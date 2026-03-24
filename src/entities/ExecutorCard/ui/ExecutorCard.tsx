@@ -18,15 +18,19 @@ export const ExecutorCard = (props: Props) => {
     const [isSelected, setIsSelected] = useState<boolean>(false)
 
     return (
-        <div className="flex items-center border-blue-300 border-solid border-2 rounded-lg bg-white gap-4 mx-auto p-[12px] max-w-[274px]">
+        <div className={`${isSelected ? 'shadow-lg border-blue-500' : ''} flex items-center gap-4 p-[12px] mx-auto max-w-[274px] border-blue-200 border-solid border-2 rounded-lg bg-white  `}>
             <div>
                 <Avatar/>
+                <label>
+                    <span>Выдели</span>
+                    <input className='hidden' type="checkbox" onChange={() => {console.log('sss');setIsSelected(prev => !prev)}}/>
+                </label>
             </div>
-            <ul className="flex flex-col max-h-100 w-full overflow-y-scroll">
+            <ul className="flex flex-col max-h-100 w-full overflow-y-auto">
                 {executor.members.map(member => {
                     return (
                         <li key={member}>
-                            <ExecutorName  name={member}/>
+                            <ExecutorName name={member}/>
                         </li>
                     )
                 })}
