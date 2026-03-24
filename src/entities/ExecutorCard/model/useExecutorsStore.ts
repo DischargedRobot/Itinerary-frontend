@@ -9,5 +9,14 @@ interface IExecutorsStore {
 }
 
 export const useExecutorsStore = create<IExecutorsStore>(set => ({
+    executors: [],
+    setExecutors: (newExecutors) => set({executors: newExecutors}),
 
+    addExecutor: (newExecutor) => set(state => {
+        if (state.executors.map(exec => exec.id).includes(newExecutor.id)) {
+            return {}
+        }
+
+        return {executors: [...state.executors, newExecutor]}
+    }) 
 }))

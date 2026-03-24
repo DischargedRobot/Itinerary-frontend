@@ -1,6 +1,6 @@
 export interface IExecutor {
     id: number
-    members: string
+    members: string[]
     isBrigade: boolean
     department: IDepartment
 }
