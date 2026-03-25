@@ -1,9 +1,13 @@
 import { FullExecutorList } from "@/widgets/FullExecutorList"
+import { FullProductTable } from "@/widgets/FullProductTable"
 
 const TaskLists = () => {
 
     return (
-        <FullExecutorList/>
+        <div>
+            <FullExecutorList/>
+            <FullProductTable/>
+        </div>
     )
 }
 

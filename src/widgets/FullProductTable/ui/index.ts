@@ -1,0 +1,1 @@
+export { FullProductTable } from './FullProductTable'
