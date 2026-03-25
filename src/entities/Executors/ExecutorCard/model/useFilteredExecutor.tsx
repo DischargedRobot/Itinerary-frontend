@@ -31,7 +31,7 @@ const FilterFunction: TFilteredFunction = {
     isBrigade: filterByIsBrigade,
 }
 
-export const useExecutorFilter = (executors: IExecutor[]) => {
+export const useFilteredExecutor = (executors: IExecutor[]) => {
 
     const filterArgs = useExecutorFiltersStore(useShallow(state => ({isBrigade: state.isBrigade, members: state.members})))
 

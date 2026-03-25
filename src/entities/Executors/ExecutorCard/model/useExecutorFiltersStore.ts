@@ -8,19 +8,16 @@ interface ExecutorFilters {
 
 
 interface IExecutorFiltersStore extends ExecutorFilters{
-    setFilters: () => void
-    setMembers: () => void
+    setFilters: (newFilters: ExecutorFilters) => void
+    setMembers: (newMembers: string[]) => void
+    setIsBrigade: (newIsBrigade: boolean) => void
 }
 
 export const useExecutorFiltersStore = create<IExecutorFiltersStore>(set => ({
     members: [],
     isBrigade: false,
     
-    setFilters: () => {
-        
-    },
-
-    setMembers: () => {
-        
-    },
+    setFilters: (newFilters) => set(newFilters),
+    setMembers: (members) => set({members}),
+    setIsBrigade: (isBrigade) => set({isBrigade}),
 }))
