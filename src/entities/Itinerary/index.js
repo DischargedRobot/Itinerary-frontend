@@ -1,1 +1,0 @@
-export { IItinerary } from './lib'

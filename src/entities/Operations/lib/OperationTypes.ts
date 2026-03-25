@@ -1,6 +1,9 @@
+import { IItinerary } from "@/entities/Itinerary/lib/ItineraryTypes"
+
 export interface IOperation {
     id: number
-    itineratyId: number // подгружаем при входе все
+    productId: number // подгружаем при входе все
+    itinerary: IItinerary // подгружаем при входе все
     divisionId: number // подгружаем при входе все
     categoryId: number // подгружаем при входе все
     normTime: number
@@ -9,8 +12,8 @@ export interface IOperation {
     equipmentId?: number // подгружаем при входе все
     isAssigned: boolean
     executorId?: number
-    pymentCoefficient?: number
+    paymentCoefficient?: number
     award?: number
     dateIssue?: Date
-    DateExecution?: Date
+    dateExecution?: Date
 }

@@ -1,1 +1,0 @@
-export { IOperation } from './lib'

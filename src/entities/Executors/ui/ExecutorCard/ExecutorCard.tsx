@@ -1,7 +1,7 @@
 'use client'
 
 import { ExecutorName } from "@/shared/ui/ExecutorName"
-import { IExecutor } from "../lib/ExecutorTypes"
+import { IExecutor } from "../../lib/ExecutorTypes"
 import { useState } from "react"
 import Avatar from "@/shared/ui/Avatar/Avatar"
 

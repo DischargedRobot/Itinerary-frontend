@@ -4,7 +4,7 @@ export interface IItinerary {
     id: number
     productId: number
     positionPlanId: number
-    audCode: number
+    audCode: string
     audName: string
     operations: IOperation[]
     numberPositions: number

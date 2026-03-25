@@ -1,6 +1,6 @@
 'use client'
 
-import { useExecutorFiltersStore } from "@/entities/Executors/ExecutorList/model"
+import { useExecutorFiltersStore } from "@/entities/Executors"
 
 export const ByBrigade = () => {
 

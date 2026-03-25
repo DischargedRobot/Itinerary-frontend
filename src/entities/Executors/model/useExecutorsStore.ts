@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IExecutor } from "../../ExecutorCard/lib/ExecutorTypes";
+import { IExecutor } from "../lib/ExecutorTypes";
 
 interface IExecutorsStore {
     executors: IExecutor[]

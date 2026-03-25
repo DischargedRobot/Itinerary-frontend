@@ -1,7 +1,7 @@
 'use client'
 
 import { Table, TableProps } from "antd"
-import { useProductStore, useProductTable } from "../model"
+import { useProductTable } from "../model"
 import { IProduct } from "../lib"
 
 const createColumns= (

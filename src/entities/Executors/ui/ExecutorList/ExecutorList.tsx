@@ -1,7 +1,7 @@
 'use client'
 
-import { ExecutorCard } from "../../ExecutorCard/ui/ExecutorCard"
-import { useExecutorsStore, useFilteredExecutor } from "../model"
+import { ExecutorCard } from "../ExecutorCard"
+import { useFilteredExecutor } from "../../model"
 
 export const ExecutorList = () => {
     

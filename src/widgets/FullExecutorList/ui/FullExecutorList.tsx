@@ -1,4 +1,4 @@
-import { ExecutorList } from "@/entities/Executors/ExecutorList/ui/ExeutorList"
+import { ExecutorList } from "@/entities/Executors"
 import { FilterExecutors } from "@/features/FilterExecutors"
 
 export const FullExecutorList = () => {

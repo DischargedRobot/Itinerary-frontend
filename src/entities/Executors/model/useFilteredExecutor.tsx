@@ -1,6 +1,6 @@
 import { useShallow } from "zustand/shallow"
 import { useExecutorFiltersStore } from "./useExecutorFiltersStore"
-import { IExecutor } from "../../ExecutorCard/lib/ExecutorTypes"
+import { IExecutor } from "../lib/ExecutorTypes"
 import { useCallback, useMemo } from "react"
 import { useExecutorsStore } from "./useExecutorsStore"
 
