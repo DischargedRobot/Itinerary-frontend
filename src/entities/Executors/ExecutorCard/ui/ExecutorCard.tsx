@@ -18,7 +18,7 @@ export const ExecutorCard = (props: Props) => {
     const [isSelected, setIsSelected] = useState<boolean>(false)
 
     return (
-        <div className={`${isSelected ? 'shadow-lg border-blue-500' : ''} flex items-center gap-4 p-[12px] mx-auto max-w-[274px] border-blue-200 border-solid border-2 rounded-lg bg-white  `}>
+        <div className={`${isSelected ? 'shadow-lg border-blue-500' : ''} flex items-center gap-4 p-3 mx-auto max-w-68.5 border-blue-200 border-solid border-2 rounded-lg bg-white  `}>
             <div>
                 <Avatar/>
                 <label>
