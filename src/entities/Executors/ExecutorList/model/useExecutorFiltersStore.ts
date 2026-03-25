@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IExecutor } from "../lib/ExecutorTypes";
+import { IExecutor } from "../../ExecutorCard/lib/ExecutorTypes";
 
 interface ExecutorFilters {
     members: string[]

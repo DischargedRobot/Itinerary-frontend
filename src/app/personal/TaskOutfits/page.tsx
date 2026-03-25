@@ -1,10 +1,10 @@
 import { ExecutorCard } from "@/entities/Executors/ExecutorCard/ui/ExecutorCard"
 
-const TaskOutfits = () => {
+const TaskLists = () => {
 
     return (
         <ExecutorCard executor={{members: ['sss','ddd','dreee','dfdg'], id: 1, isBrigade: true, department: {id: 1, name: '12'}, operations: []}}/>
     )
 }
 
-export default TaskOutfits
+export default TaskLists
