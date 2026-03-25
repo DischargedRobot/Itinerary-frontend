@@ -1,9 +1,9 @@
-import { ExecutorCard } from "@/entities/Executors/ExecutorCard/ui/ExecutorCard"
+import { FullExecutorList } from "@/widgets/FullExecutorList"
 
 const TaskLists = () => {
 
     return (
-        <ExecutorCard executor={{members: ['sss','ddd','dreee','dfdg'], id: 1, isBrigade: true, department: {id: 1, name: '12'}, operations: []}}/>
+        <FullExecutorList/>
     )
 }
 

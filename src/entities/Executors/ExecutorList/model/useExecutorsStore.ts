@@ -9,7 +9,9 @@ interface IExecutorsStore {
 }
 
 export const useExecutorsStore = create<IExecutorsStore>(set => ({
-    executors: [],
+    executors: [{members: ['sss','ddd','dreee','dfdg'], id: 1, isBrigade: false, department: {id: 1, name: '12'}, operations: []},
+        {members: ['sss','ddd','dreee','dfdg'], id: 2, isBrigade: false, department: {id: 1, name: '12'}, operations: []},
+        {members: ['sss','ddd','dreee','dfdg'], id: 3, isBrigade: false, department: {id: 1, name: '12'}, operations: []}],
     setExecutors: (newExecutors) => set({executors: newExecutors}),
 
     addExecutor: (newExecutor) => set(state => {

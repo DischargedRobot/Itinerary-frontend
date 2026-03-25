@@ -1,12 +1,16 @@
+import { ByBrigade } from "../ByBrigade"
 import { ByMembers } from "../ByMembers/ui"
 
 export const FilterExecutors = () => {
 
     return (
-        <FilterExecutors.ByMembers>
+        <div>
+            <FilterExecutors.ByMembers/>
+            <FilterExecutors.ByBrigade/>
+        </div>
         
-        </FilterExecutors.ByMembers>
     )
 }
 
 FilterExecutors.ByMembers = ByMembers
+FilterExecutors.ByBrigade = ByBrigade

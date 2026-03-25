@@ -1,9 +1,11 @@
+'use client'
+
 import { ExecutorCard } from "../../ExecutorCard/ui/ExecutorCard"
-import { useExecutorsStore } from "../model"
+import { useExecutorsStore, useFilteredExecutor } from "../model"
 
 export const ExecutorList = () => {
     
-    const executors = useExecutorsStore(state => state.executors)
+    const executors = useFilteredExecutor()
 
     return (
         <ul>
