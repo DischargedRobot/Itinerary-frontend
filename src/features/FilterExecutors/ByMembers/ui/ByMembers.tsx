@@ -11,7 +11,8 @@ export const ByMembers = () => {
         <input 
             type="search" 
             placeholder="Участники" 
-            onChange={(e) => setMembers(e.target.value.split(' ').filter(member => member !== ''))}/>
+            onChange={(e) => setMembers(e.target.value.split(' ').filter(member => member !== ''))}
+        />
     </label>
     )
 }

@@ -4,9 +4,10 @@ import { IExecutor } from "../lib/ExecutorTypes"
 import { useCallback, useMemo } from "react"
 import { useExecutorsStore } from "./useExecutorsStore"
 
-interface ExecutorFilters {
+export interface ExecutorFilters {
     members: string[]
     isBrigade: boolean
+    departmentId: number
 }
 
 type TFilterKey = keyof ExecutorFilters
@@ -27,14 +28,19 @@ const filterByIsBrigade: TFilteredFunction['isBrigade']  = (executors, isBrigade
     return executors.filter(executor => executor.isBrigade === isBrigade)
 }
 
+const filterByDepartmentId: TFilteredFunction['departmentId']  = (executors, departmentId) => {
+    return executors.filter(executor => executor.department.id === departmentId)
+}
+
 const FilterFunction: TFilteredFunction = {
     members: filterByMembers,
     isBrigade: filterByIsBrigade,
+    departmentId: filterByDepartmentId,
 }
 
 export const useFilteredExecutor = () => {
 
-    const filterArgs = useExecutorFiltersStore(useShallow(state => ({isBrigade: state.isBrigade, members: state.members})))
+    const filterArgs = useExecutorFiltersStore(useShallow(state => ({isBrigade: state.isBrigade, members: state.members, departmentId: state['departmentId']})))
 
     const executors = useExecutorsStore(state => state.executors)
 

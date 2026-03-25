@@ -1,23 +1,20 @@
 import { create } from "zustand";
-import { IExecutor } from "../lib/ExecutorTypes";
-
-interface ExecutorFilters {
-    members: string[]
-    isBrigade: boolean
-}
-
+import { ExecutorFilters } from "./useFilteredExecutor";
 
 interface IExecutorFiltersStore extends ExecutorFilters{
     setFilters: (newFilters: ExecutorFilters) => void
     setMembers: (newMembers: string[]) => void
+    setDepartmentId: (newDepartmentId: number) => void
     setIsBrigade: (newIsBrigade: boolean) => void
 }
 
 export const useExecutorFiltersStore = create<IExecutorFiltersStore>(set => ({
     members: [],
     isBrigade: false,
+    departmentId: 1,
     
     setFilters: (newFilters) => set(newFilters),
     setMembers: (members) => set({members}),
+    setDepartmentId: (departmentId) => set({departmentId}),
     setIsBrigade: (isBrigade) => set({isBrigade}),
 }))

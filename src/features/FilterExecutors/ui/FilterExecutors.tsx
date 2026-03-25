@@ -1,5 +1,6 @@
 import { ByBrigade } from "../ByBrigade"
-import { ByMembers } from "../ByMembers/ui"
+import { ByDepartment } from "../ByDepartment"
+import { ByMembers } from "../ByMembers"
 
 export const FilterExecutors = () => {
 
@@ -8,9 +9,10 @@ export const FilterExecutors = () => {
             <FilterExecutors.ByMembers/>
             <FilterExecutors.ByBrigade/>
         </div>
-        
     )
 }
 
 FilterExecutors.ByMembers = ByMembers
 FilterExecutors.ByBrigade = ByBrigade
+FilterExecutors.ByDepartment = ByDepartment
+
