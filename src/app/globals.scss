@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f4f4;
+  --foreground: #f8f8f8;
+  --text-color: #3d3d3d;
+  --placeholder-color: #ABB5BE;
+  --hover: theme('colors.blue.400');
+  --active: theme('colors.blue.600');
+  --activeElement: theme('colors.blue.200');
+  --shadow: #0f0f0f;
+  --black: #0c0c0c;
+
+  --roboto-mono: 'Roboto Mono', sans-serif;
+  --inter: 'Inter', sans-serif;
+}
+
+@theme inline {
+  /* --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono); */
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #f4f4f4;
+  }
+} */
+
+body {
+  background: var(--background);
+  color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.title {
+  font-family: var(--inter);
+  font-weight: 400;
+  color: var(--text-color);
+
+  &_very-litle {
+    font-size: 16px;
+  }
+
+  &_litle{
+    font-size: 20px;
+  }
+
+  &_very-litle{
+    font-size: 16px;
+  }
+
+  &_bold {
+    font-weight: 600;
+  }
+
+  &_tiny {
+    font-weight: 200;
+  }
+
+  &_big {
+    font-size: 48px;
+  }
+
+}
+
+.text-table {
+  font-family: var(--roboto-mono);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--text-color);
+
+  &_litle {
+    font-size: 14px;
+  }
+
+  &_big {
+    font-size: 20px;
+  }
+
+  &_tiny {
+    font-weight: 300;
+  }
+
+  &_bold {
+    font-weight: 600;
+  }
+}

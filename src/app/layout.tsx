@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import "./main.scss";
 import { ConfigProvider, ConfigProviderProps } from "antd";
-import { ConfigOptions } from "antd/es/message/interface";
+import "./main.scss";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,6 +13,7 @@ const COLORS = {
   hover: 'var(--hover)',
   active: 'var(--active)',
   activeElement: 'var(--active-element)',
+  placeholder: 'var(--placeholder-color)',
   // --text-color: var(--color-gray-500),
   // --hover: theme('colors.blue.400'),
   // --active: theme('colors.blue.600'),
@@ -22,11 +22,12 @@ const COLORS = {
 
 const token: ConfigProviderProps['theme'] = {
   token: {
+    colorBgLayout: COLORS.background,
   },
 
   components: {
     Layout: {
-      headerBg: COLORS.foreground
+      headerBg: COLORS.foreground,
     },
 
     Menu: {
@@ -38,15 +39,14 @@ const token: ConfigProviderProps['theme'] = {
       motionDurationSlow: '0.1s',
       // horizontalItemHoverColor: 'red',
       // horizontalItemHoverBg: 'black',
-      colorLinkHover: 'black',
+      itemColor: COLORS.placeholder,
       horizontalItemSelectedColor: COLORS.active,
       horizontalItemHoverColor: COLORS.hover,
+    },
 
-      
-      // horizontalItemHoverColor: COLORS.hover,
-      // motionDurationFast: 'fast',
-
-      // colorBgBase: 
+    Table: {
+      // colorBgBase: COLORS.hover,
+      // headerBg: COLORS.hover,
     }
   }
 }
@@ -61,8 +61,7 @@ export default function RootLayout({
       lang="en"
       className={`h-full antialiased`}
     >
-      <ConfigProvider
-      theme={token}>
+      <ConfigProvider theme={token}>
         <body className="min-h-full flex flex-col">
           {children}
         </body>

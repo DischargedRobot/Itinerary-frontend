@@ -1,2 +1,6 @@
 
-@use './globals.css';
+@use './reset.css';
+@use './globals.scss';
+
+@import '../common/RobotoMono/stylesheet.css';
+@import '../common/inter/stylesheet.css';

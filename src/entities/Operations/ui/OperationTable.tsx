@@ -63,6 +63,8 @@ export const OperationTable = () => {
 
     return (
         <Table
+            footer={() => <></>}
+            title={() => <div className='flex'>Операции <></></div>}
             className="operation-table"
             size="small"
             pagination={{placement: ['bottomCenter'],pageSize: 7}}

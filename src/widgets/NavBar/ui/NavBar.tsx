@@ -27,9 +27,9 @@ const MENU_ITEMS: MenuProps['items']= [
 export const NavBar = () => {
 
     return (
-        <nav  className="w-full border-b border-b-gray-300 shadow-sm">
+        <nav className="w-full border-b border-b-gray-300 shadow-sm" >
             <Menu
-                className="items-center justify-center"
+                className="nav-bar title title_very-litle w-full items-center justify-center"
                 mode="horizontal"
                 items={MENU_ITEMS}
             />

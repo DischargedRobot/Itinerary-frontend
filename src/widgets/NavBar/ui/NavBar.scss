@@ -1,12 +1,21 @@
-.no-hover:hover, .no-hover:active {
 
-    
+.nav-bar {
+    & li {
+        
+        &::after {
+            border-color: var(--placeholder-color) !important;
+        }
+        
+        &:hover::after {
+            border-color: var(--hover) !important;
+        }
 
-    &::after {
-        border-color: transparent !important;
+        &.ant-menu-item-selected::after {
+            border-color: var(--active) !important;
+        }
 
+        &.no-hover::after {
+            border-color: transparent !important;
+        }
     }
-    // border: 3px solid black;
-    // background-color: none !important;
-    // border-color: aqua;
 }
