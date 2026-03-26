@@ -32,7 +32,7 @@ export const ExecutorCard = (props: Props) => {
                     />
                 </label>
             </div>
-            <ul className="card__members flex flex-col gap-2 max-h-25 w-full overflow-y-auto scroll-black px-2">
+            <ul className="card__members text flex flex-col gap-2 max-h-25 w-full overflow-y-auto scroll-black px-2">
                 {executor.members.map(member => {
                     return (
                         <li key={member} className="w-full">

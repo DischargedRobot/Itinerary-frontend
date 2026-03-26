@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f4f4;
-  --foreground: #f8f8f8;
+  --background: #f0f0f0;
+  --foreground: #fcfcfc;
   --text-color: #3d3d3d;
   --placeholder-color: #ABB5BE;
+  --stroke: #ABB5BE;
   --hover: theme('colors.blue.400');
   --active: theme('colors.blue.600');
   --activeElement: theme('colors.blue.200');
@@ -32,7 +33,6 @@
 body {
   background: var(--background);
   color: var(--text-color);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -67,10 +67,9 @@ body {
 
 }
 
-.text-table {
+.text {
   font-family: var(--roboto-mono);
   font-weight: 400;
-  font-size: 16px;
   color: var(--text-color);
 
   &_litle {

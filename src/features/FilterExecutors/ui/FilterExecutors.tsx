@@ -5,7 +5,7 @@ import { ByMembers } from "../ByMembers"
 export const FilterExecutors = () => {
 
     return (
-        <div>
+        <div className="flex gap-3 align-center">
             <FilterExecutors.ByMembers/>
             <FilterExecutors.ByBrigade/>
         </div>

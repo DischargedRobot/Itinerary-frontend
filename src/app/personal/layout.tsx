@@ -17,7 +17,7 @@ const PersonalLayout = (props: Props) => {
             <Header style={{padding: 0}}>
                 <NavBar/>
             </Header>
-            <Content>
+            <Content className="!mx-auto !px-4">
                 {children}
             </Content>
         </Layout>

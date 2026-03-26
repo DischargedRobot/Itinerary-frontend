@@ -1,7 +1,7 @@
 import './TaskLists.scss'
 
 import { FilterExecutors } from "@/features/FilterExecutors"
-import { FilterProductByDate } from "@/features/FilterProductByDate"
+import { FilterOperationByDate } from "@/features/FilterOperationByDate"
 import { FullExecutorList } from "@/widgets/FullExecutorList"
 import { FullOperationsTable } from "@/widgets/FullOperationsTable/ui"
 import { FullProductTable } from "@/widgets/FullProductTable"
@@ -10,9 +10,9 @@ import { FullProductTable } from "@/widgets/FullProductTable"
 const TaskLists = () => {
 
     return (
-        <div>
+        <div className='flex flex-col gap-5'>
             <div className="flex gap-3">
-                <FilterProductByDate/>
+                <FilterOperationByDate/>
                 <FilterExecutors.ByDepartment/>
             </div>
             <div className="grid grid-cols-[auto_1fr] gap-3">
