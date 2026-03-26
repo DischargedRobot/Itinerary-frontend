@@ -1,3 +1,5 @@
+import './NavBar.scss'
+
 import Avatar from "@/shared/ui/Avatar/Avatar"
 import { Menu, MenuProps } from "antd"
 import Link from "next/link"
@@ -5,28 +7,33 @@ import Link from "next/link"
 const MENU_ITEMS: MenuProps['items']= [
     {
         key: 'Itineraries',
-        label: <Link href='/personal/Itineraries'>{'Маршуртные листы'}</Link>
+        label: <Link href='/personal/itineraries'>{'Маршуртные листы'}</Link>
     },
     {
         key: 'TaskLists',
-        label: <Link href='/personal/TaskLists'>{'Сформировать наряды'}</Link>
+        label: <Link href='/personal/tasklists'>{'Сформировать наряды'}</Link>
     },
     {
         key: 'CreatedTaskLists',
-        label: <Link href='/personal/CreatedTaskLists'>{'Сформированные наряды'}</Link>
+        label: <Link href='/personal/createdtasklists'>{'Сформированные наряды'}</Link>
     },
     {
         key: 'Profile',
-        label: <Link href='/personal/Profile'><Avatar/></Link>
+        label: <Link href='/personal/Profile'><Avatar size={32}/></Link>,
+        className: 'no-hover'        
     }
 ]
 
 export const NavBar = () => {
 
     return (
-        <Menu
-            mode="horizontal"
-            items={MENU_ITEMS}
-        />
+        <nav  className="w-full border-b border-b-gray-300 shadow-sm">
+            <Menu
+                className="items-center justify-center"
+                mode="horizontal"
+                items={MENU_ITEMS}
+            />
+        </nav>
+        
     )
 }

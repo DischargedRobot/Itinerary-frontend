@@ -7,6 +7,8 @@
   --hover: theme('colors.blue.400');
   --active: theme('colors.blue.600');
   --activeElement: theme('colors.blue.200');
+  --shadow: #0f0f0f;
+  --black: #0c0c0c;
 }
 
 @theme inline {

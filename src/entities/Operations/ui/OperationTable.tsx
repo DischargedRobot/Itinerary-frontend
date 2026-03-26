@@ -1,5 +1,7 @@
 'use client'
 
+import './OperationTable.scss'
+
 import { Table, TableProps } from "antd"
 import { useOperationTable } from "../model/useOperationTable"
 import { IOperation } from "../lib"
@@ -61,6 +63,7 @@ export const OperationTable = () => {
 
     return (
         <Table
+            className="operation-table"
             size="small"
             pagination={{placement: ['bottomCenter'],pageSize: 7}}
             columns={createColumn()}

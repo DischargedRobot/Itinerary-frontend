@@ -13,8 +13,8 @@ const PersonalLayout = (props: Props) => {
     } = props
 
     return (
-        <Layout>
-            <Header>
+        <Layout className="gap-5">
+            <Header style={{padding: 0}}>
                 <NavBar/>
             </Header>
             <Content>

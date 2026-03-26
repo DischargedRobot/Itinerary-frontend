@@ -1,0 +1,12 @@
+.no-hover:hover, .no-hover:active {
+
+    
+
+    &::after {
+        border-color: transparent !important;
+
+    }
+    // border: 3px solid black;
+    // background-color: none !important;
+    // border-color: aqua;
+}

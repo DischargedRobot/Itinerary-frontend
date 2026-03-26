@@ -2,18 +2,19 @@ import React from "react"
 import Image from 'next/image'
 import img from './Ellipse2.png'
 
-// interface Props { 
-//     imgPath: string
-// }
+interface Props { 
+    size: number
+}
 
-const Avatar = () => {
+const Avatar = ({size} : Props) => {
     return (
         <Image 
-            className="min-w-[64] rounded-full border-black border-solid border"
+            className={`min-w-[${size}] rounded-full border-black border-solid border`}
+            loading="eager"
             src={img} 
             alt="Avatar" 
-            width={64} 
-            height={64} 
+            width={size} 
+            height={size} 
         />
     )
 }
