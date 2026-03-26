@@ -3,14 +3,17 @@
 :root {
   --background: #F0F0F0;
   --foreground: #f8f8f8;
-  --text-color: var(--color-gray-500)
+  --text-color: var(--color-gray-500);
+  --hover: theme('colors.blue.400');
+  --active: theme('colors.blue.600');
+  --activeElement: theme('colors.blue.200');
 }
 
 @theme inline {
-  /* --color-background: var(--background); */
-  /* --color-foreground: var(--foreground); */
-  /* --font-sans: var(--font-geist-sans); */
-  /* --font-mono: var(--font-geist-mono); */
+  /* --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono); */
 }
 
 /* @media (prefers-color-scheme: dark) {

@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+.card__members {
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--hover) #fff;
+
+    &:hover {
+        scrollbar-color: var(--active) #fff !important;
+    }
+
+    &::-webkit-scrollbar {
+        width: 2px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background-color: #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--hover);
+        border-radius: 20px;
+
+        &:hover {
+            background-color: var(--active);
+        }
+    }
+}

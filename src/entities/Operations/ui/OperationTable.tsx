@@ -18,7 +18,6 @@ const createColumn = (
         title: 'Операция',
         dataIndex: 'itinerary',
         render: (itinerary: IItinerary) => {
-            console.log(itinerary)
             return `${itinerary.audName}`
         }
     },

@@ -1,8 +1,8 @@
 export const ExecutorName = ({name} : {name: string}) => {
 
     return (
-        <span className="border-solid border border-black rounded-md">
+        <p className="border-solid border border-black rounded-md px-1">
             {name}
-        </span>
+        </p>
     )
 } 

@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.executor-list {
+    border-color: var(--hover);
+
+    &_border-bottom {
+        @apply border-b-2;
+    }
+
+    &_border-top {
+        @apply border-t-2;
+    }
+}

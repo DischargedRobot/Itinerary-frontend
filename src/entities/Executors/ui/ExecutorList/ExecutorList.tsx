@@ -1,14 +1,38 @@
 'use client'
 
+import './ExecutorList.scss'
+
 import { ExecutorCard } from "../ExecutorCard"
 import { useFilteredExecutor } from "../../model"
+import { useEffect } from "react"
 
 export const ExecutorList = () => {
     
     const executors = useFilteredExecutor()
 
+    useEffect(() => {
+
+        const executorList = document.getElementById('executors-list')
+        console.log(executorList)
+
+        const borderAtOverflowY = () => {
+            const lastChildY = executorList?.lastElementChild?.getBoundingClientRect()
+            const firstChildY = executorList?.firstElementChild?.getBoundingClientRect()
+            const executorListsCoordinates = executorList?.getBoundingClientRect()
+            if (lastChildY && firstChildY && executorList && executorListsCoordinates) {
+                executorList.classList.toggle('executor-list_border-bottom', lastChildY.bottom > executorListsCoordinates.bottom)
+                executorList.classList.toggle('executor-list_border-top', firstChildY.top < executorListsCoordinates.top )
+            }
+        }
+        executorList?.addEventListener('scroll',borderAtOverflowY)
+        borderAtOverflowY()
+        return () => {
+            executorList?.removeEventListener('scroll', borderAtOverflowY)
+        }
+    }, [])
+
     return (
-        <ul>
+        <ul id='executors-list' className="executor-list flex flex-col gap-4 max-h-[400] w-[300] overflow-y-auto">
             {executors.map((executor) => {
                 return <li key={executor.id}>
                     {<ExecutorCard executor={executor}/>}
