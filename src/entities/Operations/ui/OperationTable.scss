@@ -1,9 +1,29 @@
 .operation-table {
+
+    &__title {
+        color: var(--foreground);
+    }
+
     td {
         line-height: 0 !important;
         padding: 6px 4px !important;
     }
     & .ant-table-title, .ant-table-footer {
         background: var(--activeElement);
+    }
+
+    & .ant-table {
+        @apply rounded-2xl;
+    }
+
+    &.collapsed table {
+        display: none;
+    }
+}
+
+.arrow {
+    transition: rotate 1s ease-in;
+    &_collapsed {
+        transform: rotate(180deg);
     }
 }

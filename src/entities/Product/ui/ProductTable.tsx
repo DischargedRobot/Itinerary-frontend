@@ -5,6 +5,7 @@ import './ProductTable.scss'
 import { Table, TableProps } from "antd"
 import { useProductTable } from "../model"
 import { IProduct } from "../lib"
+import { DownOutlined } from '@ant-design/icons'
 
 const createColumns= (
 
@@ -31,13 +32,25 @@ const createColumns= (
 export const ProductTable = () => {
 
     const {
-        products
+        products,
+        isVisible,
+        setIsVisible,
     } = useProductTable()
 
     return (
         <Table
+            footer={() => <></>}
+            title={() => 
+                <div 
+                    onClick={() => setIsVisible(prev => !prev)} 
+                    className='product-table__title flex justify-between'
+                >
+                    <span>Изделия</span> 
+                    <DownOutlined className={`${isVisible ? '' : 'arrow_collapsed'}`}/>
+                </div>
+            }
             size='small'
-            className="product-table"
+            className={`product-table ${isVisible ? '' : 'collapsed'}`}
             pagination={{placement: ["bottomCenter"],pageSize: 7}}
             columns={createColumns()}
             rowSelection={{type: 'checkbox'}}

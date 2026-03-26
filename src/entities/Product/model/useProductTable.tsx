@@ -1,12 +1,11 @@
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { useProductStore } from "./useProductsStore"
 
 export const useProductTable = () => {
 
     const products = useProductStore(state => state.products)
-
-    return useMemo(() => {
-        return {products}
-    }, [products])
+    const [isVisible, setIsVisible] = useState<boolean>()
+    return {products,isVisible,setIsVisible}
+    
 }
 

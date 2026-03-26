@@ -1,6 +1,6 @@
 export const FilterOperationByDate = () => {
     return (
-        <div className="flex items-center gap-1.5 title">
+        <div className="flex items-center gap-1.5 title ">
             Дата
             <label className="p-2 bg-[var(--foreground)] border border-[var(--stroke)] rounded-md">
                 <input 

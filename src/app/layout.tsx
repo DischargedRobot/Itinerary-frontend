@@ -62,7 +62,7 @@ export default function RootLayout({
       className={`h-full antialiased`}
     >
       <ConfigProvider theme={token}>
-        <body className="min-h-full flex flex-col">
+        <body className="min-h-full flex flex-col items-center">
           {children}
         </body>
       </ConfigProvider>

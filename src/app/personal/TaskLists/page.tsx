@@ -10,12 +10,12 @@ import { FullProductTable } from "@/widgets/FullProductTable"
 const TaskLists = () => {
 
     return (
-        <div className='flex flex-col gap-5'>
-            <div className="flex gap-3">
+        <div className='flex flex-col gap-5 w-full'>
+            <div className="flex gap-3 ">
                 <FilterOperationByDate/>
                 <FilterExecutors.ByDepartment/>
             </div>
-            <div className="grid grid-cols-[auto_1fr] gap-3">
+            <div className="grid grid-cols-[auto_585px] gap-3">
                 <FullExecutorList/>
                 <div>
                     <FullProductTable/>

@@ -13,11 +13,11 @@ const PersonalLayout = (props: Props) => {
     } = props
 
     return (
-        <Layout className="gap-5">
-            <Header style={{padding: 0}}>
+        <Layout className="flex w-full gap-5">
+            <Header style={{padding: 0}} className="sticky top-0 w-full">
                 <NavBar/>
             </Header>
-            <Content className="!mx-auto !px-4">
+            <Content className="mx-auto px-4">
                 {children}
             </Content>
         </Layout>
