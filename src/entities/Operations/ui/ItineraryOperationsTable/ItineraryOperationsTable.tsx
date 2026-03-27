@@ -47,10 +47,11 @@ const columns: ColumnsType<IOperation> = [
       render: (value: number) => `${value.toFixed(3)}`,
     },
     {
-      title: 'Кол-во позиций',
+      title: 'N',
       dataIndex: 'numberPositions',
       key: 'numberPositions',
-      width: '80px',
+      width: '50px',
+      minWidth: 50,
       align: 'right',
     },
     {
@@ -117,14 +118,14 @@ interface Props {
 export const ItineraryOperationsTable = ({operations}: Props) => {
 
     return(
-      <div className='max-w-200 overflow-hidden'>
-        <div className='overflow-x-auto'>
+      <div className='max-w-[900px]! overflow-auto'>
+        <div className='w-full! overflow-x-auto'>
           <Table
               columns={columns}
               dataSource={operations}
               size='small'
               rowClassName='text text_tiny text_2very-litle max-h-5.5 overflow-hidden'
-              className="itinerary-operation-table"
+              className="itinerary-operation-table overflow-x-auto"
               tableLayout='fixed'
               pagination={false}
               rowKey={'id'}

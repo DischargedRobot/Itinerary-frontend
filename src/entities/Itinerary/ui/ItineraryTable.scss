@@ -1,5 +1,6 @@
-.main-table-wrapper {
-  // ✅ Ограничиваем ширину родителя
-  max-width: 100%;
-  overflow: visible; // ✅ Родитель НЕ имеет скролла
+.itinerary-table {
+  max-width: 900px !important;
+  .ant-table-expanded-row > td  {
+    padding: 0 !important;
+  }
 }

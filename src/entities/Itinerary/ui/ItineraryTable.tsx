@@ -1,17 +1,14 @@
 'use client'
 
+import './ItineraryTable.scss'
+
 import { ItineraryOperationsTable } from "@/entities/Operations"
 import { useItineraryStore } from "../model"
 import { Table } from "antd"
-
-import './ItineraryTable.scss'
-
-// src/entities/Itinerary/config/itineraryColumns.tsx
 import { Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { IProduct } from "@/entities/Product";
 import { IItinerary } from "../lib";
-
 
 export const getItineraryColumns = (): ColumnsType<IItinerary> => [
   {
@@ -93,7 +90,7 @@ export const ItineraryTable = () => {
         // <ItineraryOperationsTable operations={itineraries[0].operations}/>
         <Table
             columns={getItineraryColumns()}
-            className="max-w-200"
+            className="itinerary-table"
             rowKey={'id'}
             dataSource={itineraries}
             expandable={{
