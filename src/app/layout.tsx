@@ -23,6 +23,9 @@ const COLORS = {
 const token: ConfigProviderProps['theme'] = {
   token: {
     colorBgLayout: COLORS.background,
+    colorPrimary: COLORS.activeElement,
+    colorPrimaryActive: COLORS.active,
+    colorPrimaryHover: COLORS.hover,
   },
 
   components: {

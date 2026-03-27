@@ -6,6 +6,7 @@ interface Props<T extends FieldValues>{
     rules?: RegisterOptions<T>,
     error?: FieldError,
     placeholder?: string
+    type?: HTMLInputElement['type']
 }
 
 export const PersonalInput = <T extends FieldValues>(props: Props<T>) => {
@@ -16,16 +17,19 @@ export const PersonalInput = <T extends FieldValues>(props: Props<T>) => {
         error,
         placeholder,
         name,
+        type = 'text',
     } = props
 
     return (
-        <label>
+        <label
+            className="  p-2 rounded-xl bg-foreground border-2 border-stroke hover:border-hover has-focus:border-active focus:border-active active:border-active">
             <input
-                type="text"
+                className="bg-transparent w-full"
+                type={type}
                 placeholder={placeholder ?? name}
                 {...register(name, rules)}
             />
-            {error}
+            {error?.message}
         </label>
     )
 }

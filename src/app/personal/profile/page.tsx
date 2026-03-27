@@ -1,4 +1,4 @@
-import { User } from "@/entities/User"
+import { User } from "@/widgets/User"
 
 const Profile = () => {
 

@@ -17,7 +17,7 @@ const PersonalLayout = (props: Props) => {
             <Header style={{padding: 0}} className="sticky top-0 w-full">
                 <NavBar/>
             </Header>
-            <Content className="mx-auto px-4">
+            <Content className="mx-auto px-4 max-w-5xl w-full justify-items-center ">
                 {children}
             </Content>
         </Layout>

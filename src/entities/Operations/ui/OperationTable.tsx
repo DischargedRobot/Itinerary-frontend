@@ -69,19 +69,17 @@ export const OperationTable = () => {
     
     return (
         <Table
-
             footer={() => <></>}
-            
             title={() => 
                 <div 
                     onClick={() => setIsVisible(prev => !prev)} 
-                    className='operation-table__title w-full max-w-[585] flex justify-between'
+                    className='operation-table__title w-full flex justify-between'
                 >
                     <span>Операции</span> 
                     <DownOutlined className={`${isVisible ? '' : 'arrow_collapsed'}`}/>
                 </div>
             }
-            className={`operation-table rounded-2xl ${isVisible ? '' : 'collapsed'}`}
+            className={`operation-table w-full rounded-2xl ${isVisible ? '' : 'collapsed'}`}
             size="small"
             pagination={{placement: ['bottomCenter'],pageSize: 7}}
             columns={createColumn()}

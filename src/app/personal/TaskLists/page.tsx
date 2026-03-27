@@ -15,7 +15,7 @@ const TaskLists = () => {
                 <FilterOperationByDate/>
                 <FilterExecutors.ByDepartment/>
             </div>
-            <div className="grid grid-cols-[auto_585px] gap-3">
+            <div className="grid grid-cols-[auto_1fr] gap-3">
                 <FullExecutorList/>
                 <div>
                     <FullProductTable/>
