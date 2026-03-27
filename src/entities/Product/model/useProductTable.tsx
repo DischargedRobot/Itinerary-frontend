@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react"
-import { useProductStore } from "./useProductsStore"
+import { useState } from "react"
+import { useFilteredProduct } from "./useFilteredProduct"
 
 export const useProductTable = () => {
 
-    const products = useProductStore(state => state.products)
+    const {products} = useFilteredProduct()
     const [isVisible, setIsVisible] = useState<boolean>()
+    
     return {products,isVisible,setIsVisible}
     
 }

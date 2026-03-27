@@ -1,11 +1,17 @@
 @use '../../../../app/typography.scss';
 
 .itinerary-operation-table {
+    .ant-table {
+        margin: 0 !important;
+    }
+
     th {
         // text-align: right !important;
         @extend .title, .title_2very-litle;
         vertical-align: bottom;
         text-align: left !important;
+
+        padding: 3px 5px !important;
 
         border-right: 1px solid var(--stroke);
         &::before {

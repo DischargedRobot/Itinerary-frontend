@@ -2,7 +2,7 @@
 
 import './ItineraryOperationTable.scss'
 
-import { Table } from "antd"
+import { Checkbox, Table } from "antd"
 import { IOperation } from "../../lib";
 import { ColumnsType } from "antd/es/table";
 import { IDepartment, IExecutor } from "@/entities/Executors/lib/ExecutorTypes";
@@ -13,6 +13,7 @@ const columns: ColumnsType<IOperation> = [
       dataIndex: 'id',
       key: 'id',
       width: '45px',
+      ellipsis: true,
       align: 'center',
     },
     {
@@ -34,23 +35,26 @@ const columns: ColumnsType<IOperation> = [
     {
       title: 'Категория',
       dataIndex: 'category',
+      ellipsis: true,
+      width: 75,
       key: 'category',
-      width: '90px',
-      render: (category: ICatergory) => (category.name),
+      render: (category: ICatergory) => category.name,
     },
     {
-      title: 'Норма времени',
+      title: 'НВ',
       dataIndex: 'normTime',
       key: 'normTime',
-      width: '80px',
+      ellipsis: true,
+      width: '100px',
       align: 'right',
-      render: (value: number) => `${value.toFixed(3)}`,
+      render: (value: number) => <div className='max-w-20 overflow-hidden whitespace-nowrap text-ellipsis'>{`${value.toFixed(3)}`}</div>,
     },
     {
       title: 'N',
       dataIndex: 'numberPositions',
       key: 'numberPositions',
       width: '50px',
+      ellipsis: true,
       minWidth: 50,
       align: 'right',
     },
@@ -62,28 +66,29 @@ const columns: ColumnsType<IOperation> = [
       ellipsis: true,
       render: (equipment) => <div className='max-w-25 overflow-hidden whitespace-nowrap text-ellipsis'>{equipment?.name}</div>,
     },
-    {
-      title: 'Назначена',
-      dataIndex: 'isAssigned',
-      key: 'isAssigned',
-      width: '75px',
-      align: 'center',
-    //   render: (checked: boolean) => <Checkbox checked={checked} disabled />,
-    },
+    // {
+    //   title: 'Назначена',
+    //   dataIndex: 'isAssigned',
+    //   key: 'isAssigned',
+    //   ellipsis: true,
+    //   width: '75px',
+    //   align: 'center',
+    //   render: (checked: boolean) => <Checkbox defaultChecked={checked} />,
+    // },
     {
       title: 'Исполнитель',
       dataIndex: 'executor',
       key: 'executor',
-      ellipsis: true,
       align: 'left',
       width: 110,
-      render: (executor?: IExecutor) => <div style={{overflow: 'hidden', maxWidth: 110, whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{executor ? executor.name : ''}</div>,
+      ellipsis: true,
+      render: (executor?: IExecutor) =>executor ? executor.name : '',
     },
     {
-      title: 'Коэффцициент',
+      title: 'К',
       dataIndex: 'paymentCoefficient',
       key: 'paymentCoefficient',
-      width: '90px',
+      width: '40px',
       align: 'right',
       render: (value?: number) => value?.toFixed(2) || '',
     },
@@ -92,12 +97,14 @@ const columns: ColumnsType<IOperation> = [
       dataIndex: 'award',
       key: 'award',
       width: '70px',
+      ellipsis: true,
       align: 'right',
       render: (value?: number) => value !== undefined ? `${value.toFixed(0)}%` : ' ',
     },
     {
       title: 'Дата выдачи',
       dataIndex: 'dateIssue',
+      ellipsis: true,
       key: 'dateIssue',
       width: '100px',
       render: (date?: Date) => date ? date.toLocaleDateString() : '',
@@ -106,6 +113,7 @@ const columns: ColumnsType<IOperation> = [
       title: 'Дата исполнения',
       dataIndex: 'dateExecution',
       key: 'dateExecution',
+      ellipsis: true,
       width: '100px',
       render: (date?: Date) => date ? date.toLocaleDateString() : '',
     },
@@ -118,20 +126,15 @@ interface Props {
 export const ItineraryOperationsTable = ({operations}: Props) => {
 
     return(
-      <div className='max-w-[900px]! overflow-auto'>
-        <div className='w-full! overflow-x-auto'>
           <Table
               columns={columns}
               dataSource={operations}
               size='small'
-              rowClassName='text text_tiny text_2very-litle max-h-5.5 overflow-hidden'
-              className="itinerary-operation-table overflow-x-auto"
-              tableLayout='fixed'
+              rowClassName=' text text_tiny text_2very-litle max-h-5.5 overflow-hidden'
+              className="itinerary-operation-table max-w-[900px]! "
               pagination={false}
               rowKey={'id'}
-              scroll={{ x: true, y: 100 }}
+              scroll={{y: 100, x: 'min-content'}}
           />
-        </div>
-      </div>
     )
 }

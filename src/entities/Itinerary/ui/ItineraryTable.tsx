@@ -17,6 +17,7 @@ export const getItineraryColumns = (): ColumnsType<IItinerary> => [
     key: 'date',
     width: 120,
     align: 'center',
+    showSorterTooltip: false,
     sorter: (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
     render: (date: Date) => date.toLocaleDateString(),
   },
@@ -39,11 +40,12 @@ export const getItineraryColumns = (): ColumnsType<IItinerary> => [
     },
   },
   {
-    title: 'Количество',
+    title: 'N',
     dataIndex: 'numberPositions',
     key: 'numberPositions',
     width: 100,
     align: 'right',
+    showSorterTooltip: false,
     sorter: (a, b) => a.numberPositions - b.numberPositions,
     render: (value: number) => value,
   },
@@ -90,13 +92,14 @@ export const ItineraryTable = () => {
         // <ItineraryOperationsTable operations={itineraries[0].operations}/>
         <Table
             columns={getItineraryColumns()}
+            size='small'
             className="itinerary-table"
             rowKey={'id'}
             dataSource={itineraries}
             expandable={{
-                expandedRowRender: (itinerary) => 
-                    <ItineraryOperationsTable operations={itinerary.operations}/>
-                }}
+              expandedRowRender: (itinerary) => 
+                  <ItineraryOperationsTable operations={itinerary.operations}/>
+            }}
             
             // scroll={{x: true}}
         />
