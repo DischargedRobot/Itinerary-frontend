@@ -11,14 +11,15 @@ export const ItineraryTable = () => {
     const itineraries = useItineraryStore(state => state.itineraries)
 
     return (
-        <Table
-            rowKey={'id'}
-            dataSource={itineraries}
-            expandable={{
-                expandedRowRender: (itinerary) => 
-                    <ItineraryOperationsTable operations={itinerary.operations}/>
-                }}
-        />
+        <ItineraryOperationsTable operations={itineraries[0].operations}/>
+        // <Table
+        //     rowKey={'id'}
+        //     dataSource={itineraries}
+        //     expandable={{
+        //         expandedRowRender: (itinerary) => 
+        //             <ItineraryOperationsTable operations={itinerary.operations}/>
+        //         }}
+        // />
         
     )
 }

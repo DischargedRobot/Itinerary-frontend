@@ -1,5 +1,7 @@
 'use client'
 
+import './ItineraryOperationTable.scss'
+
 import { Table } from "antd"
 import { IOperation } from "../../lib";
 import { ColumnsType } from "antd/es/table";
@@ -10,36 +12,36 @@ const columns: ColumnsType<IOperation> = [
       title: 'ID',
       dataIndex: 'id',
       key: 'id',
-      width: 60,
+      width: '45px',
       align: 'center',
     },
     {
       title: 'Цех',
       dataIndex: 'department',
       key: 'department',
-      width: 80,
-      render: (department: IDepartment) => <span> {department.name} </span>,
-    },
-    {
-      title: 'Категория',
-      dataIndex: 'category',
-      key: 'category',
-      width: 70,
-      render: (category: ICatergory) => (category.name),
+      ellipsis: true,
+      render: (department) => <div className='max-w-13.75 overflow-hidden whitespace-nowrap text-ellipsis'>{department.name}</div>, 
     },
     {
       title: 'Тип операции',
       dataIndex: 'type',
       key: 'type',
-      width: 100,
+      width: '100px',
       ellipsis: true,
       render: (type: ITypeOperation) => (type.name),
+    },
+    {
+      title: 'Категория',
+      dataIndex: 'category',
+      key: 'category',
+      width: '75px',
+      render: (category: ICatergory) => (category.name),
     },
     {
       title: 'Норма времени',
       dataIndex: 'normTime',
       key: 'normTime',
-      width: 90,
+      width: '80px',
       align: 'right',
       render: (value: number) => `${value.toFixed(3)}`,
     },
@@ -47,14 +49,14 @@ const columns: ColumnsType<IOperation> = [
       title: 'Кол-во позиций',
       dataIndex: 'numberPositions',
       key: 'numberPositions',
-      width: 80,
-      align: 'center',
+      width: '80px',
+      align: 'right',
     },
     {
       title: 'Оборудование',
       dataIndex: 'equipment',
       key: 'equipment',
-      width: 120,
+      width: '100px',
       ellipsis: true,
       render: (equipment) => (equipment?.name),
     },
@@ -62,57 +64,59 @@ const columns: ColumnsType<IOperation> = [
       title: 'Назначена',
       dataIndex: 'isAssigned',
       key: 'isAssigned',
-      width: 70,
+      width: '75px',
       align: 'center',
     //   render: (checked: boolean) => <Checkbox checked={checked} disabled />,
     },
-    {
-      title: 'Состояние',
-      key: 'status',
-      width: 90,
-      align: 'center',
-    //   render: (_, record) => {
-    //     const isClosed = record.dateExecution && record.executorId;
-    //     const color = isClosed ? 'success' : record.isAssigned ? 'processing' : 'default';
-    //     const text = isClosed ? 'закрыто' : record.isAssigned ? 'в работе' : 'открыто';
-    //     return <Tag color={color}>{text}</Tag>;
-    //   },
-    },
+    // {
+    //   title: 'Состояние',
+    //   key: 'status',
+    //   width: '75px',
+    //   align: 'center',
+    //   render: (status, _) => {}
+    // //   render: (_, record) => {
+    // //     const isClosed = record.dateExecution && record.executorId;
+    // //     const color = isClosed ? 'success' : record.isAssigned ? 'processing' : 'default';
+    // //     const text = isClosed ? 'закрыто' : record.isAssigned ? 'в работе' : 'открыто';
+    // //     return <Tag color={color}>{text}</Tag>;
+    // //   },
+    // },
     {
       title: 'Исполнитель',
       dataIndex: 'executor',
       key: 'executor',
-      width: 100,
-      render: (executor?: IExecutor) => (executor ? executor.name : ''),
+      ellipsis: true,
+      align: 'left',
+      render: (executor?: IExecutor) => <div style={{overflow: 'hidden', maxWidth: 110, whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{executor ? executor.name : ''}</div>,
     },
     {
-      title: 'Коэфф.',
+      title: 'Коэффцициент',
       dataIndex: 'paymentCoefficient',
       key: 'paymentCoefficient',
-      width: 70,
-      align: 'center',
+      width: '90px',
+      align: 'right',
       render: (value?: number) => value?.toFixed(2) || '',
     },
     {
       title: '% премии',
       dataIndex: 'award',
       key: 'award',
-      width: 80,
+      width: '70px',
       align: 'right',
-      render: (value?: number) => value !== undefined ? `${value.toFixed(2)}%` : ' ',
+      render: (value?: number) => value !== undefined ? `${value.toFixed(0)}%` : ' ',
     },
     {
       title: 'Дата выдачи',
       dataIndex: 'dateIssue',
       key: 'dateIssue',
-      width: 100,
+      width: '100px',
       render: (date?: Date) => date ? date.toLocaleDateString() : '',
     },
     {
       title: 'Дата исполнения',
       dataIndex: 'dateExecution',
       key: 'dateExecution',
-      width: 110,
+      width: '100px',
       render: (date?: Date) => date ? date.toLocaleDateString() : '',
     },
 ];
@@ -123,17 +127,17 @@ interface Props {
   
 export const ItineraryOperationsTable = ({operations}: Props) => {
 
-    console.log(operations)
     return(
         <Table
-        className=""
             columns={columns}
             dataSource={operations}
-            size="small"
-            bordered
+            size='small'
+            rowClassName='text t text_tiny text_very-litle max-h-5.5 overflow-hidden'
+            className="itinerary-operation-table "
+            tableLayout='fixed'
             pagination={false}
             rowKey={'id'}
-            scroll={{ x: 1500 }}
+            scroll={{ x: 'max-content', y: 55 * 5 }}
         />
     )
 }

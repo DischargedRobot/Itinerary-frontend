@@ -1,24 +1,27 @@
+'use client'
+
 import './NavBar.scss'
 
 import Avatar from "@/shared/ui/Avatar/Avatar"
 import { Menu, MenuProps } from "antd"
 import Link from "next/link"
+import { useNavBar } from '../model'
 
 const MENU_ITEMS: MenuProps['items']= [
     {
-        key: 'Itineraries',
+        key: '/personal/itineraries',
         label: <Link href='/personal/itineraries'>{'Маршуртные листы'}</Link>
     },
     {
-        key: 'TaskLists',
+        key: '/personal/tasklists',
         label: <Link href='/personal/tasklists'>{'Сформировать наряды'}</Link>
     },
     {
-        key: 'CreatedTaskLists',
+        key: '/personal/createdtasklists',
         label: <Link href='/personal/createdtasklists'>{'Сформированные наряды'}</Link>
     },
     {
-        key: 'Profile',
+        key: '/personal/profile',
         label: <Link href='/personal/profile'><Avatar size={32}/></Link>,
         className: 'no-hover'        
     }
@@ -26,9 +29,14 @@ const MENU_ITEMS: MenuProps['items']= [
 
 export const NavBar = () => {
 
+    const { 
+        selectedKeys
+    } = useNavBar()
+
     return (
         <nav className="w-full border-b border-b-gray-300 shadow-sm" >
             <Menu
+                selectedKeys={[selectedKeys ?? '']}
                 className="nav-bar title title_very-litle w-full items-center justify-center"
                 mode="horizontal"
                 items={MENU_ITEMS}

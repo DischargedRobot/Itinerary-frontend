@@ -7,9 +7,10 @@
     }
 
     td {
-        line-height: 0 !important;
+        line-height: 1 !important;
         padding: 6px 4px !important;
     }
+    
     & .ant-table-title, .ant-table-footer {
         background: var(--activeElement);
     }
