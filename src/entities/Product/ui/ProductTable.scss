@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 .product-table {
     &__title {
         color: var(--foreground);
@@ -9,6 +11,10 @@
     }
     & .ant-table-title, .ant-table-footer {
         background: var(--activeElement);
+    }
+
+    & .ant-table {
+        @apply rounded-2xl;
     }
 
     &.collapsed table {

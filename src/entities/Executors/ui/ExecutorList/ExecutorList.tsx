@@ -20,7 +20,8 @@ export const ExecutorList = () => {
             const firstChildY = executorList?.firstElementChild?.getBoundingClientRect()
             const executorListsCoordinates = executorList?.getBoundingClientRect()
             if (lastChildY && firstChildY && executorList && executorListsCoordinates) {
-                executorList.classList.toggle('executor-list_border-bottom', lastChildY.bottom > executorListsCoordinates.bottom)
+                // -граница иначе дёргается
+                executorList.classList.toggle('executor-list_border-bottom', lastChildY.bottom-2 > executorListsCoordinates.bottom)
                 executorList.classList.toggle('executor-list_border-top', firstChildY.top < executorListsCoordinates.top )
             }
         }

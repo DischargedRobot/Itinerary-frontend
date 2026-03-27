@@ -3,6 +3,22 @@
 .executor-list {
     border-color: var(--hover);
 
+    scrollbar-width: thin;
+    scrollbar-color: var(--hover) var(--background);
+
+    &::-webkit-scrollbar {
+        width: 2px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background-color: var(--background);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--hover);
+        border-radius: 20px;
+    }
+
     &_border-bottom {
         @apply border-b-2;
     }

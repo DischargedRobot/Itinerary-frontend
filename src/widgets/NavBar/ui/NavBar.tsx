@@ -19,7 +19,7 @@ const MENU_ITEMS: MenuProps['items']= [
     },
     {
         key: 'Profile',
-        label: <Link href='/personal/Profile'><Avatar size={32}/></Link>,
+        label: <Link href='/personal/profile'><Avatar size={32}/></Link>,
         className: 'no-hover'        
     }
 ]
