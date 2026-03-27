@@ -1,7 +1,7 @@
-@import './reset.css';
+@use './reset.css';
 // @import "tailwindcss";
-@import './globals.css';
-@import './typography.scss';
+@use './globals.css';
+@use './typography.scss';
 
 @import '../common/RobotoMono/stylesheet.css';
 @import '../common/inter/stylesheet.css';

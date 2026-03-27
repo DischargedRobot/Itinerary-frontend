@@ -20,6 +20,7 @@ const columns: ColumnsType<IOperation> = [
       dataIndex: 'department',
       key: 'department',
       ellipsis: true,
+      width: 55,
       render: (department) => <div className='max-w-13.75 overflow-hidden whitespace-nowrap text-ellipsis'>{department.name}</div>, 
     },
     {
@@ -34,7 +35,7 @@ const columns: ColumnsType<IOperation> = [
       title: 'Категория',
       dataIndex: 'category',
       key: 'category',
-      width: '75px',
+      width: '90px',
       render: (category: ICatergory) => (category.name),
     },
     {
@@ -58,7 +59,7 @@ const columns: ColumnsType<IOperation> = [
       key: 'equipment',
       width: '100px',
       ellipsis: true,
-      render: (equipment) => (equipment?.name),
+      render: (equipment) => <div className='max-w-25 overflow-hidden whitespace-nowrap text-ellipsis'>{equipment?.name}</div>,
     },
     {
       title: 'Назначена',
@@ -68,25 +69,13 @@ const columns: ColumnsType<IOperation> = [
       align: 'center',
     //   render: (checked: boolean) => <Checkbox checked={checked} disabled />,
     },
-    // {
-    //   title: 'Состояние',
-    //   key: 'status',
-    //   width: '75px',
-    //   align: 'center',
-    //   render: (status, _) => {}
-    // //   render: (_, record) => {
-    // //     const isClosed = record.dateExecution && record.executorId;
-    // //     const color = isClosed ? 'success' : record.isAssigned ? 'processing' : 'default';
-    // //     const text = isClosed ? 'закрыто' : record.isAssigned ? 'в работе' : 'открыто';
-    // //     return <Tag color={color}>{text}</Tag>;
-    // //   },
-    // },
     {
       title: 'Исполнитель',
       dataIndex: 'executor',
       key: 'executor',
       ellipsis: true,
       align: 'left',
+      width: 110,
       render: (executor?: IExecutor) => <div style={{overflow: 'hidden', maxWidth: 110, whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{executor ? executor.name : ''}</div>,
     },
     {
@@ -128,16 +117,20 @@ interface Props {
 export const ItineraryOperationsTable = ({operations}: Props) => {
 
     return(
-        <Table
-            columns={columns}
-            dataSource={operations}
-            size='small'
-            rowClassName='text t text_tiny text_very-litle max-h-5.5 overflow-hidden'
-            className="itinerary-operation-table "
-            tableLayout='fixed'
-            pagination={false}
-            rowKey={'id'}
-            scroll={{ x: 'max-content', y: 55 * 5 }}
-        />
+      <div className='max-w-200 overflow-hidden'>
+        <div className='overflow-x-auto'>
+          <Table
+              columns={columns}
+              dataSource={operations}
+              size='small'
+              rowClassName='text text_tiny text_2very-litle max-h-5.5 overflow-hidden'
+              className="itinerary-operation-table"
+              tableLayout='fixed'
+              pagination={false}
+              rowKey={'id'}
+              scroll={{ x: true, y: 100 }}
+          />
+        </div>
+      </div>
     )
 }

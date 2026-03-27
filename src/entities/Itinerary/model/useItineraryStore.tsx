@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { IItinerary } from "../lib";
 import { mockItineraries } from "@/shared/testData/testData";
 
+
 interface IItineraryStore {
     itineraries: IItinerary[]
 

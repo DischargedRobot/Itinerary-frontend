@@ -1,7 +1,16 @@
+@use '../../../../app/typography.scss';
+
 .itinerary-operation-table {
     th {
         // text-align: right !important;
+        @extend .title, .title_2very-litle;
         vertical-align: bottom;
+        text-align: left !important;
+
+        border-right: 1px solid var(--stroke);
+        &::before {
+            width: 0 !important;
+        }
     }
 
     td {
