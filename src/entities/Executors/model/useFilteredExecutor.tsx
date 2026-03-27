@@ -51,6 +51,6 @@ export const useFilteredExecutor = () => {
     }, [filterArgs])
     
     return useMemo(() => {
-        return filterExecutors(['members', 'isBrigade'], executors)
+        return filterExecutors(['members', 'isBrigade', 'departmentId'], executors)
     }, [executors, filterExecutors])
 }

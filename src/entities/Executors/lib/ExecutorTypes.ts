@@ -1,4 +1,5 @@
 import { IOperation } from "@/entities/Operations"
+import { IDepartment } from "@/shared/lib/types"
 
 export interface IExecutor {
     id: number
@@ -7,9 +8,4 @@ export interface IExecutor {
     isBrigade: boolean
     department: IDepartment
     operations: IOperation[]
-}
-
-export interface IDepartment {
-    name: string
-    id: number
 }

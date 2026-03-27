@@ -5,7 +5,7 @@ import './ItineraryOperationTable.scss'
 import { Checkbox, Table } from "antd"
 import { IOperation } from "../../lib";
 import { ColumnsType } from "antd/es/table";
-import { IDepartment, IExecutor } from "@/entities/Executors/lib/ExecutorTypes";
+import { IExecutor } from "@/entities/Executors/lib/ExecutorTypes";
 import { ICatergory, ITypeOperation } from "@/shared";
 const columns: ColumnsType<IOperation> = [
     {

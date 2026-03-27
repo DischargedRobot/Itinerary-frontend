@@ -1,7 +1,7 @@
 // ===== Базовые справочники (подгружаются при входе) =====
 
-import { IDepartment, IExecutor } from "@/entities/Executors/lib/ExecutorTypes";
-import { ICatergory, ITypeOperation } from "../lib";
+import {  IExecutor } from "@/entities/Executors/lib/ExecutorTypes";
+import { ICatergory, IDepartment, ITypeOperation } from "../lib";
 import { IEquipment } from "../lib/types/IEquipment";
 import { IProduct } from "@/entities/Product";
 import { IItinerary } from "@/entities/Itinerary";
