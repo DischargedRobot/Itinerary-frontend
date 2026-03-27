@@ -3,8 +3,8 @@
 import './OperationTable.scss'
 
 import { Table, TableProps } from "antd"
-import { useOperationTable } from "../model/useOperationTable"
-import { IOperation } from "../lib"
+import { useOperationTable } from "../../model/useOperationTable"
+import { IOperation } from "../../lib"
 import { IItinerary } from "@/entities/Itinerary"
 import { DownOutlined } from '@ant-design/icons'
 
@@ -65,7 +65,6 @@ export const OperationTable = () => {
         setIsVisible,
         isVisible,
     } = useOperationTable()
-
     
     return (
         <Table

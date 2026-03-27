@@ -1,8 +1,9 @@
 import { IOperation } from "@/entities/Operations/lib/OperationTypes"
+import { IProduct } from "@/entities/Product"
 
 export interface IItinerary {
     id: number
-    productId: number
+    product: IProduct
     positionPlanId: number
     audCode: string
     audName: string

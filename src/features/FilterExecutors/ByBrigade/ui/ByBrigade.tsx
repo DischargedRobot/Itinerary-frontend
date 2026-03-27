@@ -7,7 +7,7 @@ export const ByBrigade = () => {
     const setIsBrigade = useExecutorFiltersStore(state => state.setIsBrigade)
     
     return (
-        <label className="flex items-center gap-2 title">
+        <label className="title flex items-center gap-2">
             <span>Бригада:</span>
             <input type="checkbox" onChange={e => setIsBrigade(e.target.checked)}/>
         </label>

@@ -22,7 +22,7 @@ export const PersonalInput = <T extends FieldValues>(props: Props<T>) => {
 
     return (
         <label
-            className="  p-2 rounded-xl bg-foreground border-2 border-stroke hover:border-hover has-focus:border-active focus:border-active active:border-active">
+            className="p-2 rounded-xl bg-foreground border-2 border-stroke hover:border-hover has-focus:border-active focus:border-active active:border-active">
             <input
                 className="bg-transparent w-full"
                 type={type}

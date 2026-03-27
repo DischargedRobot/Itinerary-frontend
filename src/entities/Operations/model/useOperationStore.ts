@@ -20,7 +20,7 @@ const createInitial = (): IOperation[] => {
                 date: new Date,
                 route: [1],
             },
-            divisionId: index,
+            department: {id: index, name: 'sss'},
             categoryId: index,
             normTime: index,
             typeId: index,

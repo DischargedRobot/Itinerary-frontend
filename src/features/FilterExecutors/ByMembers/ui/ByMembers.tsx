@@ -7,7 +7,7 @@ export const ByMembers = () => {
     const setMembers = useExecutorFiltersStore(state => state.setMembers)
 
     return (
-    <label className="p-2 bg-[var(--foreground)] border border-[var(--stroke)] rounded-md title">
+    <label className="p-2 bg-foreground border border-stroke rounded-md title hover:border-hover has-focus:border-active focus:border-active active:border-active">
         <input
             name="executor" 
             type="search" 
