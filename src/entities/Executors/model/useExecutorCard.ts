@@ -2,6 +2,7 @@ import { useState } from "react"
 import { IExecutor } from "../lib"
 import { useOperationStore } from "@/entities/Operations"
 import { useExecutorsStore } from "./useExecutorsStore"
+import { useSelectedExecutorsStore } from "./useSelectedExecutorsStore"
 
 export const useExecutorCard = () => {
 
@@ -9,11 +10,9 @@ export const useExecutorCard = () => {
     
     // const addProducts = useProductStore(state => state.addProducts)
     // const removeProducts = useProductStore(state => state.removeProducts)
-    const addOperations = useOperationStore(state => state.addOperations)
-    const removeOperations = useOperationStore(state => state.removeOperations)
 
-    const addSelectedExecutor = useExecutorsStore(state => state.addSelectedExecutor)
-    const removeSelectedExecutor = useExecutorsStore(state => state.removeSelectedExecutor)
+    const addSelectedExecutor = useSelectedExecutorsStore(state => state.addSelectedExecutor)
+    const removeSelectedExecutor = useSelectedExecutorsStore(state => state.removeSelectedExecutor)
 
     const handleSelect = (executor: IExecutor) => {
             // вытаскиваем из операций продукты

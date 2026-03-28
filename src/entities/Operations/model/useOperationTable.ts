@@ -4,6 +4,7 @@ import { IProduct, useProductStore } from "@/entities/Product"
 import { useOperationStore } from "./useOperationStore"
 import { useExecutorsStore } from "@/entities/Executors"
 import { IOperation } from "../lib"
+import { useSelectedExecutorsStore } from "@/entities/Executors/model"
 
 export const useOperationTable = () => {
 
@@ -36,7 +37,7 @@ export const useOperationTable = () => {
     }, [setProducts, filteredOperations])
     
 
-    const selectedExecutors = useExecutorsStore(state => state.selectedExecutors)
+    const selectedExecutors = useSelectedExecutorsStore(state => state.selectedExecutors)
     // если мы изменяем фильтры, то обновляем операции 
     // Сделать так, чтобы при 
     const setOperations = useOperationStore(state => state.setOperations)
