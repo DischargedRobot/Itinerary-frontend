@@ -3,7 +3,7 @@
     & li {
         
         &::after {
-            border-color: var(--placeholder-color) !important;
+            border-color: var(--placeholder) !important;
         }
         
         &:hover::after {

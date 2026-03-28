@@ -50,6 +50,10 @@ const token: ConfigProviderProps['theme'] = {
     Table: {
       // colorBgBase: COLORS.hover,
       // headerBg: COLORS.hover,
+    },
+    Calendar: {
+      colorPrimary: COLORS.activeElement,
+      controlItemBgHover: COLORS.hover,
     }
   }
 }
