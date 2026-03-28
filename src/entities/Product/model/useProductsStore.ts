@@ -1,15 +1,18 @@
 import { create } from "zustand";
 import { IProduct } from "../lib";
+import { mockProducts } from "@/shared/testData/testData";
 
 interface IProductSore {
     products: IProduct[]
     
     setProducts: (newProducts: IProduct[]) => void
     addProducts: (newProducts: IProduct[]) => void
+    removeProducts: (removedProducts: IProduct[]) => void
 }
 
 export const useProductStore = create<IProductSore>(set => ({
-    products: [{id: 1, name: 'Воздушный анализатор', audCode: 'КСИУ', departmentId: 1, kit: 30, increasingKit: 150}],
+    products: mockProducts,
+
 
     setProducts: (products) => set({products}),
     addProducts: (newProducts) =>  set((state) => {
@@ -20,6 +23,15 @@ export const useProductStore = create<IProductSore>(set => ({
             return {}
         }
 
-        return {products: [...state.products.filter(product => newProductIds.includes(product.id)), ...newProducts]}
-    })
+        return {products: [...state.products.filter(product => !newProductIds.includes(product.id)), ...newProducts]}
+    }),
+    removeProducts: (removedProducts) => set(state => {
+        const removedProductsIds = removedProducts.map(prod => prod.id)
+        const withoutRemovedProducts = state.products.filter(prod => !removedProductsIds.includes(prod.id))
+        console.log(removedProductsIds,'withour', withoutRemovedProducts)
+        if (withoutRemovedProducts.length === state.products.length) {
+            return {}
+        }
+        return {products: withoutRemovedProducts}
+    }),
 }))

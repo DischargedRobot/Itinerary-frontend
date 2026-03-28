@@ -13,7 +13,6 @@ export const ExecutorList = () => {
     useEffect(() => {
 
         const executorList = document.getElementById('executors-list')
-        console.log(executorList)
 
         const borderAtOverflowY = () => {
             const lastChildY = executorList?.lastElementChild?.getBoundingClientRect()

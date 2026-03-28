@@ -1,7 +1,8 @@
-import { IDepartment, IExecutor } from "@/entities/Executors/lib/ExecutorTypes"
+import { IExecutor } from "@/entities/Executors/lib/ExecutorTypes"
 import { IItinerary } from "@/entities/Itinerary/lib/ItineraryTypes"
 import { IProduct } from "@/entities/Product"
 import { ICatergory } from "@/shared"
+import { IDepartment } from "@/shared/lib"
 import { IEquipment } from "@/shared/lib/types/IEquipment"
 import { ITypeOperation } from "@/shared/lib/types/ITypeOperation"
 
@@ -16,7 +17,7 @@ export interface IOperation {
     numberPositions: number
     equipment?: IEquipment // подгружаем при входе все
     isAssigned: boolean
-    executor: IExecutor
+    executor?: IExecutor
     paymentCoefficient?: number
     award?: number
     dateIssue?: Date

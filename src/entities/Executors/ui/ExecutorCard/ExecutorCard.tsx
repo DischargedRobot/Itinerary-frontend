@@ -21,7 +21,6 @@ export const ExecutorCard = (props: Props) => {
 
     const { 
         isSelected, 
-        setIsSelected,
         handleSelect,
     } = useExecutorCard()
 
@@ -30,11 +29,7 @@ export const ExecutorCard = (props: Props) => {
             <div 
                 className='relative cursor-pointer'
                 onMouseDown={(e) => {e.preventDefault()}} 
-                onClick={() => {
-                    console.log(executor)
-                    setIsSelected(prev => !prev)
-                    handleSelect(executor)
-                }}
+                onClick={() => handleSelect(executor)}
                 >
                 <Avatar size={64}/>
                 <label className='absolute bottom-0 right-0 flex w-4!'>

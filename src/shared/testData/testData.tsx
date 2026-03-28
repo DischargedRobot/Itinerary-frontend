@@ -247,5 +247,5 @@ mockItineraries[1].operations = mockOperations.filter(op => op.itinerary.id === 
 
 // ===== Добавляем операции в исполнителей (опционально) =====
 mockExecutors.forEach(executor => {
-  executor.operations = mockOperations.filter(op => op.executor.id === executor.id);
+  executor.operations = mockOperations.filter(op => op.executor?.id === executor.id);
 });
