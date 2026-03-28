@@ -22,4 +22,5 @@ export interface IOperation {
     award?: number
     dateIssue?: Date
     dateExecution?: Date
+    isFormed: boolean
 }

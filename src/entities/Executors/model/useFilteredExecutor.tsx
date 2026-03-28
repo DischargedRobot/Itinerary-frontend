@@ -46,7 +46,7 @@ export const useFilteredExecutor = () => {
     const filterArgs = useExecutorFiltersStore(useShallow(state => ({isBrigade: state.isBrigade, members: state.members, departmentId: state['departmentId']})))
 
     const executors = useExecutorsStore(state => state.executors)
-    console.log(executors, 'execs')
+    // console.log(executors, 'execs')
 
     const filterExecutors =  useCallback(<T extends TFilterKey>(filterKeys: T[], executors: IExecutor[]): IExecutor[] => {
         return filterKeys.reduce((filteredExecutors, filterKey) => {

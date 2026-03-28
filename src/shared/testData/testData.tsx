@@ -133,6 +133,7 @@ export const mockOperations: IOperation[] = [
     award: 500,
     dateIssue: new Date('2024-04-15T08:00:00'),
     dateExecution: new Date('2024-04-15T12:30:00'),
+    isFormed: false,
   },
   {
     id: 1002,
@@ -150,6 +151,7 @@ export const mockOperations: IOperation[] = [
     award: 700,
     dateIssue: new Date('2024-04-15T13:00:00'),
     dateExecution: undefined, // ещё не выполнена
+    isFormed: false,
   },
   {
     id: 1003,
@@ -165,6 +167,7 @@ export const mockOperations: IOperation[] = [
     executor: mockExecutors[1],
     paymentCoefficient: 1.0,
     dateIssue: new Date('2024-04-16T09:00:00'),
+    isFormed: false,
   },
   {
     id: 1004,
@@ -179,6 +182,7 @@ export const mockOperations: IOperation[] = [
     isAssigned: false,
     executor: mockExecutors[2],
     paymentCoefficient: 1.1,
+    isFormed: false,
   },
   {
     id: 1005,
@@ -191,6 +195,7 @@ export const mockOperations: IOperation[] = [
     numberPositions: 50,
     isAssigned: false,
     executor: mockExecutors[1],
+    isFormed: false,
   },
 
   // === Маршрут 102 ===
@@ -210,6 +215,7 @@ export const mockOperations: IOperation[] = [
     award: 1200,
     dateIssue: new Date('2024-04-16T10:30:00'),
     dateExecution: new Date('2024-04-16T14:00:00'),
+    isFormed: false,
   },
   {
     id: 2002,
@@ -226,6 +232,7 @@ export const mockOperations: IOperation[] = [
     paymentCoefficient: 1.1,
     award: 300,
     dateIssue: new Date('2024-04-16T14:30:00'),
+    isFormed: false,
   },
   {
     id: 2003,
@@ -238,6 +245,7 @@ export const mockOperations: IOperation[] = [
     numberPositions: 25,
     isAssigned: false,
     executor: mockExecutors[1],
+    isFormed: false,
   },
 ];
 
