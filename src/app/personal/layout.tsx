@@ -1,4 +1,4 @@
-import { NavBar } from "@/widgets/NavBar/ui/NavBar"
+import { NavBar } from "@/widgets/NavBar"
 import { Layout } from "antd"
 import { Content, Header } from "antd/es/layout/layout"
 

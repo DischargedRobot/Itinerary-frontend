@@ -7,6 +7,7 @@ interface IOperationFiltersStore {
     filterArgs: () => IOperationFilters
     
     setProducts: (newProductIds: number[]) => void
+    setIsFormed: (isFormed: boolean) => void
 }
 
 
@@ -15,5 +16,6 @@ export const useOperationFiltersStore = create<IOperationFiltersStore>((set, get
     isFormed: false,
     filterArgs: () => ({productIds: get().productIds, isFormed: get().isFormed}),
 
-    setProducts: (newProductIds) => set({productIds: newProductIds})
+    setProducts: (productIds) => set({productIds}),
+    setIsFormed: (isFormed) => set({isFormed}),
 }))

@@ -1,4 +1,3 @@
-import { IProduct, useProductStore } from "@/entities/Product"
 import { useState } from "react"
 import { IExecutor } from "../lib"
 import { useOperationStore } from "@/entities/Operations"

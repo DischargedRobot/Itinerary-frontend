@@ -1,5 +1,5 @@
 import { ItineraryTable } from "@/entities/Itinerary"
-import { ItineraryOperationsTable } from "@/entities/Operations"
+// import { ItineraryOperationsTable } from "@/entities/Operations"
 
 const ItinerariesPage = () => {
 
