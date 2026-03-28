@@ -4,9 +4,10 @@ import { useOperationStore } from "./useOperationStore"
 import { useMemo } from "react"
 import { IOperation } from "../lib"
 
-export interface IOperationFilters {
+export interface IOperationFilters{
     productIds: number[]
     isFormed: boolean 
+    dateExecution: {fromDate?: Date, toDate?: Date}
 }
 
 type TOperationFilterKey = keyof IOperationFilters
@@ -26,9 +27,24 @@ const filterByIsFormed: TOperationFilterFunctions['isFormed'] = (operations, isF
     return operations.filter(operation => operation.isFormed == isFormed)
 }
 
+const filterByDateExecution: TOperationFilterFunctions['dateExecution'] = (operations, date) => {
+    if (date.fromDate && date.toDate) {
+        return operations
+    } 
+
+    return operations.filter(oper => {
+        if (oper.dateExecution !== undefined ) {
+            // можно и без !=== но так понятней
+            return (date.fromDate !== undefined ? oper.dateExecution >= date.fromDate : true) && (date.toDate !== undefined ? oper.dateExecution <= date.toDate : true)
+        }
+        return false
+    })
+}
+
 const OperationFilterFunction: TOperationFilterFunctions = {
     productIds: filterByProductsIds,
     isFormed: filterByIsFormed,
+    dateExecution: filterByDateExecution,
 }
     // extends чтобы тайп скрипт понял что filter одинаковый при подстановки в function и  args
 const filter = <T extends TOperationFilterKey>(filters: T[], operations: IOperation[], filterArgs: IOperationFilters): IOperation[] => {
@@ -43,6 +59,6 @@ export const useFilteredOperations = () => {
     const operations = useOperationStore(useShallow(state => state.operations))
 
     return useMemo(() => {
-        return {filteredOperations: filter(['isFormed', 'productIds'],operations, filters)}
+        return {filteredOperations: filter(['isFormed', 'productIds', 'dateExecution'],operations, filters)}
     },[operations, filters])
 }

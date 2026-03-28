@@ -3,7 +3,11 @@
 import { Calendar } from "antd";
 import { useEffect, useRef, useState } from "react";
 
-export const SelectDate = () => {
+interface Props {
+    onSelect: (date: Date) => void
+}
+
+export const SelectDate = ({onSelect}: Props) => {
     const [isVisible, setIsVisible] = useState<boolean>(false)
     const [date, setDate] = useState<Date>(new Date)
 
@@ -23,7 +27,8 @@ export const SelectDate = () => {
         <div 
             ref={calendarRef}
             className="relative"
-            onClick={(e) => {setIsVisible(true)}}
+            onClick={(e) => {
+                setIsVisible(true)}}
         >   
             {isVisible 
             ? <Calendar 
@@ -34,7 +39,11 @@ export const SelectDate = () => {
                 }
                 className="absolute z-10 top-[150%] w-75"
                 fullscreen={false}
-                onSelect={date => setDate(date.toDate())}
+                onSelect={date => {
+                    const Date = date.toDate()
+                    onSelect(Date)
+                    setDate(Date)
+                }}
             />
             : ''
             }
