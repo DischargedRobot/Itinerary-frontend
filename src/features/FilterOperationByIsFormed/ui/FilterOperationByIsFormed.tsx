@@ -8,9 +8,10 @@ export const FilterOperationByIsFormed = () => {
     } = useFilterOperationByIsFormed()
 
     return (
-        <label>
+        <label className="title flex items-center gap-2">
             Сформированные наряды: 
             <input 
+                className="w-5 h-5"
                 checked={isChecked}
                 onChange={handleChange}
                 name="isFormed"

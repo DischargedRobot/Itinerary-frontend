@@ -32,7 +32,7 @@ export const ExecutorList = () => {
     }, [])
 
     return (
-        <ul id='executors-list' className="executor-list flex flex-col gap-4 max-h-[400] w-[300] overflow-y-auto">
+        <ul id='executors-list' className="executor-list flex flex-col gap-4 max-h-[400] w-min overflow-y-auto">
             {executors.map((executor) => {
                 return <li key={executor.id}>
                     {<ExecutorCard executor={executor}/>}

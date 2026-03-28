@@ -14,11 +14,7 @@ const MENU_ITEMS: MenuProps['items']= [
     },
     {
         key: '/personal/tasklists',
-        label: <Link href='/personal/tasklists'>{'Сформировать наряды'}</Link>
-    },
-    {
-        key: '/personal/createdtasklists',
-        label: <Link href='/personal/createdtasklists'>{'Сформированные наряды'}</Link>
+        label: <Link href='/personal/tasklists'>{'Наряды заданий'}</Link>
     },
     {
         key: '/personal/profile',

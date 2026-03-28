@@ -4,6 +4,7 @@ import { FilterExecutors } from "@/features/FilterExecutors"
 import { FilterOperationByDate } from "@/features/FilterOperationByDate"
 import { IDepartment } from "@/shared/lib"
 import { useTopItineraryFilters } from "../model/useTopItineraryFilters"
+import { FilterOperationByIsFormed } from "@/features/FilterOperationByIsFormed"
 
 export const TopItineraryFilters = () => {
 
@@ -22,6 +23,7 @@ export const TopItineraryFilters = () => {
                 onChange={handleSelect}
                 placeholder="Цех"
             />
+            <FilterOperationByIsFormed/>
         </div>
     )
 }

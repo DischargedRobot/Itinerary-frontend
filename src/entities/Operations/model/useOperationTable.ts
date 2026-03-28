@@ -7,14 +7,15 @@ export const useOperationTable = () => {
 
     const [isVisible, setIsVisible] = useState<boolean>()
     const setProducts = useProductStore(state => state.setProducts)
-    const operations = useOperationStore(state => state.operations)
-        console.log('opper', operations)
-
+        // console.log('opper', operations)
+    // const {filte} = useFilteredOperations()
     // TODO: мб перенести в сторе продуктов? но тогда он будет зависимым от другого стора, хм...
+    const {filteredOperations} = useFilteredOperations()
+
     useEffect(() => {
-        console.log('add prod', operations)
-        setProducts(operations
-                .map<IProduct>(operation => operation.product)
+        console.log('add prod', filteredOperations)
+        setProducts(filteredOperations
+                .map<IProduct>(filteredOperations => filteredOperations.product)
                 .reduce<{currentIds: number[], uniqProduct: IProduct[]}>(
                     (currentProduct, product) => {
                         if (!currentProduct.currentIds.includes(product.id)){
@@ -30,9 +31,8 @@ export const useOperationTable = () => {
                         }
                     )
                 .uniqProduct)
-    }, [setProducts, operations])
+    }, [setProducts, filteredOperations])
     
-    const {filteredOperations} = useFilteredOperations()
 
     return {operations: filteredOperations, isVisible, setIsVisible}
 }

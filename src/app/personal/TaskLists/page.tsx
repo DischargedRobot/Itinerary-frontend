@@ -13,7 +13,6 @@ const TaskLists = () => {
     return (
         <div className='flex flex-col gap-5 w-full'>
             <TopItineraryFilters/>
-            <FilterOperationByIsFormed/>
             <div className="grid grid-cols-[auto_1fr] gap-3">
                 <FullExecutorList/>
                 <div className='flex flex-col gap-5'>
