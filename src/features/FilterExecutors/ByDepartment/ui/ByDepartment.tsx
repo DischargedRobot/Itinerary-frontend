@@ -10,7 +10,7 @@ export interface DropdownOption<T> {
 interface SearchableDropdownProps<T> {
     options: DropdownOption<T>[]
     value: T | null
-    onChange: (value: T) => void
+    onChange: (value: T | null) => void
     placeholder?: string
     disabled?: boolean
     className?: string
@@ -35,6 +35,11 @@ export const ByDepartment = <T,>({
             return userInput
         }
         
+        if (userInput.length === 0 && value !== null){
+            console.log(userInput, 'ss', value)
+            return userInput
+        }
+
         if (value !== null && value !== undefined) {
             const selected = options.find(opt => opt.value === value)
             return selected ? selected.label : ''
@@ -51,7 +56,6 @@ export const ByDepartment = <T,>({
     )
 
     const isUserInputValid = useMemo(() => {
-        if (!userInput) return true // Пустой ввод считаем валидным
         const selected = options.find(opt => opt.value === value)
         return selected ? userInput.toLowerCase() === selected.label.toLowerCase() : false
     }, [userInput, value, options])
@@ -60,19 +64,19 @@ export const ByDepartment = <T,>({
         const handleClickOutside = (e: MouseEvent) => {
             if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
                 setIsOpen(false)
-                
                 if (!isUserInputValid) {
                     setUserInput('')
+                    onChange(null)
                 }
             }
         }
         document.addEventListener('mousedown', handleClickOutside)
         return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [isUserInputValid])
+    }, [isUserInputValid, onChange])
 
-    const handleSelect = (option: DropdownOption<T>): void => {
-        onChange(option.value)
-        setUserInput('')
+    const handleSelect = (option: DropdownOption<T> | null): void => {
+        onChange(option?.value ?? null)
+        setUserInput(option?.label ?? '')
         setIsOpen(false)
     }
 
@@ -90,10 +94,14 @@ export const ByDepartment = <T,>({
         if (e.key === 'Escape') {
             setIsOpen(false)
             setUserInput('')
+            onChange(null)
             inputRef.current?.blur()
         }
         if (e.key === 'Enter' && filteredOptions.length > 0 && isOpen) {
             e.preventDefault()
+            if (e.currentTarget.value.length === 0) {
+                handleSelect(null)
+            }
             handleSelect(filteredOptions[0])
         }
     }

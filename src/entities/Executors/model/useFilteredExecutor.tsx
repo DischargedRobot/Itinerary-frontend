@@ -7,7 +7,7 @@ import { useExecutorsStore } from "./useExecutorsStore"
 export interface ExecutorFilters {
     members: string[]
     isBrigade: boolean
-    departmentId: number
+    departmentId: number | null
 }
 
 type TFilterKey = keyof ExecutorFilters
@@ -29,6 +29,9 @@ const filterByIsBrigade: TFilteredFunction['isBrigade']  = (executors, isBrigade
 }
 
 const filterByDepartmentId: TFilteredFunction['departmentId']  = (executors, departmentId) => {
+    if (departmentId === null) {
+        return executors
+    }
     return executors.filter(executor => executor.department.id === departmentId)
 }
 
@@ -43,6 +46,7 @@ export const useFilteredExecutor = () => {
     const filterArgs = useExecutorFiltersStore(useShallow(state => ({isBrigade: state.isBrigade, members: state.members, departmentId: state['departmentId']})))
 
     const executors = useExecutorsStore(state => state.executors)
+    console.log(executors, 'execs')
 
     const filterExecutors =  useCallback(<T extends TFilterKey>(filterKeys: T[], executors: IExecutor[]): IExecutor[] => {
         return filterKeys.reduce((filteredExecutors, filterKey) => {
