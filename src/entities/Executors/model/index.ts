@@ -1,3 +1,4 @@
 export { useExecutorFiltersStore } from './useExecutorFiltersStore'
 export { useFilteredExecutor } from './useFilteredExecutor'
 export { useExecutorsStore } from './useExecutorsStore'
+export { useExecutorCard } from './useExecutorCard'

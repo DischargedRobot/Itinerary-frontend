@@ -7,6 +7,7 @@ import { IExecutor } from "../../lib/ExecutorTypes"
 import { useState } from "react"
 import Avatar from "@/shared/ui/Avatar/Avatar"
 import { SelectCircle } from '@/shared/ui'
+import { useExecutorCard } from '../../model'
 
 interface Props {
     executor: IExecutor
@@ -18,14 +19,22 @@ export const ExecutorCard = (props: Props) => {
         executor
     } = props
 
-    const [isSelected, setIsSelected] = useState<boolean>(false)
+    const { 
+        isSelected, 
+        setIsSelected,
+        handleSelect,
+    } = useExecutorCard()
 
     return (
         <div className={`${isSelected ? 'shadow-lg border-blue-600' : 'border-blue-200 hover:border-blue-400'} flex items-center gap-4 p-3 mx-auto max-w-68.5  border-solid border-2 rounded-lg bg-white`}>
             <div 
                 className='relative cursor-pointer'
                 onMouseDown={(e) => {e.preventDefault()}} 
-                onClick={() => setIsSelected(prev => !prev)}
+                onClick={() => {
+                    console.log(executor)
+                    setIsSelected(prev => !prev)
+                    handleSelect(executor)
+                }}
                 >
                 <Avatar size={64}/>
                 <label className='absolute bottom-0 right-0 flex w-4!'>

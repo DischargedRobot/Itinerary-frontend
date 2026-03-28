@@ -22,9 +22,11 @@ export const SelectCircle = ({
                 type="checkbox"
                 className="hidden"
                 checked={isSelected}
+                onClick={(e) => e.stopPropagation()}
                 onChange={() => {
-                    if (setIsSelected !== undefined)
-                    setIsSelected();
+                    if (setIsSelected !== undefined){
+                        setIsSelected();
+                    }
                 }}
             />
         </div>
