@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { IExecutor } from "../lib"
 import { useOperationStore } from "@/entities/Operations"
+import { useExecutorsStore } from "./useExecutorsStore"
 
 export const useExecutorCard = () => {
 
@@ -10,6 +11,9 @@ export const useExecutorCard = () => {
     // const removeProducts = useProductStore(state => state.removeProducts)
     const addOperations = useOperationStore(state => state.addOperations)
     const removeOperations = useOperationStore(state => state.removeOperations)
+
+    const addSelectedExecutor = useExecutorsStore(state => state.addSelectedExecutor)
+    const removeSelectedExecutor = useExecutorsStore(state => state.removeSelectedExecutor)
 
     const handleSelect = (executor: IExecutor) => {
             // вытаскиваем из операций продукты
@@ -33,22 +37,18 @@ export const useExecutorCard = () => {
                 setIsSelected(true)
                 // фильтруем перед тем как отрпавить, чтобы 
                 // не было дупликатов в изделиях, т.к. операции могут быть привязаны к одинаковому изделию
-                addOperations(executor.operations)
-
+                addSelectedExecutor(executor)
                 // addProduct(Array.from(new Set(executor.operations.map(operation => JSON.stringify(operation.product)))).map(product => JSON.parse(product)))
-                console.log('selec', executor.operations)
+                console.log('selec', executor)
             } else {
                 setIsSelected(false)
-                console.log('unselec', executor.operations)
+                console.log('unselec', executor)
 
-                removeOperations(executor.operations)
+                removeSelectedExecutor(executor)
             }
 
         }
 
-
-    
-    
     return {
         isSelected,
         setIsSelected,

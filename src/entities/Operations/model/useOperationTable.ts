@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useFilteredOperations } from "./useFilteredOperations"
 import { IProduct, useProductStore } from "@/entities/Product"
 import { useOperationStore } from "./useOperationStore"
+import { useExecutorsStore } from "@/entities/Executors"
+import { IOperation } from "../lib"
 
 export const useOperationTable = () => {
 
@@ -33,6 +35,17 @@ export const useOperationTable = () => {
                 .uniqProduct)
     }, [setProducts, filteredOperations])
     
+
+    const selectedExecutors = useExecutorsStore(state => state.selectedExecutors)
+    // если мы изменяем фильтры, то обновляем операции 
+    // Сделать так, чтобы при 
+    const setOperations = useOperationStore(state => state.setOperations)
+    useEffect(() => {
+        setOperations(selectedExecutors.reduce<IOperation[]>((allOperations, exec) => {
+            allOperations.push(...exec.operations)
+        return allOperations
+    }, []))
+    }, [selectedExecutors, setOperations])
 
     return {operations: filteredOperations, isVisible, setIsVisible}
 }

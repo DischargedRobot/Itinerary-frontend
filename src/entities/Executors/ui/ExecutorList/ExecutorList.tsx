@@ -7,7 +7,8 @@ import { useFilteredExecutor } from "../../model"
 import { useEffect } from "react"
 
 export const ExecutorList = () => {
-    
+
+    // TODO: в хук перенести
     const executors = useFilteredExecutor()
 
     useEffect(() => {
@@ -24,8 +25,10 @@ export const ExecutorList = () => {
                 executorList.classList.toggle('executor-list_border-top', firstChildY.top < executorListsCoordinates.top )
             }
         }
+
         executorList?.addEventListener('scroll',borderAtOverflowY)
         borderAtOverflowY()
+        
         return () => {
             executorList?.removeEventListener('scroll', borderAtOverflowY)
         }

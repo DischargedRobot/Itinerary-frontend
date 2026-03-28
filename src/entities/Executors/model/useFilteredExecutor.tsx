@@ -1,8 +1,9 @@
 import { useShallow } from "zustand/shallow"
 import { useExecutorFiltersStore } from "./useExecutorFiltersStore"
 import { IExecutor } from "../lib/ExecutorTypes"
-import { useCallback, useMemo } from "react"
+import { useCallback, useEffect, useMemo } from "react"
 import { useExecutorsStore } from "./useExecutorsStore"
+import { IOperation, useOperationFiltersStore, useOperationStore } from "@/entities/Operations"
 
 export interface ExecutorFilters {
     members: string[]
@@ -41,20 +42,32 @@ const FilterFunction: TFilteredFunction = {
     departmentId: filterByDepartmentId,
 }
 
+const filterExecutors =  <T extends TFilterKey>(filterKeys: T[], executors: IExecutor[], filterArgs: ExecutorFilters): IExecutor[] => {
+    return filterKeys.reduce((filteredExecutors, filterKey) => {
+        return FilterFunction[filterKey](filteredExecutors, filterArgs[filterKey])
+    }, executors)
+}
+
 export const useFilteredExecutor = () => {
 
     const filterArgs = useExecutorFiltersStore(useShallow(state => ({isBrigade: state.isBrigade, members: state.members, departmentId: state['departmentId']})))
-
     const executors = useExecutorsStore(state => state.executors)
-    // console.log(executors, 'execs')
 
-    const filterExecutors =  useCallback(<T extends TFilterKey>(filterKeys: T[], executors: IExecutor[]): IExecutor[] => {
-        return filterKeys.reduce((filteredExecutors, filterKey) => {
-            return FilterFunction[filterKey](filteredExecutors, filterArgs[filterKey])
-        }, executors)
-    }, [filterArgs])
-    
-    return useMemo(() => {
-        return filterExecutors(['members', 'isBrigade', 'departmentId'], executors)
-    }, [executors, filterExecutors])
+    const filteredExecutors = useMemo(() => {
+        return filterExecutors(['members', 'isBrigade', 'departmentId'], executors, filterArgs)
+    }, [executors, filterArgs])
+
+    // const selectedExecutors = useExecutorsStore(state => state.selectedExecutors)
+    // // если мы изменяем фильтры, то обновляем операции 
+    // // Сделать так, чтобы при 
+    // const setOperations = useOperationStore(state => state.setOperations)
+    // useEffect(() => {
+    //     console.log(selectedExecutors, 'selected')
+    //     setOperations(selectedExecutors.reduce<IOperation[]>((allOperations, exec) => {
+    //         allOperations.push(...exec.operations)
+    //     return allOperations
+    // }, []))
+    // }, [selectedExecutors, setOperations])
+
+    return filteredExecutors
 }
