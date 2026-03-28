@@ -48,23 +48,25 @@ export const useOperationStore = create<IOperationStore>(set => ({
 
     operations: [],
 
-    
+
     setOperations: (operations) => set({operations}),
 
     addOperations: (newOperations) => set(state => {
         const newOperationsIds = newOperations.map(newOper => newOper.id)
-        const newProductIdsInCurrentState = state.operations.filter(oper => newOperationsIds.includes(oper.id))
-
-        if (newProductIdsInCurrentState) {
+        const withoutNewOperations = state.operations.filter(operation => !newOperationsIds.includes(operation.id))
+        console.log(newOperations, 'newOperations', state.operations, withoutNewOperations)
+        if (withoutNewOperations.length + newOperations.length === state.operations.length) {
+            console.log(withoutNewOperations, 'newOperationsIdsInCurrentState')
             return {}
         }
 
-        return {operations: [...state.operations.filter(operation => !newOperationsIds.includes(operation.id)), ...newOperations]}
+        return {operations: [...withoutNewOperations, ...newOperations]}
     }),
 
     removeOperations: (removedOperations) => set(state => {
         const removedOperationsIds = removedOperations.map(oper => oper.id)
         const withoutRemovedOperations = state.operations.filter(oper => !removedOperationsIds.includes(oper.id))
+        console.log(removedOperations, 'removedOperations', state.operations)
 
         if (withoutRemovedOperations.length === state.operations.length) {
             return {}

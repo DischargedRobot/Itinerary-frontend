@@ -17,13 +17,13 @@ export const useProductStore = create<IProductSore>(set => ({
     setProducts: (products) => set({products}),
     addProducts: (newProducts) =>  set((state) => {
         const newProductIds = newProducts.map(newProduct => newProduct.id)
-        const newProductIdsInCurrent = state.products.filter(product => newProductIds.includes(product.id)) // какие изделия уже есть в текущем списке
+        const withoutNewProducts = state.products.filter(product => !newProductIds.includes(product.id)) // какие изделия уже есть в текущем списке
         
-        if (newProductIdsInCurrent.length === newProducts.length) { // если все уже есть, то не обновляем
+        if (withoutNewProducts.length + newProducts.length === newProducts.length) { // если все уже есть, то не обновляем
             return {}
         }
 
-        return {products: [...state.products.filter(product => !newProductIds.includes(product.id)), ...newProducts]}
+        return {products: [...withoutNewProducts, ...newProducts]}
     }),
     removeProducts: (removedProducts) => set(state => {
         const removedProductsIds = removedProducts.map(prod => prod.id)

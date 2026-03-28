@@ -8,9 +8,8 @@ export const useFilteredOperations = () => {
     const productIds = useOperationFiltersStore(useShallow(state => state.productIds))
 
     const operations = useOperationStore(state => state.operations)
-        
     return useMemo(() => {
-        const filteredOperations = operations.filter(operation => productIds.includes(operation.productId))
+        const filteredOperations = operations.filter(operation => productIds.includes(operation.product.id))
         return {filteredOperations}
     },[operations, productIds])
 }
