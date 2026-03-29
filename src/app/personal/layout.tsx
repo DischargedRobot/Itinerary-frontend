@@ -1,3 +1,4 @@
+import { Toast } from "@/shared/ui/Toast/Toast"
 import { NavBar } from "@/widgets/NavBar"
 import { Layout } from "antd"
 import { Content, Header } from "antd/es/layout/layout"
@@ -20,6 +21,7 @@ const PersonalLayout = (props: Props) => {
             <Content className="mx-auto px-4 max-w-5xl w-full justify-items-center ">
                 {children}
             </Content>
+            <Toast/>
         </Layout>
     )
 }

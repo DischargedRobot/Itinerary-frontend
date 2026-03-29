@@ -1,3 +1,4 @@
+import { MakeOptional } from "@/shared/lib"
 import { create } from "zustand"
 
 export type TToast = 'error' | 'warning' | `success`
@@ -11,8 +12,9 @@ interface IToast {
     key: number
 }
 
+
 interface IToastStore  extends IToast{
-    setToast: (newToast: IToast) => void
+    setToast: (newToast:  Omit<MakeOptional<IToast, 'title'>, 'key'>) => void
 }
 
 const defaultTitle = new Map<TToast, string>([
@@ -30,10 +32,10 @@ export const useToastStore = create<IToastStore>(set => ({
     duration: 3000,
     key: 0,
 
-    setToast: (newToast) => set(state => ({...newToast, title: newToast?.title ?? defaultTitle.get(newToast.type), key: ++state.key, isVisible: true})),
+    setToast: (newToast) => set(state => ({...newToast, title: newToast.title ?? defaultTitle.get(newToast.type), key: ++state.key, isVisible: true})),
 }))
 
 
-// export const showToast = (toast: IToast) => {
-//     useToastStore(state => state.setToast)(toast)
-// }
+export const showToast = (toast: Omit<MakeOptional<IToast, 'title'>, 'key'>) => {
+    useToastStore.getState().setToast(toast)
+}
