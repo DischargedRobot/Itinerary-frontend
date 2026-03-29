@@ -7,6 +7,7 @@ import { IOperation } from "../../lib";
 import { ColumnsType } from "antd/es/table";
 import { IExecutor } from "@/entities/Executors/lib/ExecutorTypes";
 import { ICatergory, ITypeOperation } from "@/shared";
+import { SelectEquipment } from '@/features/SelectEquipment';
 const columns: ColumnsType<IOperation> = [
     {
       title: 'ID',
@@ -64,7 +65,7 @@ const columns: ColumnsType<IOperation> = [
       key: 'equipment',
       width: '100px',
       ellipsis: true,
-      render: (equipment) => <div className='max-w-25 overflow-hidden whitespace-nowrap text-ellipsis'>{equipment?.name}</div>,
+      render: (equipment) => <SelectEquipment defaultValue={equipment}/>,
     },
     // {
     //   title: 'Назначена',

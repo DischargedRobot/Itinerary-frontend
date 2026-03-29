@@ -1,0 +1,1 @@
+export { useEquipmentStore } from './model'
