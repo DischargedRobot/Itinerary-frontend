@@ -15,6 +15,10 @@
   --roboto-mono: 'Roboto Mono', sans-serif;
   --inter: 'Inter', sans-serif;
   
+  /* Toasts colors */
+  --toast-error: #a31c1c;
+  --toast-success: #32a82a;
+  --toast-warning: #cfcc21;
 }
 
 
