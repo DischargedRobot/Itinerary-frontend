@@ -96,6 +96,7 @@ export const ItineraryTable = () => {
             className="itinerary-table"
             rowKey={'id'}
             dataSource={itineraries}
+            pagination={{placement: ['bottomCenter'], pageSize: 20}}
             expandable={{
               expandedRowRender: (itinerary) => 
                   <ItineraryOperationsTable operations={itinerary.operations}/>
