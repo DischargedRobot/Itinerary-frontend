@@ -1,9 +1,9 @@
 import { useShallow } from "zustand/shallow"
 import { useExecutorFiltersStore } from "./useExecutorFiltersStore"
 import { IExecutor } from "../lib/ExecutorTypes"
-import { useCallback, useEffect, useMemo } from "react"
+import {  useEffect, useMemo } from "react"
 import { useExecutorsStore } from "./useExecutorsStore"
-import { IOperation, useOperationFiltersStore, useOperationStore } from "@/entities/Operations"
+import { useSelectedExecutorsStore } from "./useSelectedExecutorsStore"
 
 export interface ExecutorFilters {
     members: string[]
@@ -57,17 +57,12 @@ export const useFilteredExecutor = () => {
         return filterExecutors(['members', 'isBrigade', 'departmentId'], executors, filterArgs)
     }, [executors, filterArgs])
 
-    // const selectedExecutors = useExecutorsStore(state => state.selectedExecutors)
-    // // если мы изменяем фильтры, то обновляем операции 
-    // // Сделать так, чтобы при 
-    // const setOperations = useOperationStore(state => state.setOperations)
-    // useEffect(() => {
-    //     console.log(selectedExecutors, 'selected')
-    //     setOperations(selectedExecutors.reduce<IOperation[]>((allOperations, exec) => {
-    //         allOperations.push(...exec.operations)
-    //     return allOperations
-    // }, []))
-    // }, [selectedExecutors, setOperations])
+    // TODO: мб перенести в другой хук
+    const selectedExecutors = useSelectedExecutorsStore(useShallow(state => state.selectedExecutors))
+    const setSelectedExecutors = useSelectedExecutorsStore(state => state.setSelectedExecutors)
+    useEffect(() => {
+        setSelectedExecutors(selectedExecutors.filter(selectedExec => filteredExecutors.includes(selectedExec)))
+    }, [selectedExecutors, setSelectedExecutors, filteredExecutors])
 
     return filteredExecutors
 }

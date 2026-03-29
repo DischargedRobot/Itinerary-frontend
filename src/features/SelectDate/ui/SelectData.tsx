@@ -27,8 +27,6 @@ export const SelectDate = ({onSelect}: Props) => {
         <div 
             ref={calendarRef}
             className="relative"
-            onClick={(e) => {
-                setIsVisible(true)}}
         >   
             {isVisible 
             ? <Calendar 
@@ -39,15 +37,22 @@ export const SelectDate = ({onSelect}: Props) => {
                 }
                 className="absolute z-10 top-[150%] w-75"
                 fullscreen={false}
-                onSelect={date => {
+                onSelect={(date, mode) => {
                     const Date = date.toDate()
                     onSelect(Date)
                     setDate(Date)
+                    if (mode.source === 'date') {
+                        setIsVisible(false)
+                    }
                 }}
+                onPanelChange={(_, mode) => console.log(mode, 'mode')}
             />
             : ''
             }
-            <span className=" p-2 bg-foreground border borde-stroke rounded-md"> 
+            <span   
+                className=" p-2 bg-foreground border borde-stroke rounded-md"
+                onClick={() => {
+                setIsVisible(prev => !prev)}}> 
                 {date.toLocaleDateString()}
             </span>
         </div>

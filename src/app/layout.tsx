@@ -26,9 +26,14 @@ const token: ConfigProviderProps['theme'] = {
     colorPrimary: COLORS.activeElement,
     colorPrimaryActive: COLORS.active,
     colorPrimaryHover: COLORS.hover,
+    controlItemBgActive: COLORS.hover,
   },
 
   components: {
+    Select: {
+      optionSelectedColor: COLORS.foreground
+    },
+
     Layout: {
       headerBg: COLORS.foreground,
     },
@@ -52,7 +57,7 @@ const token: ConfigProviderProps['theme'] = {
       // headerBg: COLORS.hover,
     },
     Calendar: {
-      colorPrimary: COLORS.activeElement,
+      colorPrimary: COLORS.active,
       controlItemBgHover: COLORS.hover,
     }
   }
@@ -69,7 +74,11 @@ export default function RootLayout({
       className={`h-full antialiased`}
     >
       <ConfigProvider theme={token}>
-        <body className="min-h-full flex flex-col items-center">
+        <body 
+          style={{
+            '--ant-select-option-selected-bg': COLORS.hover
+          }  as React.CSSProperties }
+        className="min-h-full flex flex-col items-center">
           {children}
         </body>
       </ConfigProvider>

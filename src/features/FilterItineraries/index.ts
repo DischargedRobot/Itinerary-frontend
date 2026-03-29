@@ -1,1 +1,1 @@
-export {FilterItineraries} from './ByDate'
+export {FilterItineraries} from './FilterItineraries'
