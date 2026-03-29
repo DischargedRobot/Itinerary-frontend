@@ -20,7 +20,7 @@ export const APIJSONRequest = async (
             throw mapAPIError(response.status)
         }
 
-        return response.json
+        return response.json()
 
     } catch (error) {
         if (error instanceof TypeError && error.message === 'Failed to fetch') {

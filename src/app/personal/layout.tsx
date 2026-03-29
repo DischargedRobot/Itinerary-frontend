@@ -1,4 +1,4 @@
-import { Toast } from "@/shared/ui/Toast/Toast"
+import { Toast } from "@/shared/ui"
 import { NavBar } from "@/widgets/NavBar"
 import { Layout } from "antd"
 import { Content, Header } from "antd/es/layout/layout"

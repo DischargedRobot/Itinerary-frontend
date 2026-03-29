@@ -31,7 +31,7 @@ export const Toast = () => {
                 <span className="toas__text">{message}</span>
             </div>
         )
-        : null
+        : 'null'
     )
 
 }

@@ -14,7 +14,10 @@ interface IToast {
 
 
 interface IToastStore  extends IToast{
-    setToast: (newToast:  Omit<MakeOptional<IToast, 'title'>, 'key'>) => void
+    isVisible: boolean
+
+    setToast: (newToast: Omit<MakeOptional<IToast, 'title'>, 'key'>) => void
+    setIsVisible: (isVisible: boolean) => void
 }
 
 const defaultTitle = new Map<TToast, string>([
@@ -31,8 +34,10 @@ export const useToastStore = create<IToastStore>(set => ({
     title: defaultTitle.get("warning") ?? '',
     duration: 3000,
     key: 0,
+    isVisible: false,
 
     setToast: (newToast) => set(state => ({...newToast, title: newToast.title ?? defaultTitle.get(newToast.type), key: ++state.key, isVisible: true})),
+    setIsVisible: (isVisible) => set({isVisible}),
 }))
 
 

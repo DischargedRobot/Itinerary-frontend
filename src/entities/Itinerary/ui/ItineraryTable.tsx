@@ -86,6 +86,8 @@ export const getItineraryColumns = (): ColumnsType<IItinerary> => [
 ];
 export const ItineraryTable = () => {
 
+    
+
     const itineraries = useItineraryStore(state => state.itineraries)
 
     return (

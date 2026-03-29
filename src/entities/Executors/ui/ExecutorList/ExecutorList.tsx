@@ -5,11 +5,17 @@ import './ExecutorList.scss'
 import { ExecutorCard } from "../ExecutorCard"
 import { useFilteredExecutor } from "../../model"
 import { useEffect } from "react"
+import { executorsAPI } from '../../api'
 
 export const ExecutorList = () => {
 
     // TODO: в хук перенести
-    const executors = useFilteredExecutor()
+    // const check = async () => {
+    //     const resp = await executorsAPI.getExecutor()
+    //     console.log(resp)
+    // }
+    // check()
+    // const executors = useFilteredExecutor()
 
     useEffect(() => {
 

@@ -1,4 +1,4 @@
-import {  useEffect, useRef, useState } from "react"
+import {  useCallback, useEffect, useRef, useState } from "react"
 import { TToast, useToastStore } from "./useToastStore"
 
 export const useToast = () => {
@@ -8,12 +8,13 @@ export const useToast = () => {
     const message = useToastStore(state => state.message)
     const type = useToastStore(state => state.type)
     const key = useToastStore(state => state.key)
+    const isVisible = useToastStore(state => state.isVisible)
+    const setIsVisible = useToastStore(state => state.setIsVisible)
 
     const [isFade, setIsFade] = useState<boolean>(false)
-    const [isVisible, setIsVisible] = useState<boolean>(false)
     const timer = useRef<number>(null)
 
-    const startTimer = () => {
+    const startTimer = useCallback(() => {
         if (timer.current) {
             clearTimeout(timer.current)
         }
@@ -21,7 +22,7 @@ export const useToast = () => {
         timer.current = window.setTimeout(() => {
             setIsFade(true)
         }, duration)
-    }
+    }, [duration])
 
     const toast = useRef<HTMLElement>(null)
 
@@ -59,11 +60,11 @@ export const useToast = () => {
             }
         }
 
-    }, [])
+    }, [key])
 
     useEffect(() => {
         startTimer()
-    }, [key])
+    }, [key, startTimer])
 
     return  {
         title,
