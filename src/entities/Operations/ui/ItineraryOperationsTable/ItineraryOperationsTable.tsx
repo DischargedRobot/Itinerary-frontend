@@ -8,6 +8,8 @@ import { ColumnsType } from "antd/es/table";
 import { IExecutor } from "@/entities/Executors/lib/ExecutorTypes";
 import { ICatergory, ITypeOperation } from "@/shared";
 import { SelectEquipment } from '@/features/SelectEquipment';
+import { IEquipment } from '@/shared/lib';
+import { SelectExecutorInTable } from '@/features/SelectExecutorInTable/ui/SelectExecutorInTable';
 const columns: ColumnsType<IOperation> = [
     {
       title: 'ID',
@@ -65,7 +67,7 @@ const columns: ColumnsType<IOperation> = [
       key: 'equipment',
       width: '100px',
       ellipsis: true,
-      render: (equipment) => <SelectEquipment defaultValue={equipment}/>,
+      render: (equipment: IEquipment) => <SelectEquipment defaultValue={equipment}/>,
     },
     // {
     //   title: 'Назначена',
@@ -83,7 +85,7 @@ const columns: ColumnsType<IOperation> = [
       align: 'left',
       width: 110,
       ellipsis: true,
-      render: (executor?: IExecutor) =>executor ? executor.name : '',
+      render: (executor?: IExecutor) => <SelectExecutorInTable defaultValue={executor}/>,
     },
     {
       title: 'К',
@@ -124,6 +126,7 @@ interface Props {
     operations: IOperation[]
 }
   
+// TODO: это виджет, так-то
 export const ItineraryOperationsTable = ({operations}: Props) => {
 
     return(

@@ -1,18 +1,18 @@
 import { Select } from "antd"
-import { useSelectEquipment } from "../model"
-import { IEquipment } from "@/shared/lib"
+import { useSelectExecutorInTable } from "../model"
+import { IExecutor } from "@/entities/Executors"
 
 interface Props { 
-    defaultValue?: IEquipment
+    defaultValue?: IExecutor
 }
 
-export const SelectEquipment = (props: Props) => {
+export const SelectExecutorInTable = (props: Props) => {
 
     const {
         defaultValue
     } = props
 
-    const { equipments } = useSelectEquipment()
+    const { executors } = useSelectExecutorInTable()
 
     return (
         <Select
@@ -26,7 +26,7 @@ export const SelectEquipment = (props: Props) => {
                         width: '100%',
                     }
             }}}
-            options={equipments.map(equip => ({label: equip.name, value: equip.id}))}
+            options={executors.map(executor => ({label: executor.name, value: executor.id}))}
             defaultValue={{label: defaultValue?.name, value: defaultValue?.id}}
         />
     )

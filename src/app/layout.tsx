@@ -31,7 +31,7 @@ const token: ConfigProviderProps['theme'] = {
 
   components: {
     Select: {
-      optionSelectedColor: COLORS.foreground
+      optionSelectedColor: COLORS.foreground,
     },
 
     Layout: {
