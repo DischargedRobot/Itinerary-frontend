@@ -2,10 +2,10 @@ import { APIError, mapAPIError } from "./apiError"
 
 const URL = process.env.NEXT_PUBLIC_API_URL 
 
-export const APIJSONRequest = async (
+export const APIJSONRequest = async <T>(
     endpoint: string,
     options?: RequestInit
-) => {
+): Promise<T[]> => {
 
     try { 
         const response = await fetch(`${URL}/${endpoint}`, {

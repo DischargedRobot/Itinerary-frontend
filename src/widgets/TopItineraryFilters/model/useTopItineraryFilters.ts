@@ -1,6 +1,6 @@
 import { useExecutorFiltersStore } from "@/entities/Executors"
 import { IDepartment } from "@/shared/lib"
-import { useDepartmentStore } from "@/shared/model/Department/useDepartmentStore"
+import { useDepartmentStore } from "@/entities/Department/model/useDepartmentStore"
 import { useMemo, useState } from "react"
 
 export const useTopItineraryFilters = () => {
