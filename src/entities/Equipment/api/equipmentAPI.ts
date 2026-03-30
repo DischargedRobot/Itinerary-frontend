@@ -1,7 +1,7 @@
 import { APIJSONRequest } from "@/shared/api"
 import { IEquipment } from "@/shared/lib"
 
-interface IEquipmentResponse extends Omit<IEquipment, 'operationType'>{
+export interface IEquipmentResponse extends Omit<IEquipment, 'operationType'>{
     operationTypeId: number
 }
 

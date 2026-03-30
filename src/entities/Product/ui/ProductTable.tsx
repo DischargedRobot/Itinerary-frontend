@@ -14,19 +14,23 @@ const createColumns= (
         key: 'Code',
         title: 'Код',
         dataIndex: 'audCode',
+        ellipsis: true,
+        width: '30%'
     },
     {
         key: 'Name',
         title: 'Наименование',
         dataIndex: 'name',
+        ellipsis: true,
+        width: '70%'
     },
-    {
-        key: 'KitAndIncreasinKit',
-        title: 'Комплект/Нарастающий',
-        render: (_, product) => {
-            return `${product.kit}/${product.increasingKit}`
-        }
-    }
+    // {
+    //     key: 'KitAndIncreasinKit',
+    //     title: 'Комплект/Нарастающий',
+    //     render: (_, product) => {
+    //         return `${product.kit}/${product.increasingKit}`
+    //     }
+    // }
 ])
 
 export const ProductTable = () => {
