@@ -4,7 +4,7 @@ import { IProduct } from "@/entities/Product"
 import { ICatergory } from "@/shared"
 import { IDepartment } from "@/shared/lib"
 import { IEquipment } from "@/shared/lib/types/IEquipment"
-import { ITypeOperation } from "@/shared/lib/types/ITypeOperation"
+import { ITypeOperation } from "@/entities/OperationType/lib/OpertionTypeTypes"
 
 export interface IOperation {
     id: number

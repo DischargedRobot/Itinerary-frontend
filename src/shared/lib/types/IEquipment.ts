@@ -1,4 +1,4 @@
-import { ITypeOperation } from "./ITypeOperation"
+import { ITypeOperation } from "@/entities/OperationType"
 
 export interface IEquipment {
     id: number
