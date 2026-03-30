@@ -1,0 +1,1 @@
+export { useInitial } from './model'

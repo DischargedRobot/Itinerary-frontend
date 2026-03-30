@@ -4,6 +4,6 @@ import { APIJSONRequest } from "@/shared/api"
 
 export const categoryAPI = {
     getCategories: async (): Promise<ICatergory[]> => {
-        return APIJSONRequest<ICatergory>('Category')
+        return APIJSONRequest<ICatergory>('OperationCategories')
     }
 }

@@ -1,0 +1,1 @@
+export { equipmentAPI } from './equipmentAPI'

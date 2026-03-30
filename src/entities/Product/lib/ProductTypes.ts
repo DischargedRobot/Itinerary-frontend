@@ -3,6 +3,4 @@ export interface IProduct {
     name: string
     audCode: string
     departmentId: number
-    kit: number
-    increasingKit: number
 }

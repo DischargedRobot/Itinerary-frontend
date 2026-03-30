@@ -2,6 +2,7 @@ import { APIJSONRequest } from "@/shared/api"
 import { APIError } from "@/shared/api"
 import { showToast } from "@/shared/model"
 import { IExecutor } from "../lib"
+import { IDepartment } from "@/shared/lib"
 
 interface IExecutorResponse {
     id: number
@@ -32,5 +33,10 @@ export const executorsAPI = {
             // }
             throw error as APIError
         }
+    },
+
+    getExecutorsByDepartmentId: async (departmentId: IDepartment['id']) => {
+        const executors = await APIJSONRequest<IExecutorResponse>(`Executors/by-division?divisionID=${departmentId}`)
+        return (executors)
     }
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { FilterOperationByIsFormed } from '@/features/FilterOperationByIsFormed'
+import { useInitial } from '@/_app'
 import './TaskLists.scss'
 
 import { FullExecutorList } from "@/widgets/FullExecutorList"
@@ -9,6 +9,8 @@ import { FullProductTable } from "@/widgets/FullProductTable"
 import { TopItineraryFilters } from '@/widgets/TopItineraryFilters'
 
 const TaskLists = () => {
+
+    useInitial()
 
     return (
         <div className='flex flex-col gap-5 w-full'>
