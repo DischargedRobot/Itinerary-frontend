@@ -1,0 +1,1 @@
+export { categoryAPI }from './categoryAPI'

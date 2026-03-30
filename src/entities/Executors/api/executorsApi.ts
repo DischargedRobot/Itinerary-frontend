@@ -14,7 +14,7 @@ interface IExecutorResponse {
 
 export const executorsAPI = {
 
-    getExecutor: async (): Promise<IExecutorResponse[]> => {
+    getExecutors: async (): Promise<IExecutorResponse[]> => {
         
         try {
             const executors = await APIJSONRequest<IExecutorResponse>('Executors')

@@ -8,7 +8,7 @@ interface IDepartmentResponse extends IDepartment{
 
 export const departmentsAPI = {
 
-    getDepartment: async (): Promise<IDepartmentResponse[]> => {
+    getDepartments: async (): Promise<IDepartmentResponse[]> => {
         return APIJSONRequest<IDepartmentResponse>('Department')
     }
 }
