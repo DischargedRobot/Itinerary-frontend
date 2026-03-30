@@ -1,7 +1,5 @@
 import { useState } from "react"
 import { IExecutor } from "../lib"
-import { useOperationStore } from "@/entities/Operations"
-import { useExecutorsStore } from "./useExecutorsStore"
 import { useSelectedExecutorsStore } from "./useSelectedExecutorsStore"
 
 export const useExecutorCard = () => {

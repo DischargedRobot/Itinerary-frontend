@@ -9,7 +9,7 @@ interface ISelectedExecutorsStore {
     removeSelectedExecutor: (removedSelectedExecutor: IExecutor) => void
 }
 
-export const useSelectedExecutorsStore = create<ISelectedExecutorsStore>((set, get) => ({
+export const useSelectedExecutorsStore = create<ISelectedExecutorsStore>((set) => ({
     selectedExecutors: [],
 
     setSelectedExecutors: (selectedExecutors) => set({selectedExecutors}),

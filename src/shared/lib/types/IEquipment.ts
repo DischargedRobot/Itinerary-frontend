@@ -1,7 +1,7 @@
-import { IOperation } from "@/entities/Operations"
+import { ITypeOperation } from "./ITypeOperation"
 
 export interface IEquipment {
     id: number
     name: string
-    operationTypeId: IOperation['id']
+    operationType: ITypeOperation
 }

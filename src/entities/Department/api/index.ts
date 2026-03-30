@@ -1,0 +1,1 @@
+export { departmentAPI } from './departmentAPI'

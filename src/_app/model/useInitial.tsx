@@ -1,8 +1,7 @@
 import { categoryAPI } from "@/entities/Category"
-import { departmentsAPI } from "@/entities/Department/api/departmentAPI"
+import { departmentAPI } from "@/entities/Department"
 import { useExecutorsStore } from "@/entities/Executors"
-import { executorsAPI } from "@/entities/Executors/api"
-import { rejects } from "assert"
+import { executorsAPI } from "@/entities/Executors"
 import { useEffect } from "react"
 
 export const useInitial = () => {
@@ -16,7 +15,7 @@ export const useInitial = () => {
         Promise.all([
             categoryAPI.getCategories().then(resolve => console.log(resolve)),
             executorsAPI.getExecutors().then(resolve => executors = resolve), 
-            departmentsAPI.getDepartments().then(resolve => departments = resolve)
+            departmentAPI.getDepartments().then(resolve => departments = resolve)
         ]).then(resolves => console.log(resolves))
         .catch(rejects => console.log(rejects[0], rejects[1]))
         .then()

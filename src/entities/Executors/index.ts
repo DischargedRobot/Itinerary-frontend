@@ -1,3 +1,5 @@
+export { executorsAPI } from './api'
+
 export { type IExecutor} from './lib'
 
 export { useExecutorFiltersStore } from './model'
