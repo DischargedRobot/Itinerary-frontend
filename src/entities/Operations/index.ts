@@ -1,3 +1,5 @@
+export { operationAPI } from './api'
+
 export { type IOperation } from './lib'
 
 export { useOperationFiltersStore } from './model'

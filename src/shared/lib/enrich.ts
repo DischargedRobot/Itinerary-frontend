@@ -50,7 +50,7 @@ export const enrichAddObject = <
         inputObject: TInput
     ): {
         object: Omit<TInput, InputKey> & {
-            [K in NameNewObject]: typeof extract extends 'all' 
+                [K in NameNewObject]: typeof extract extends 'all' 
                 ? TSource 
                 // Только те, что перечислены
                 : Pick<TSource, Exclude<typeof extract, 'all'>[number]>
@@ -58,9 +58,9 @@ export const enrichAddObject = <
             success: boolean;
         } => {
             const matchingItem = source.find(item => 
-                (item[match.sourceKey] as unknown) === (inputObject[match.inputKey] as unknown)
-            )
-            let newObj ;
+                (item[match.sourceKey] as unknown) === (inputObject[match.inputKey] as unknown))
+
+            let newObj;
             const {[match.inputKey]: _, ...objectWithoutInputKey } = inputObject
             //  все, если all
             if (extract === 'all') {
@@ -88,5 +88,6 @@ export const enrichAddObject = <
                 },
                     success: !!matchingItem
                 })
-            })
+            }
+    )
 

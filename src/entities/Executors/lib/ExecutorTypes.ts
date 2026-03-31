@@ -7,5 +7,5 @@ export interface IExecutor {
     name: string
     isBrigade: boolean
     department: IDepartment
-    operations: IOperation[] | {id: number[]}
+    operations: IOperation[] | {id: number}[]
 }

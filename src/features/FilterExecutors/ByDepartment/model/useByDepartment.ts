@@ -24,34 +24,37 @@ export const useByDepartment = () => {
     )
 
     const handleSelect = async (departmentId: number) => {
-        console.log(departmentId, 'departmentId')
+        // console.log(departmentId, 'departmentId')
         setValue(departmentId)
 
         const executors = await mutate(
             () => executorsAPI.getExecutorsByDepartmentId(departmentId),
-            {revalidate: false}
-        ).then(executorsResponse => 
-            executorsResponse?.map((executor) => {
-                const department = departments.find(dep => dep.id === departmentId) 
-                const enrichExecutor = enrichAddObject<typeof executorsResponse[number], IDepartment>()(
-                    {sourceKey: 'id', inputKey: 'departmentId'},
-                    'all',
-                    departments,
-                    'department'
-                )
-                
-                const {operationsIds, ...data} = enrichExecutor(executor).object
-                if (department) {
-                    return {
-                        ...data,
-                        operations: {id: operationsIds}
+            {revalidate: false})
+            .then(executorsResponse => 
+                executorsResponse?.map((executor) => {
+                    const department = departments.find(dep => dep.id === departmentId) 
+                    // связываем отделы с айдишниками отделов в эксекьюторе
+                    const enrichExecutor = enrichAddObject<typeof executorsResponse[number], IDepartment>()(
+                        {sourceKey: 'id', inputKey: 'departmentId'},
+                        'all',
+                        departments,
+                        'department'
+                    )
+                    
+                    const {operationsIds, ...data} = enrichExecutor(executor).object
+                    console.log(executor, 'executor', operationsIds)
+                    if (department) {
+                        return {
+                            ...data,
+                            operations: operationsIds?.map(operationId => ({id: operationId})) || []
+                        }
                     }
-                }
-                // если ошибка в данных (экзекьютор содержит отсутствующий айди отдела)
-                throw mapAPIError(404)
-                
-        })) || []
 
+                    // если ошибка в данных (экзекьютор содержит отсутствующий айди отдела)
+                    throw mapAPIError(404)
+                    
+        })) || []
+        console.log(executors, 'executors')
         setExecutors(executors)
     }
 
