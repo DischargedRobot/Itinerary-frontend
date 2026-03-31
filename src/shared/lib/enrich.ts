@@ -29,56 +29,64 @@ export const enrich = <
         }, {...inputObject} as TInput & Partial<Pick<TSource, (typeof extract)[number]>>)
     }
 
-export const enrichAddObject = <    
+
+
+export const enrichAddObject = <
     TInput, 
     TSource,
-    TNewKey extends string,
-    TInputKey extends keyof TInput,
-    TSourceKey extends keyof TSource,
-> (
-    match: IMatch<TInputKey, TSourceKey>,
-    extract: (keyof TSource)[] | 'all', 
-    source: TSource[],
-    nameNewObject: TNewKey,
-) => 
-        (inputObject: TInput): {
-            object: Omit<TInput, TInputKey> & {
-                [K in TNewKey]: typeof extract extends 'all' 
-                    ? TSource 
-                    // Только те, что перечислены
-                    : Pick<TSource, Exclude<typeof extract, 'all'>[number]>
-            };
+    > () => <
+        InputKey extends keyof TInput,
+        SourceKey extends keyof TSource,
+        NameNewObject extends string,
+    >(
+        match: {    
+            sourceKey: SourceKey,
+            inputKey: InputKey,
+        },
+        extract: (keyof TSource)[] | 'all', 
+        source: TSource[],
+        nameNewObject: NameNewObject,
+    ) => ((
+        inputObject: TInput
+    ): {
+        object: Omit<TInput, InputKey> & {
+            [K in NameNewObject]: typeof extract extends 'all' 
+                ? TSource 
+                // Только те, что перечислены
+                : Pick<TSource, Exclude<typeof extract, 'all'>[number]>
+            },
             success: boolean;
         } => {
-        const matchingItem = source.find(item => 
-            item[match.sourceKey] as unknown === inputObject[match.inputKey] as unknown
-        )
-        let newObj ;
-        const {[match.inputKey]: _, ...objectWithoutInputKey } = inputObject
-        //  все, если all
-        if (extract === 'all') {
-            newObj = matchingItem
+            const matchingItem = source.find(item => 
+                (item[match.sourceKey] as unknown) === (inputObject[match.inputKey] as unknown)
+            )
+            let newObj ;
+            const {[match.inputKey]: _, ...objectWithoutInputKey } = inputObject
+            //  все, если all
+            if (extract === 'all') {
+                newObj = matchingItem
 
-        } else {
-            // иначе берём только те, которые в перечислили
-            newObj = extract.reduce<Partial<Pick<TSource, (typeof extract)[number]>>>((enrichedObject, key) => {
-                return {
-                    ...enrichedObject,
-                    [key]: matchingItem?.[key],
-                }
-            }, {})
-        }
-        
-        return ({
-            object: {
-                ...objectWithoutInputKey, 
-                [nameNewObject]: newObj
-            } as Omit<TInput, TInputKey> & {
-                [K in TNewKey]: typeof extract extends 'all' 
-                    ? TSource 
-                    // Только те, что перечислены
-                    : Pick<TSource, Exclude<typeof extract, 'all'>[number]>
-            },
-                success: !!matchingItem
-        })
-    }
+            } else {
+                // иначе берём только те, которые в перечислили
+                newObj = extract.reduce<Partial<Pick<TSource, (typeof extract)[number]>>>((enrichedObject, key) => {
+                    return {
+                        ...enrichedObject,
+                        [key]: matchingItem?.[key],
+                    }
+                }, {})
+            }
+            
+            return ({
+                object: {
+                    ...objectWithoutInputKey, 
+                    [nameNewObject]: newObj
+                } as Omit<TInput, InputKey> & {
+                    [K in NameNewObject]: typeof extract extends 'all' 
+                        ? TSource 
+                        // Только те, что перечислены
+                        : Pick<TSource, Exclude<typeof extract, 'all'>[number]>
+                },
+                    success: !!matchingItem
+                })
+            })
+

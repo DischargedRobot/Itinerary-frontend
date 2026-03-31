@@ -12,7 +12,7 @@ export const equipmentAPIUtilities = {
         equipments: IEquipmentResponse[], 
         operationsTypes: ITypeOperation[]
     ): IEquipment[] => {
-        const enrichWithbject = enrichAddObject<IEquipmentResponse, ITypeOperation,'operationType','operationTypeId','id'>(
+        const enrichWithbject = enrichAddObject<IEquipmentResponse, ITypeOperation>()(
             {sourceKey: 'id', inputKey: 'operationTypeId'} as const, 
             ['id', 'name'] as const, 
             operationsTypes,

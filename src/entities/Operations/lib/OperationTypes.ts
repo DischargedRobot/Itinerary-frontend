@@ -24,3 +24,4 @@ export interface IOperation {
     dateExecution?: Date
     isFormed: boolean
 }
+

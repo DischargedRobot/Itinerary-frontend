@@ -31,20 +31,19 @@ export const useByDepartment = () => {
             () => executorsAPI.getExecutorsByDepartmentId(departmentId),
             {revalidate: false}
         ).then(executorsResponse => 
-            executorsResponse?.map(({operationsIds, ...item}) => {
+            executorsResponse?.map((executor) => {
                 const department = departments.find(dep => dep.id === departmentId) 
-                console.log(department, departments,'dep', departmentId)
-                const enriched = enrichAddObject<typeof executorsResponse[number], IDepartment,  'department',  'departmentId', 'id'>(
+                const enrichExecutor = enrichAddObject<typeof executorsResponse[number], IDepartment>()(
                     {sourceKey: 'id', inputKey: 'departmentId'},
                     'all',
                     departments,
                     'department'
-                    
                 )
+                
+                const {operationsIds, ...data} = enrichExecutor(executor).object
                 if (department) {
                     return {
-                        ...item, 
-                        department: department, 
+                        ...data,
                         operations: {id: operationsIds}
                     }
                 }
