@@ -34,6 +34,6 @@ export const useFilteredProduct = () => {
     const filterArgs = useProductFilterStore(useShallow(state => ({name: state.name})))
 
     const products = useProductStore(state => state.products)
-    console.log('products', products)
+    // console.log('products', products)
     return {products: filterProduct(['name'], products, filterArgs)}
 }

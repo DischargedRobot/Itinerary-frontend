@@ -46,9 +46,6 @@ export const useInitial = () => {
     // )
 
     useEffect(() => {
-        let executors
-        let departments
-        
         PromiseAllNamed({
             categories: categoryAPI.getCategories(),
             equipments: equipmentAPI.getEquipments(),
@@ -58,10 +55,13 @@ export const useInitial = () => {
             departments: departmentAPI.getDepartments(),
         }).then(({equipments, operationsTypes, products, categories, departments}) => {
             setCategories(categories)
-            setProducts(products)
+            // setProducts(products)
             setOperationsTypes(operationsTypes)
+            console.log(departments, 'depsss')
             setDepartments(departments)
-            setEquipment(equipmentAPIUtilities.equipmentOperationsTypesTransformer(equipments, operationsTypes))
+            const res = equipmentAPIUtilities.enrichEquipmentResponse(equipments, operationsTypes)
+            console.log(res, 'res')
+            setEquipment(res)
         })
         // Promise.all([
         //     categoryAPI.getCategories().then(resolve => console.log(resolve)),

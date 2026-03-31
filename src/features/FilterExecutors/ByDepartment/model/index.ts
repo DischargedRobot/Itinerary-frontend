@@ -1,0 +1,1 @@
+export { useByDepartment }from './useByDepartment'
