@@ -17,11 +17,11 @@ const createColumn = (
         dataIndex: 'typeId'
     },
     {
-        key: 'itinerary',
-        title: 'Операция',
-        dataIndex: 'itinerary',
-        render: (itinerary: IItinerary) => {
-            return `${itinerary.audName}`
+        key: 'itineraryId',
+        title: 'itineraryId',
+        dataIndex: 'itineraryId',
+        render: (itinerary: number) => {
+            return `${itinerary}`
         }
     },
     {

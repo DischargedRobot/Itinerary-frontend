@@ -42,7 +42,7 @@ export const useByDepartment = () => {
                     )
                     
                     const {operationsIds, ...data} = enrichExecutor(executor).object
-                    console.log(executor, 'executor', operationsIds)
+                    // console.log(executor, 'executor', operationsIds)
                     if (department) {
                         return {
                             ...data,
@@ -54,7 +54,7 @@ export const useByDepartment = () => {
                     throw mapAPIError(404)
                     
         })) || []
-        console.log(executors, 'executors')
+        // console.log(executors, 'executors')
         setExecutors(executors)
     }
 

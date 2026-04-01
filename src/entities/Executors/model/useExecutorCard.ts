@@ -11,6 +11,8 @@ import { execFile } from "child_process"
 import { useCategoriesStore } from "@/entities/Category"
 import { useOperationTypeStore } from "@/entities/OperationType/model"
 import { useEquipmentStore } from "@/entities/Equipment"
+import { mapAPIError } from "@/shared/api/apiError"
+import { useProductStore } from "@/entities/Product"
 export const useExecutorCard = () => {
 
     const [isSelected, setIsSelected] = useState<boolean>(false)
@@ -27,6 +29,7 @@ export const useExecutorCard = () => {
     const categories = useCategoriesStore(state => state.categories)
     const operationTypes = useOperationTypeStore(state => state.operationTypes)
     const equipments = useEquipmentStore(state => state.equipments)
+    const products = useProductStore(state => state.products)
 
 
     const handleSelect = async (executor: IExecutor) => {
@@ -38,14 +41,27 @@ export const useExecutorCard = () => {
                 {revalidate: false}
             )   
             
-            const data = executorOperations?.map( executor => {
-                const department = departments.find(dep => dep.id === executor.departmentId)
-                const equipment = equipments.find(equip => equip.id === executor.equipmentId)
-                // const categories =
-                return {...executor, department: department}
+            console.log(executorOperations, 'execu oper')
+            const operation = executorOperations?.map( executorOper => {
+                // можно и через энричи, впринципе
+                const department = departments.find(dep => dep.id === executorOper.departmentId)
+                const equipment = equipments.find(equip => equip.id === executorOper.equipmentId)
+                const category = categories.find(categorie => categorie.id === executorOper.categoryId)
+                const operationType = operationTypes.find(operationType => operationType.id === executorOper.typeId)
+                // addProducts([executorOper.product])
+                console.log(department, departments, equipment,category, operationType, executorOper.product, products, 'no error',executorOper)
+                
+                if (department && equipment && category && operationType) {
+                    const {departmentId, equipmentId, categoryId, typeId, ...withoutIds} = executorOper
+                    return {...withoutIds, department, equipment, category, type: operationType}
+                }
+
+                console.log(department, departments, equipment,category, operationType, executorOper.product, products, 'error',executorOper)
+                // ошибка т.к. у нас неизвестный айди (м.б. делать тогда повтороный запрос этих данных)
+                throw mapAPIError(404)
             })
 
-            updateExecutor({operations: executorOperations }, executor.id)
+            updateExecutor({operations: operation }, executor.id)
         // console.log(cachedData, 'nootcache', executorOperations)
         }
         // console.log(cachedData, 'cache', executorOperations)

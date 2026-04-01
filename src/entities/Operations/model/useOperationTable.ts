@@ -3,7 +3,7 @@ import { useFilteredOperations } from "./useFilteredOperations"
 import { IProduct, useProductStore } from "@/entities/Product"
 import { useOperationStore } from "./useOperationStore"
 import { useExecutorsStore } from "@/entities/Executors"
-import { IOperation } from "../lib"
+import { IOperation, isIOperation } from "../lib"
 import { useSelectedExecutorsStore } from "@/entities/Executors/model"
 
 export const useOperationTable = () => {
@@ -17,10 +17,12 @@ export const useOperationTable = () => {
 
     useEffect(() => {
         console.log('add prod', filteredOperations)
+        if (filteredOperations.length > 0)
         setProducts(filteredOperations
                 .map<IProduct>(filteredOperations => filteredOperations.product)
                 .reduce<{currentIds: number[], uniqProduct: IProduct[]}>(
                     (currentProduct, product) => {
+                        console.log(product, 'product in useTable')
                         if (!currentProduct.currentIds.includes(product.id)){
                             currentProduct.currentIds.push(product.id)
                             currentProduct.uniqProduct.push(product)
@@ -43,7 +45,11 @@ export const useOperationTable = () => {
     const setOperations = useOperationStore(state => state.setOperations)
     useEffect(() => {
         setOperations(selectedExecutors.reduce<IOperation[]>((allOperations, exec) => {
-            allOperations.push(...exec.operations)
+            exec.operations.forEach( oper => {
+                    if (isIOperation(oper)) {
+                    allOperations.push(oper)
+                }
+            })
         return allOperations
     }, []))
     }, [selectedExecutors, setOperations])

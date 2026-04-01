@@ -11,7 +11,7 @@ interface IExecutorsStore {
 }
 
 export const useExecutorsStore = create<IExecutorsStore>(set => ({
-    executors: mockExecutors,
+    executors: [],
 
     setExecutors: (newExecutors) => set({executors: newExecutors}),
 
