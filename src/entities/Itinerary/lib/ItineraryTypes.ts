@@ -7,10 +7,17 @@ export interface IItinerary {
 	positionPlanId: number
 	audCode: string
 	audName: string
-	operations: IOperation[]
+	operations: IOperation[] | { id: number }[]
 	numberPositions: number
 	kit: number
 	increasingKit: number
 	date: Date
 	route: number[] // тут по идеи ID цехов
+}
+
+export interface IItineraryWithFullOpearions extends Omit<
+	IItinerary,
+	"operations"
+> {
+	operations: IOperation[]
 }

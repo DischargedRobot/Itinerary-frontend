@@ -8,10 +8,10 @@ import { Table } from "antd"
 import { Tag } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import { IProduct } from "@/entities/Product"
-import { IItinerary } from "../lib"
+import { IItinerary, IItineraryWithFullOpearions } from "../lib"
 import { useFilteredItineraries } from "../model/useFiltereditineraries"
 
-export const getItineraryColumns = (): ColumnsType<IItinerary> => [
+export const getItineraryColumns = (): ColumnsType<IItineraryWithFullOpearions> => [
 	{
 		title: "Дата",
 		dataIndex: "date",
@@ -40,7 +40,8 @@ export const getItineraryColumns = (): ColumnsType<IItinerary> => [
 		title: "Наименование ДСЕ",
 		dataIndex: "product",
 		key: "productName",
-		width: 150,
+		width: 200,
+		ellipsis: true,
 		render: (product: IProduct) => {
 			return <span>{product?.name || ""}</span>
 		},
@@ -59,10 +60,10 @@ export const getItineraryColumns = (): ColumnsType<IItinerary> => [
 		title: "Комплект",
 		key: "kit",
 		width: 100,
-		align: "center",
+		align: "right",
 		render: (_, record) => (
 			<span>
-				{record.kit}/{record.kit + record.increasingKit || 151}
+				{record.kit}/{record.increasingKit}
 			</span>
 		),
 	},
@@ -70,7 +71,8 @@ export const getItineraryColumns = (): ColumnsType<IItinerary> => [
 		title: "Маршрут",
 		dataIndex: "route",
 		key: "route",
-		width: 200,
+		width: 150,
+		ellipsis: true,
 		render: (route: number[]) => {
 			if (!route?.length) return "—"
 
@@ -110,7 +112,7 @@ export const ItineraryTable = () => {
 				),
 			}}
 
-			// scroll={{x: true}}
+		// scroll={{x: true}}
 		/>
 	)
 }

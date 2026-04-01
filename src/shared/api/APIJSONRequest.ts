@@ -10,7 +10,7 @@ export const APIJSONRequest = async <T>(
 		const response = await fetch(`${URL}/${endpoint}`, {
 			...options,
 			headers: {
-				"Conten-Type": "aplication/json",
+				"Content-Type": "application/json",
 				...options?.headers,
 			},
 		})
@@ -21,10 +21,11 @@ export const APIJSONRequest = async <T>(
 
 		return response.json()
 	} catch (error) {
+		console.log(error)
+
 		if (error instanceof TypeError && error.message === "Failed to fetch") {
 			throw mapAPIError(null)
 		}
-
 		// не наша
 		if (!(error instanceof APIError)) {
 			throw mapAPIError(0)

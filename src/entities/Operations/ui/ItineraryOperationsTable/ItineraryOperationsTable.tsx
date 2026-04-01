@@ -6,10 +6,10 @@ import { Checkbox, Table } from "antd"
 import { IOperation } from "../../lib"
 import { ColumnsType } from "antd/es/table"
 import { IExecutor } from "@/entities/Executors/lib/ExecutorTypes"
-import { ICatergory, ITypeOperation } from "@/shared"
 import { SelectEquipment } from "@/features/SelectEquipment"
-import { IEquipment } from "@/shared/lib"
+import { ICatergory, IEquipment } from "@/shared/lib"
 import { SelectExecutorInTable } from "@/features/SelectExecutorInTable/ui/SelectExecutorInTable"
+import { ITypeOperation } from "@/entities/OperationType"
 const columns: ColumnsType<IOperation> = [
 	{
 		title: "ID",

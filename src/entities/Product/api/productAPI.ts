@@ -6,7 +6,10 @@ import { IProduct } from "../lib"
 // }
 
 export const productAPI = {
-	getProducts: async (count: number, page: number): Promise<IProduct[]> => {
+	getProducts: async (
+		count: number = 100,
+		page: number = 1,
+	): Promise<IProduct[]> => {
 		return await APIJSONRequest<IProduct>(
 			`Products?count=${count}&page=${page}`,
 		)

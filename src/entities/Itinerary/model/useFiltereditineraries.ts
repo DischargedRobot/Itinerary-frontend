@@ -1,8 +1,9 @@
 import { useShallow } from "zustand/shallow"
 import { useMemo } from "react"
 import { useItineraryFiltersStore } from "./useItineraryFiltersStore"
-import { IItinerary } from "../lib/ItineraryTypes"
+import { IItinerary, IItineraryWithFullOpearions } from "../lib/ItineraryTypes"
 import { useItineraryStore } from "./useItineraryStore"
+import { IOperation, isIOperation } from "@/entities/Operations"
 
 export interface ItineraryFilters {
 	planPositionId?: number
@@ -94,5 +95,16 @@ export const useFilteredItineraries = () => {
 	//         )
 	// }, [selectedItineraries, setSelectedItineraries, filteredItineraries])
 
-	return filteredItineraries
+	const allOperationsAreIOperation = filteredItineraries.every((itiner) =>
+		itiner.operations.every((op) => isIOperation(op)),
+	)
+
+	if (allOperationsAreIOperation) {
+		return filteredItineraries as IItineraryWithFullOpearions[]
+	}
+
+	return filteredItineraries.map(({ operations, ...itiner }) => ({
+		...itiner,
+		operations: [],
+	})) as IItineraryWithFullOpearions[]
 }

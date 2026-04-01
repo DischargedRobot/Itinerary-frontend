@@ -54,7 +54,7 @@ export const useInitial = () => {
 		PromiseAllNamed({
 			categories: categoryAPI.getCategories(),
 			equipments: equipmentAPI.getEquipments(),
-			products: productAPI.getProducts(),
+			// products: productAPI.getProducts(),
 			operationsTypes: operationTypeAPI.getOperationsTypes(),
 			// executorsAPI.getExecutors().then(resolve => executors = resolve),
 			departments: departmentAPI.getDepartments(),
@@ -62,7 +62,7 @@ export const useInitial = () => {
 			({
 				equipments,
 				operationsTypes,
-				products,
+				// products,
 				categories,
 				departments,
 			}) => {
