@@ -14,7 +14,7 @@ const PersonalLayout = (props: Props) => {
     } = props
 
     return (
-        <Layout className="flex w-full gap-5">
+        <Layout className="flex w-full gap-5 relative">
             <Header style={{padding: 0}} className="sticky top-0 w-full">
                 <NavBar/>
             </Header>

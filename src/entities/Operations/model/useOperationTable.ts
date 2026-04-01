@@ -16,8 +16,7 @@ export const useOperationTable = () => {
     const {filteredOperations} = useFilteredOperations()
 
     useEffect(() => {
-        console.log('add prod', filteredOperations)
-        if (filteredOperations.length > 0)
+        // console.log('add prod', filteredOperations)
         setProducts(filteredOperations
                 .map<IProduct>(filteredOperations => filteredOperations.product)
                 .reduce<{currentIds: number[], uniqProduct: IProduct[]}>(

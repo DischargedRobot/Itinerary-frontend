@@ -7,6 +7,7 @@ import { useOperationTable } from "../../model/useOperationTable"
 import { IOperation } from "../../lib"
 import { IItinerary } from "@/entities/Itinerary"
 import { DownOutlined } from '@ant-design/icons'
+import { IProduct } from '@/entities/Product'
 
 const createColumn = (
 
@@ -14,35 +15,37 @@ const createColumn = (
     {
         key: 'typeOperation',
         title: 'Операция',
-        dataIndex: 'typeId'
+        dataIndex: 'name',
+        ellipsis: true,
     },
     {
-        key: 'itineraryId',
-        title: 'itineraryId',
-        dataIndex: 'itineraryId',
-        render: (itinerary: number) => {
-            return `${itinerary}`
-        }
+        key: 'product',
+        title: 'Изделие',
+        dataIndex: 'product',
+        render: (product: IProduct) => {
+            return `${product.name}`
+        },
+        ellipsis: true,
     },
     {
         key: 'numberPositions',
         title: 'N',
-        dataIndex: 'numberPositions'
+        dataIndex: 'numberPositions',
     },
     {
         key: 'dateExecution',
         title: 'Дата исполнения',
-        dataIndex: 'dateExecution'
+        dataIndex: 'dateExecution',
     },
     {
         key: 'normTime',
         title: 'Норма времени',
-        dataIndex: 'normTime'
+        dataIndex: 'normTime',
     },
     {
         key: 'pymentCoefficient',
         title: 'К',
-        dataIndex: 'pymentCoefficient'
+        dataIndex: 'pymentCoefficient',
     },
     {
         key: 'x2',

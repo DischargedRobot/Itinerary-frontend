@@ -18,13 +18,13 @@ export const useToast = () => {
         if (timer.current) {
             clearTimeout(timer.current)
         }
-
         timer.current = window.setTimeout(() => {
+            console.log('Время вышло')
             setIsFade(true)
         }, duration)
     }, [duration])
 
-    const toast = useRef<HTMLElement>(null)
+    const toast = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
 
@@ -33,6 +33,7 @@ export const useToast = () => {
         }
 
         const handleMouseOver = () => {
+
             setIsFade(false)
             if (timer.current) {
                 clearTimeout(timer.current)
@@ -40,9 +41,8 @@ export const useToast = () => {
         }
 
         const handleTransitionEnd = () => {
-            if (isFade) {
-                setIsVisible(false)
-            }
+            setIsFade(false)
+            setIsVisible(false)
         }
 
         const toastElement = toast.current
@@ -63,10 +63,13 @@ export const useToast = () => {
     }, [key])
 
     useEffect(() => {
-        startTimer()
-    }, [key, startTimer])
+        if (isVisible) {
+            startTimer()
+        }
+    }, [key, startTimer,isVisible])
 
     return  {
+        toast,
         title,
         message,
         type,

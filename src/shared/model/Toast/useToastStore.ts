@@ -43,4 +43,6 @@ export const useToastStore = create<IToastStore>(set => ({
 
 export const showToast = (toast: Omit<MakeOptional<IToast, 'title'>, 'key'>) => {
     useToastStore.getState().setToast(toast)
+    console.log('show', useToastStore.getState().key)
+
 }
