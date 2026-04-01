@@ -10,7 +10,7 @@ interface IDepartmentStore {
 
 export const useDepartmentStore = create<IDepartmentStore>(set => ({
 
-    departments: mockDepartments,
+    departments: [],
 
     setDepartments: (departments) => set({departments})
 

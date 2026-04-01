@@ -7,8 +7,8 @@ import { IProduct } from "../lib"
 
 export const productAPI = {
 
-    getProducts: async(): Promise<IProduct[]> => {
-        return await APIJSONRequest<IProduct>('Products')
+    getProducts: async(count: number, page: number): Promise<IProduct[]> => {
+        return await APIJSONRequest<IProduct>(`Products?count=${count}&page=${page}`)
 
         // return (responseProducts.map(({kitIncreasingKit, ...product}) => {
         //     const kitAndIncreasingKit = kitIncreasingKit.split('/').map(parseInt)
