@@ -1,15 +1,14 @@
-import { create } from "zustand";
-import { IPlanPosition } from "../lib";
+import { create } from "zustand"
+import { IPlanPosition } from "../lib"
 
 interface IPlanPositionStore {
-    planPositions: IPlanPosition[]
+	planPositions: IPlanPosition[]
 
-    setPlanPositions: (newPlanPositions: IPlanPosition[]) => void
+	setPlanPositions: (newPlanPositions: IPlanPosition[]) => void
 }
 
-export const usePlanPositionStore = create<IPlanPositionStore>(set => ({
+export const usePlanPositionStore = create<IPlanPositionStore>((set) => ({
+	planPositions: [],
 
-    planPositions: [],
-
-    setPlanPositions: (planPositions) => set({planPositions}),
+	setPlanPositions: (planPositions) => set({ planPositions }),
 }))

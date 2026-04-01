@@ -1,1 +1,1 @@
-export { productAPI } from './productAPI'
+export { productAPI } from "./productAPI"

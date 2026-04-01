@@ -1,1 +1,1 @@
-export { ItineraryOperationsTable } from './ItineraryOperationsTable'
+export { ItineraryOperationsTable } from "./ItineraryOperationsTable"

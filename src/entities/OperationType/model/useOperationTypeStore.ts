@@ -1,13 +1,13 @@
-import { create } from "zustand";
-import { ITypeOperation } from "../lib";
+import { create } from "zustand"
+import { ITypeOperation } from "../lib"
 
 interface IOperationTypeStore {
-    operationTypes: ITypeOperation[]
+	operationTypes: ITypeOperation[]
 
-    setOperationsTypes: (newOperationTypes: ITypeOperation[]) => void
+	setOperationsTypes: (newOperationTypes: ITypeOperation[]) => void
 }
 
-export const useOperationTypeStore = create<IOperationTypeStore>(set => ({
-    operationTypes: [],
-    setOperationsTypes: (operationTypes) => set({operationTypes})
-})) 
+export const useOperationTypeStore = create<IOperationTypeStore>((set) => ({
+	operationTypes: [],
+	setOperationsTypes: (operationTypes) => set({ operationTypes }),
+}))

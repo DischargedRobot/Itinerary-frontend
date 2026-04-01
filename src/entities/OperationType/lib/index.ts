@@ -1,1 +1,1 @@
-export { type ITypeOperation } from './OpertionTypeTypes'
+export { type ITypeOperation } from "./OpertionTypeTypes"

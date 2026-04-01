@@ -1,3 +1,3 @@
-export { equipmentAPI } from './equipmentAPI'
+export { equipmentAPI } from "./equipmentAPI"
 
-export { equipmentAPIUtilities } from './equipmentAPIUtilities'
+export { equipmentAPIUtilities } from "./equipmentAPIUtilities"

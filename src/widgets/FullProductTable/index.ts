@@ -1,1 +1,1 @@
-export { FullProductTable } from './ui'
+export { FullProductTable } from "./ui"

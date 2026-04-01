@@ -1,18 +1,14 @@
 import { usePlanPositionStore } from "@/entities/PlanPosition"
 
 export const useByPlanPosition = () => {
+	const planPositions = usePlanPositionStore((state) => state.planPositions)
 
-    const planPositions = usePlanPositionStore(state => state.planPositions)
+	// const sets = useStore
 
-    // const sets = useStore
+	const handleSelect = () => {}
 
-    const handleSelect = () => {
-        
-        
-    }
-
-    return {
-        planPositions,
-        handleSelect,
-    }
+	return {
+		planPositions,
+		handleSelect,
+	}
 }

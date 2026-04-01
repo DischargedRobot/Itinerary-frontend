@@ -1,26 +1,26 @@
-@use '../../../../app/typography.scss';
+@use "../../../../app/typography.scss";
 
 .itinerary-operation-table {
-    .ant-table {
-        margin: 0 !important;
-    }
+	.ant-table {
+		margin: 0 !important;
+	}
 
-    th {
-        // text-align: right !important;
-        @extend .title, .title_2very-litle;
-        vertical-align: bottom;
-        text-align: left !important;
+	th {
+		// text-align: right !important;
+		@extend .title, .title_2very-litle;
+		vertical-align: bottom;
+		text-align: left !important;
 
-        padding: 3px 5px !important;
+		padding: 3px 5px !important;
 
-        border-right: 1px solid var(--stroke);
-        &::before {
-            width: 0 !important;
-        }
-    }
+		border-right: 1px solid var(--stroke);
+		&::before {
+			width: 0 !important;
+		}
+	}
 
-    td {
-        line-height: 1 !important;
-        padding: 4px !important;
-    }
+	td {
+		line-height: 1 !important;
+		padding: 4px !important;
+	}
 }

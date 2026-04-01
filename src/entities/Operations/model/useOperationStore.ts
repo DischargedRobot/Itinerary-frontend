@@ -7,7 +7,7 @@ import { IOperation } from "../lib"
 //         return {
 //             id: index,
 //             productId: 1,
-//             itinerary: {    
+//             itinerary: {
 //                 id: 1,
 //                 productId: 1,
 //                 positionPlanId: 1,
@@ -37,42 +37,62 @@ import { IOperation } from "../lib"
 // }
 
 interface IOperationStore {
-    operations: IOperation[]
+	operations: IOperation[]
 
-    setOperations: (newOperations: IOperation[]) => void
-    addOperations: (newOperations: IOperation[]) => void
-    removeOperations: (removedOperations: IOperation[]) => void
+	setOperations: (newOperations: IOperation[]) => void
+	addOperations: (newOperations: IOperation[]) => void
+	removeOperations: (removedOperations: IOperation[]) => void
 }
 
-export const useOperationStore = create<IOperationStore>(set => ({
+export const useOperationStore = create<IOperationStore>((set) => ({
+	operations: [],
 
-    operations: [],
+	setOperations: (operations) => set({ operations }),
 
+	addOperations: (newOperations) =>
+		set((state) => {
+			const newOperationsIds = newOperations.map((newOper) => newOper.id)
+			const withoutNewOperations = state.operations.filter(
+				(operation) => !newOperationsIds.includes(operation.id),
+			)
+			console.log(
+				newOperations,
+				"newOperations",
+				state.operations,
+				withoutNewOperations,
+			)
+			if (
+				withoutNewOperations.length + newOperations.length ===
+				state.operations.length
+			) {
+				console.log(
+					withoutNewOperations,
+					"newOperationsIdsInCurrentState",
+				)
+				return {}
+			}
 
-    setOperations: (operations) => set({operations}),
+			return { operations: [...withoutNewOperations, ...newOperations] }
+		}),
 
-    addOperations: (newOperations) => set(state => {
-        const newOperationsIds = newOperations.map(newOper => newOper.id)
-        const withoutNewOperations = state.operations.filter(operation => !newOperationsIds.includes(operation.id))
-        console.log(newOperations, 'newOperations', state.operations, withoutNewOperations)
-        if (withoutNewOperations.length + newOperations.length === state.operations.length) {
-            console.log(withoutNewOperations, 'newOperationsIdsInCurrentState')
-            return {}
-        }
+	removeOperations: (removedOperations) =>
+		set((state) => {
+			const removedOperationsIds = removedOperations.map(
+				(oper) => oper.id,
+			)
+			const withoutRemovedOperations = state.operations.filter(
+				(oper) => !removedOperationsIds.includes(oper.id),
+			)
+			console.log(
+				removedOperations,
+				"removedOperations",
+				state.operations,
+			)
 
-        return {operations: [...withoutNewOperations, ...newOperations]}
-    }),
+			if (withoutRemovedOperations.length === state.operations.length) {
+				return {}
+			}
 
-    removeOperations: (removedOperations) => set(state => {
-        const removedOperationsIds = removedOperations.map(oper => oper.id)
-        const withoutRemovedOperations = state.operations.filter(oper => !removedOperationsIds.includes(oper.id))
-        console.log(removedOperations, 'removedOperations', state.operations)
-
-        if (withoutRemovedOperations.length === state.operations.length) {
-            return {}
-        }
-
-        return {operations: withoutRemovedOperations}
-    }),
-    
+			return { operations: withoutRemovedOperations }
+		}),
 }))

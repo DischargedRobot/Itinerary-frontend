@@ -1,3 +1,3 @@
-export { operationTypeAPI } from './api'
+export { operationTypeAPI } from "./api"
 
-export { type ITypeOperation } from './lib'
+export { type ITypeOperation } from "./lib"

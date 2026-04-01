@@ -1,10 +1,7 @@
 import { User } from "@/widgets/User"
 
 const Profile = () => {
-
-    return (
-        <User/>
-    )
+	return <User />
 }
 
 export default Profile

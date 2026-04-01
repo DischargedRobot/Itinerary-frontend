@@ -1,23 +1,24 @@
 @use "tailwindcss";
 
 .product-table {
-    &__title {
-        color: var(--foreground);
-    }
+	&__title {
+		color: var(--foreground);
+	}
 
-    td {
-        line-height: 0 !important;
-        padding: 6px 4px !important;
-    }
-    & .ant-table-title, .ant-table-footer {
-        background: var(--active-element);
-    }
+	td {
+		line-height: 0 !important;
+		padding: 6px 4px !important;
+	}
+	& .ant-table-title,
+	.ant-table-footer {
+		background: var(--active-element);
+	}
 
-    & .ant-table {
-        @apply rounded-2xl;
-    }
+	& .ant-table {
+		@apply rounded-2xl;
+	}
 
-    &.collapsed table {
-        display: none;
-    }
+	&.collapsed table {
+		display: none;
+	}
 }

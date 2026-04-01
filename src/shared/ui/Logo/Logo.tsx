@@ -1,7 +1,5 @@
 const Logo = () => {
-
-    return (<>
-    </>)
+	return <></>
 }
 
 export default Logo

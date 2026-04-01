@@ -1,1 +1,1 @@
-export { ItineraryTable } from './ItineraryTable'
+export { ItineraryTable } from "./ItineraryTable"

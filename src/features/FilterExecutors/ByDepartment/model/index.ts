@@ -1,1 +1,1 @@
-export { useByDepartment }from './useByDepartment'
+export { useByDepartment } from "./useByDepartment"

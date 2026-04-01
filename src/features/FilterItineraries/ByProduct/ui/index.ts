@@ -1,1 +1,1 @@
-export { ByProduct } from './ByProduct'
+export { ByProduct } from "./ByProduct"

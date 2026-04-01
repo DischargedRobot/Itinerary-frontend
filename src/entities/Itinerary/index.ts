@@ -1,2 +1,2 @@
-export {type IItinerary } from './lib'
-export { ItineraryTable } from './ui'
+export { type IItinerary } from "./lib"
+export { ItineraryTable } from "./ui"

@@ -4,61 +4,98 @@ import { useOperationStore } from "./useOperationStore"
 import { useMemo } from "react"
 import { IOperation } from "../lib"
 
-export interface IOperationFilters{
-    productIds: number[]
-    isFormed: boolean 
-    dateExecution: {fromDate?: Date, toDate?: Date}
+export interface IOperationFilters {
+	productIds: number[]
+	isFormed: boolean
+	dateExecution: { fromDate?: Date; toDate?: Date }
 }
 
 type TOperationFilterKey = keyof IOperationFilters
 
 type TOperationFilterFunctions = {
-    [K in TOperationFilterKey]: (operations: IOperation[], args: IOperationFilters[K]) => IOperation[]
+	[K in TOperationFilterKey]: (
+		operations: IOperation[],
+		args: IOperationFilters[K],
+	) => IOperation[]
 }
 
-const filterByProductsIds: TOperationFilterFunctions['productIds'] = (operations, productIds) => {
-    if (productIds.length) {
-        return operations
-    }
-    return operations.filter(operation => productIds.includes(operation.product.id))
+const filterByProductsIds: TOperationFilterFunctions["productIds"] = (
+	operations,
+	productIds,
+) => {
+	if (productIds.length) {
+		return operations
+	}
+	return operations.filter((operation) =>
+		productIds.includes(operation.product.id),
+	)
 }
 
-const filterByIsFormed: TOperationFilterFunctions['isFormed'] = (operations, isFormed) => {
-    return operations.filter(operation => operation.isFormed == isFormed)
+const filterByIsFormed: TOperationFilterFunctions["isFormed"] = (
+	operations,
+	isFormed,
+) => {
+	return operations.filter((operation) => operation.isFormed == isFormed)
 }
 
-const filterByDateExecution: TOperationFilterFunctions['dateExecution'] = (operations, date) => {
-    if (date.fromDate && date.toDate) {
-        return operations
-    } 
+const filterByDateExecution: TOperationFilterFunctions["dateExecution"] = (
+	operations,
+	date,
+) => {
+	if (date.fromDate && date.toDate) {
+		return operations
+	}
 
-    return operations.filter(oper => {
-        if (oper.dateExecution !== undefined ) {
-            // можно и без !=== но так понятней
-            return (date.fromDate !== undefined ? oper.dateExecution >= date.fromDate : true) && (date.toDate !== undefined ? oper.dateExecution <= date.toDate : true)
-        }
-        return false
-    })
+	return operations.filter((oper) => {
+		if (oper.dateExecution !== undefined) {
+			// можно и без !=== но так понятней
+			return (
+				(date.fromDate !== undefined
+					? oper.dateExecution >= date.fromDate
+					: true) &&
+				(date.toDate !== undefined
+					? oper.dateExecution <= date.toDate
+					: true)
+			)
+		}
+		return false
+	})
 }
 
 const OperationFilterFunction: TOperationFilterFunctions = {
-    productIds: filterByProductsIds,
-    isFormed: filterByIsFormed,
-    dateExecution: filterByDateExecution,
+	productIds: filterByProductsIds,
+	isFormed: filterByIsFormed,
+	dateExecution: filterByDateExecution,
 }
-    // extends чтобы тайп скрипт понял что filter одинаковый при подстановки в function и  args
-const filter = <T extends TOperationFilterKey>(filters: T[], operations: IOperation[], filterArgs: IOperationFilters): IOperation[] => {
-    return filters.reduce((filteredOperations, filter) => {
-        return OperationFilterFunction[filter](filteredOperations, filterArgs[filter])
-    }, operations)
+// extends чтобы тайп скрипт понял что filter одинаковый при подстановки в function и  args
+const filter = <T extends TOperationFilterKey>(
+	filters: T[],
+	operations: IOperation[],
+	filterArgs: IOperationFilters,
+): IOperation[] => {
+	return filters.reduce((filteredOperations, filter) => {
+		return OperationFilterFunction[filter](
+			filteredOperations,
+			filterArgs[filter],
+		)
+	}, operations)
 }
 
 export const useFilteredOperations = () => {
+	const filters = useOperationFiltersStore(
+		useShallow((state) => state.filterArgs()),
+	)
+	const operations = useOperationStore(
+		useShallow((state) => state.operations),
+	)
 
-    const filters = useOperationFiltersStore(useShallow(state => state.filterArgs()))
-    const operations = useOperationStore(useShallow(state => state.operations))
-
-    return useMemo(() => {
-        return {filteredOperations: filter(['isFormed', 'productIds', 'dateExecution'],operations, filters)}
-    },[operations, filters])
+	return useMemo(() => {
+		return {
+			filteredOperations: filter(
+				["isFormed", "productIds", "dateExecution"],
+				operations,
+				filters,
+			),
+		}
+	}, [operations, filters])
 }

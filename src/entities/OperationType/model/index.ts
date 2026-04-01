@@ -1,1 +1,1 @@
-export { useOperationTypeStore } from './useOperationTypeStore'
+export { useOperationTypeStore } from "./useOperationTypeStore"

@@ -1,1 +1,1 @@
-export { FilterOperationByIsFormed } from './FilterOperationByIsFormed'
+export { FilterOperationByIsFormed } from "./FilterOperationByIsFormed"

@@ -1,3 +1,3 @@
-export { departmentAPI } from './api'
+export { departmentAPI } from "./api"
 
-export { useDepartmentStore } from './model'
+export { useDepartmentStore } from "./model"

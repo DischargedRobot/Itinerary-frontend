@@ -1,1 +1,1 @@
-export { operationTypeAPI } from './operationTypeAPI'
+export { operationTypeAPI } from "./operationTypeAPI"

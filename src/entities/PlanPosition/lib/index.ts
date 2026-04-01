@@ -1,1 +1,1 @@
-export { type IPlanPosition } from './planPositionTypes'
+export { type IPlanPosition } from "./planPositionTypes"

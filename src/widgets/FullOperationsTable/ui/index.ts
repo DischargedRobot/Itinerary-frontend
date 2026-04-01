@@ -1,1 +1,1 @@
-export { FullOperationsTable } from './FullOperationsTable'
+export { FullOperationsTable } from "./FullOperationsTable"

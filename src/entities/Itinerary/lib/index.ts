@@ -1,1 +1,1 @@
-export { type IItinerary } from './ItineraryTypes'
+export { type IItinerary } from "./ItineraryTypes"

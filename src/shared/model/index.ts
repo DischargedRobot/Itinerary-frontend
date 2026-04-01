@@ -1,3 +1,3 @@
-export {useToastStore } from './Toast'
-export {useDepartmentStore } from '../../entities/Department/model'
-export { showToast } from './Toast'
+export { useToastStore } from "./Toast"
+export { useDepartmentStore } from "../../entities/Department/model"
+export { showToast } from "./Toast"

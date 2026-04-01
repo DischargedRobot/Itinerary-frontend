@@ -1,1 +1,1 @@
-export { ByProduct } from './ui'
+export { ByProduct } from "./ui"

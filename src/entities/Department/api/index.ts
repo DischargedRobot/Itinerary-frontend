@@ -1,1 +1,1 @@
-export { departmentAPI } from './departmentAPI'
+export { departmentAPI } from "./departmentAPI"

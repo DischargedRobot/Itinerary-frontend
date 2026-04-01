@@ -1,1 +1,1 @@
-export { ByDepartment } from './ByDepartment'
+export { ByDepartment } from "./ByDepartment"

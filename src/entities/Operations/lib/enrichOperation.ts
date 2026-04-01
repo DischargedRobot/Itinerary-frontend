@@ -8,7 +8,7 @@
 
 // export const enrichOperation = <
 //     TInput,
-// > (inputObject: TInput, source: unknown[], newObjectsNames: string[], types: readonly string[], inputKeys: keyof TInput[], sourceKey: string[]) => 
+// > (inputObject: TInput, source: unknown[], newObjectsNames: string[], types: readonly string[], inputKeys: keyof TInput[], sourceKey: string[]) =>
 //     {
 //         type EntityTypes = EntityMap<typeof types>;
 
@@ -21,7 +21,6 @@
 //             )
 //             return enrichBy(finishedObject)
 //         }, {inputObject})
-        
 
 //         const enrichByCategory = enrichAddObject<
 //     }

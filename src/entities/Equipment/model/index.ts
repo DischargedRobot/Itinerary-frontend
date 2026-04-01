@@ -1,1 +1,1 @@
-export { useEquipmentStore } from './useEquipmentStore'
+export { useEquipmentStore } from "./useEquipmentStore"

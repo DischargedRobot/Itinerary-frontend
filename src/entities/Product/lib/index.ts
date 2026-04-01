@@ -1,1 +1,1 @@
-export { type IProduct } from './ProductTypes'
+export { type IProduct } from "./ProductTypes"

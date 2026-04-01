@@ -1,1 +1,1 @@
-export { type IPersonalFormValues} from './types'
+export { type IPersonalFormValues } from "./types"

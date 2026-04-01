@@ -1,7 +1,6 @@
-
 export interface IProduct {
-    id: number
-    name: string
-    audCode: string
-    departmentId: number
+	id: number
+	name: string
+	audCode: string
+	departmentId: number
 }

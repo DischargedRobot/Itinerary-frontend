@@ -1,32 +1,32 @@
 @use "tailwindcss";
 
 .operation-table {
+	&__title {
+		color: var(--foreground);
+	}
 
-    &__title {
-        color: var(--foreground);
-    }
+	td {
+		line-height: 1 !important;
+		padding: 6px 4px !important;
+	}
 
-    td {
-        line-height: 1 !important;
-        padding: 6px 4px !important;
-    }
-    
-    & .ant-table-title, .ant-table-footer {
-        background: var(--active-element);
-    }
+	& .ant-table-title,
+	.ant-table-footer {
+		background: var(--active-element);
+	}
 
-    & .ant-table {
-        @apply rounded-2xl;
-    }
+	& .ant-table {
+		@apply rounded-2xl;
+	}
 
-    &.collapsed table {
-        display: none;
-    }
+	&.collapsed table {
+		display: none;
+	}
 }
 
 .arrow {
-    transition: rotate 1s ease-in;
-    &_collapsed {
-        transform: rotate(180deg);
-    }
+	transition: rotate 1s ease-in;
+	&_collapsed {
+		transform: rotate(180deg);
+	}
 }

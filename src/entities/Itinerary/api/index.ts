@@ -1,1 +1,1 @@
-export { itineraryAPI } from './itineraryAPI'
+export { itineraryAPI } from "./itineraryAPI"

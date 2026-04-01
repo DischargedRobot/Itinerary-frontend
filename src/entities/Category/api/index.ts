@@ -1,1 +1,1 @@
-export { categoryAPI }from './categoryAPI'
+export { categoryAPI } from "./categoryAPI"

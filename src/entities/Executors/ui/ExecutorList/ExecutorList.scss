@@ -1,29 +1,29 @@
 @use "tailwindcss";
 
 .executor-list {
-    border-color: var(--hover);
+	border-color: var(--hover);
 
-    scrollbar-width: thin;
-    scrollbar-color: var(--hover) var(--background);
+	scrollbar-width: thin;
+	scrollbar-color: var(--hover) var(--background);
 
-    &::-webkit-scrollbar {
-        width: 2px;
-    }
-    
-    &::-webkit-scrollbar-track {
-        background-color: var(--background);
-    }
+	&::-webkit-scrollbar {
+		width: 2px;
+	}
 
-    &::-webkit-scrollbar-thumb {
-        background-color: var(--hover);
-        border-radius: 20px;
-    }
+	&::-webkit-scrollbar-track {
+		background-color: var(--background);
+	}
 
-    &_border-bottom {
-        @apply border-b-2;
-    }
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--hover);
+		border-radius: 20px;
+	}
 
-    &_border-top {
-        @apply border-t-2;
-    }
+	&_border-bottom {
+		@apply border-b-2;
+	}
+
+	&_border-top {
+		@apply border-t-2;
+	}
 }

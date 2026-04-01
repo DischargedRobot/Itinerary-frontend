@@ -1,15 +1,14 @@
-import { ICatergory } from "@/shared/lib";
-import { create } from "zustand";
+import { ICatergory } from "@/shared/lib"
+import { create } from "zustand"
 
 interface ICaregoriesStore {
-    categories: ICatergory[]
+	categories: ICatergory[]
 
-    setCategories: (newCategories: ICatergory[]) => void
+	setCategories: (newCategories: ICatergory[]) => void
 }
 
-export const useCategoriesStore = create<ICaregoriesStore>(set => ({
+export const useCategoriesStore = create<ICaregoriesStore>((set) => ({
+	categories: [],
 
-    categories: [],
-
-    setCategories: (categories) => set({categories})
+	setCategories: (categories) => set({ categories }),
 }))

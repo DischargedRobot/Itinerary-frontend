@@ -1,6 +1,3 @@
 export const useItinerariesPage = () => {
-
-    return {
-
-    }
+	return {}
 }

@@ -1,4 +1,4 @@
-
+import { useItineraryFiltersStore } from "@/entities/Itinerary/model/useItineraryFiltersStore"
 import { planPositionAPI, usePlanPositionStore } from "@/entities/PlanPosition"
 import { IPlanPosition } from "@/entities/PlanPosition/lib"
 import { IProduct, useProductStore } from "@/entities/Product"
@@ -7,38 +7,47 @@ import { mapAPIError } from "@/shared/api/apiError"
 import { useSWRConfig } from "swr"
 
 export const useByProduct = () => {
+	const { cache } = useSWRConfig()
+	const products = useProductStore((state) => state.products)
+	const setPlanPositions = usePlanPositionStore(
+		(state) => state.setPlanPositions,
+	)
+	const setProductId = useItineraryFiltersStore((state) => state.setProductId)
 
-    const { cache } = useSWRConfig()
-    const products = useProductStore(state => state.products)
-    const setPlanPositions = usePlanPositionStore(state => state.setPlanPositions)
+	// TODO: в lib
+	const getCachedPlanPositions = async (
+		productId: number,
+	): Promise<IPlanPosition[]> => {
+		const cacheKey = [
+			["planPositions", "productId"],
+			["all", productId],
+		].toString()
 
-    const getCachedPlanPositions = async (productId: number): Promise<IPlanPosition[]> => {
-        const cacheKey = [['planPositions', 'productId'],['all', productId]].toString();
+		const serverPlanPositions = getCachedData(cache, cacheKey, () =>
+			planPositionAPI.getPlanPositionsByProduct(productId),
+		)
 
-        const serverPlanPositions = getCachedData(
-            cache,
-            cacheKey,
-            () => planPositionAPI.getPlanPositionsByProduct(productId),
-        )
+		if (!serverPlanPositions) {
+			throw mapAPIError(404)
+		}
 
-        if (!serverPlanPositions) {
-            throw mapAPIError(404)
-        }
+		return serverPlanPositions
+	}
 
-        return serverPlanPositions ;
-    };
+	const handleSelect = async (productId: IProduct["id"]) => {
+		const planPositions = await getCachedPlanPositions(productId)
 
-    const handleSelect = async (product: IProduct) => {
+		if (planPositions) {
+			setPlanPositions(planPositions)
+		}
 
-        const planPositions = await getCachedPlanPositions(product.id);
-        
-        if (planPositions) {
-            setPlanPositions(planPositions)
-        }
+		console.log(planPositions, "plans")
 
-    }
-    return {
-        products,
-        handleSelect
-    }
+		setProductId(productId)
+	}
+
+	return {
+		products,
+		handleSelect,
+	}
 }

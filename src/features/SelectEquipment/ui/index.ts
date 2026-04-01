@@ -1,1 +1,1 @@
-export { SelectEquipment } from './SelectEquipment'
+export { SelectEquipment } from "./SelectEquipment"

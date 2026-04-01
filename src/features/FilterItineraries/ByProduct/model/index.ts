@@ -1,1 +1,1 @@
-export { useByProduct } from './useByProduct'
+export { useByProduct } from "./useByProduct"

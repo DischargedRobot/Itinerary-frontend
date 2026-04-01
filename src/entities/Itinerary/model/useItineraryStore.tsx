@@ -1,16 +1,15 @@
-import { create } from "zustand";
-import { IItinerary } from "../lib";
-import { mockItineraries } from "@/shared/testData/testData";
-
+import { create } from "zustand"
+import { IItinerary } from "../lib"
+import { mockItineraries } from "@/shared/testData/testData"
 
 interface IItineraryStore {
-    itineraries: IItinerary[]
+	itineraries: IItinerary[]
 
-    setItineraries: (newItineraries: IItinerary[]) => void
+	setItineraries: (newItineraries: IItinerary[]) => void
 }
 
 export const useItineraryStore = create<IItineraryStore>((set) => ({
-    itineraries: mockItineraries,
+	itineraries: mockItineraries,
 
-    setItineraries: (newItineraries) => set({itineraries: newItineraries}),
+	setItineraries: (newItineraries) => set({ itineraries: newItineraries }),
 }))

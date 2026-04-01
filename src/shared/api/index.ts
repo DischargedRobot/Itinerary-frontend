@@ -1,4 +1,4 @@
-export { APIJSONRequest }from './APIJSONRequest'
-export { APIError} from './apiError'
+export { APIJSONRequest } from "./APIJSONRequest"
+export { APIError } from "./apiError"
 
-export { PromiseAllNamed } from './PromisesUtilities'
+export { PromiseAllNamed } from "./PromisesUtilities"

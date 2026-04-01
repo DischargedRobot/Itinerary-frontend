@@ -1,21 +1,19 @@
-
 .nav-bar {
-    & li {
-        
-        &::after {
-            border-color: var(--placeholder) !important;
-        }
-        
-        &:hover::after {
-            border-color: var(--hover) !important;
-        }
+	& li {
+		&::after {
+			border-color: var(--placeholder) !important;
+		}
 
-        &.ant-menu-item-selected::after {
-            border-color: var(--active) !important;
-        }
+		&:hover::after {
+			border-color: var(--hover) !important;
+		}
 
-        &.no-hover::after {
-            border-color: transparent !important;
-        }
-    }
+		&.ant-menu-item-selected::after {
+			border-color: var(--active) !important;
+		}
+
+		&.no-hover::after {
+			border-color: transparent !important;
+		}
+	}
 }

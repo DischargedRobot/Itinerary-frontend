@@ -1,3 +1,3 @@
-export { categoryAPI }from './api'
+export { categoryAPI } from "./api"
 
-export { useCategoriesStore } from './model'
+export { useCategoriesStore } from "./model"

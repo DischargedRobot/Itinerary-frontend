@@ -1,1 +1,1 @@
-export { ByDepartment } from './ui'
+export { ByDepartment } from "./ui"
