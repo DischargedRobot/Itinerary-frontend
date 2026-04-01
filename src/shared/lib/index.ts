@@ -6,3 +6,5 @@ export {type MakeOptional } from './types'
 
 export { enrich } from './enrich'
 export { enrichAddObject } from './enrich'
+
+export { getCachedData } from './getCachedData'

@@ -1,5 +1,6 @@
 export { type ICatergory } from './lib'
 export { enrich } from './lib'
+export { getCachedData } from './lib'
 
 export { showToast } from './model'
 

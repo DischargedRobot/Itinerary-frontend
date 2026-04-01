@@ -39,7 +39,8 @@ export const useExecutorCard = () => {
                     {revalidate: false}
                 )   
 
-                console.log(executorOperations, 'execu oper')
+                // TODO: вынести в отдельную функцию
+                // console.log(executorOperations, 'execu oper')
                 const operation = executorOperations?.map( executorOper => {
                     // можно и через энричи, впринципе
                     const department = departments.find(dep => dep.id === executorOper.departmentId)
@@ -75,12 +76,10 @@ export const useExecutorCard = () => {
             // фильтруем перед тем как отрпавить, чтобы 
             // не было дупликатов в изделиях, т.к. операции могут быть привязаны к одинаковому изделию
             addSelectedExecutor(executor)
-            // addProduct(Array.from(new Set(executor.operations.map(operation => JSON.stringify(operation.product)))).map(product => JSON.parse(product)))
-            console.log('selec', executor)
+            // console.log('selec', executor)
         } else {
             setIsSelected(false)
-            console.log('unselec', executor)
-
+            // console.log('unselec', executor)
             removeSelectedExecutor(executor)
         }
 
