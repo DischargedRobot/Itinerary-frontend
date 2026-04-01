@@ -1,5 +1,5 @@
-import {  useCallback, useEffect, useRef, useState } from "react"
-import { TToast, useToastStore } from "./useToastStore"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { useToastStore } from "./useToastStore"
 
 export const useToast = () => {
 
