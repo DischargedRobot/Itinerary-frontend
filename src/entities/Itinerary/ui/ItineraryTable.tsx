@@ -9,6 +9,7 @@ import { Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { IProduct } from "@/entities/Product";
 import { IItinerary } from "../lib";
+import { useFilteredItineraries } from '../model/useFiltereditineraries'
 
 export const getItineraryColumns = (): ColumnsType<IItinerary> => [
   {
@@ -88,7 +89,7 @@ export const ItineraryTable = () => {
 
     
 
-    const itineraries = useItineraryStore(state => state.itineraries)
+    const itineraries = useFilteredItineraries()
 
     return (
         // <ItineraryOperationsTable operations={itineraries[0].operations}/>

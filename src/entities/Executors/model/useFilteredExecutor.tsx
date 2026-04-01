@@ -50,11 +50,21 @@ const filterExecutors =  <T extends TFilterKey>(filterKeys: T[], executors: IExe
 
 export const useFilteredExecutor = () => {
 
-    const filterArgs = useExecutorFiltersStore(useShallow(state => ({isBrigade: state.isBrigade, members: state.members, departmentId: state['departmentId']})))
+    const filterArgs = useExecutorFiltersStore(
+        useShallow(state => ({
+            isBrigade: state.isBrigade, 
+            members: state.members, 
+            departmentId: state['departmentId']}
+        ))
+    )
     const executors = useExecutorsStore(state => state.executors)
 
     const filteredExecutors = useMemo(() => {
-        return filterExecutors(['members', 'isBrigade', 'departmentId'], executors, filterArgs)
+        return filterExecutors(
+            ['members', 'isBrigade', 'departmentId'], 
+            executors, 
+            filterArgs
+        )
     }, [executors, filterArgs])
 
     // TODO: мб перенести в другой хук
