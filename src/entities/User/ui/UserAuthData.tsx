@@ -1,4 +1,4 @@
-// "use client"
+"use client"
 
 import { PersonalInput } from "@/shared"
 import { IUser } from "../lib"

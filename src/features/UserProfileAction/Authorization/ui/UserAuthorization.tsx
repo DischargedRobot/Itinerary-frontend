@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "antd"
 import { UserAuthData } from "@/entities/User"
 import { useUserAuthorizationForm } from "../model"
