@@ -1,4 +1,5 @@
 export { useOperationFiltersStore } from "./useOperationFiltersStore"
 export { useOperationTable } from "./useOperationTable"
-export { useOperationStore } from "./useOperationStore"
+export { useOperationStore } from "./createOperationStore"
+export { useSelectedOperationsStore } from "./createOperationStore"
 export { useFilteredOperations } from "./useFilteredOperations"

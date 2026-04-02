@@ -64,6 +64,7 @@ export const OperationTable = () => {
 
 	return (
 		<Table
+			rowSelection={{ onSelect: () => { } }}
 			footer={() => <></>}
 			title={() => (
 				<div

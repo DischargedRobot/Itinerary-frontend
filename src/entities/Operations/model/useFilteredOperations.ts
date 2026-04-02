@@ -1,6 +1,6 @@
 import { useShallow } from "zustand/shallow"
 import { useOperationFiltersStore } from "./useOperationFiltersStore"
-import { useOperationStore } from "./useOperationStore"
+import { useOperationStore } from "./createOperationStore"
 import { useMemo } from "react"
 import { IOperation } from "../lib"
 

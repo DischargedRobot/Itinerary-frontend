@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useFilteredOperations } from "./useFilteredOperations"
 import { IProduct, useProductStore } from "@/entities/Product"
-import { useOperationStore } from "./useOperationStore"
+import { useOperationStore } from "./createOperationStore"
 import { useExecutorsStore } from "@/entities/Executors"
 import { IOperation, isIOperation } from "../lib"
 import { useSelectedExecutorsStore } from "@/entities/Executors/model"
