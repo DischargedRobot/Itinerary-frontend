@@ -6,13 +6,8 @@ type IUserAuthRequest = {
 	password: string
 }
 
-export type IUserAuthResponse = {
+export interface IUserAuthResponse extends IUser {
 	id: number
-	login: string
-	firstName: string
-	lastName: string
-	middleName?: string
-	emails: string[]
 }
 
 export const userAPI = {
@@ -30,8 +25,8 @@ export const userAPI = {
 		})
 	},
 
-	updateProfile: async (id: number, updates: Partial<IUser>) => {
-		return APIJSONRequest<IUser>(`Users/${id}`, {
+	updateProfile: async (updates: Partial<IUser>) => {
+		return APIJSONRequest<IUser>(`Users/${updates.id}`, {
 			method: "PUT",
 			body: JSON.stringify(updates),
 		})
