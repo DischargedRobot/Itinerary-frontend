@@ -49,7 +49,7 @@ export const useItineraryTable = () => {
 						),
 					)
 					.filter(isIOperation)
-
+				console.log(operations, "operations")
 				addOperationsToItinerary(operations, itinerary.id)
 			}
 		} catch (error) {

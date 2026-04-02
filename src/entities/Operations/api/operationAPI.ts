@@ -21,8 +21,19 @@ export const operationAPI = {
 	},
 
 	getOperationsByItineraryId: async (itineraryId: number) => {
-		return APIJSONRequest<IOperationResponse>(
+		const operations = await APIJSONRequest<IOperationResponse>(
 			`OperationsOfItinerary/by-itinerary/${itineraryId}`,
 		)
+
+		return operations.map(({ dateIssue, dateExecution, ...operation }) => {
+			if (dateExecution)
+				return {
+					dateIssue: dateIssue ? new Date(dateIssue) : undefined,
+					dateExecution: dateExecution
+						? new Date(dateExecution)
+						: undefined,
+					...operation,
+				}
+		})
 	},
 }

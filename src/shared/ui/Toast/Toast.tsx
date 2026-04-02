@@ -19,7 +19,7 @@ const icons = new Map<TToast, React.ReactNode>([
 export const Toast = () => {
 	const { title, message, type, isVisible, isFade, toast } = useToast()
 
-	console.log(isVisible, "TOAST", isFade)
+	// console.log(isVisible, "TOAST", isFade)
 	return isVisible ? (
 		<div
 			ref={toast}

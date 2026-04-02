@@ -31,6 +31,8 @@ import { IOperation } from "./OperationTypes"
 
 //         const enrichByCategory = enrichAddObject<
 //     }
+
+//TODO: мб передлать под энрич
 export const enrichOperation = (
 	executorOper: IOperationResponse,
 	departments: IDepartment[],
@@ -50,17 +52,7 @@ export const enrichOperation = (
 	const operationType = operationTypes.find(
 		(operationType) => operationType.id === executorOper.typeId,
 	)
-	console.log(
-		department,
-		departments,
-		equipment,
-		category,
-		operationType,
-		executorOper.product,
-		// products,
-		"no error",
-		executorOper,
-	)
+	// console.log(department, departments, equipment,category, operationType, executorOper.product, products, 'no error',executorOper)
 
 	if (department && equipment && category && operationType) {
 		const { departmentId, equipmentId, categoryId, typeId, ...withoutIds } =

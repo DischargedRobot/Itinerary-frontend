@@ -18,7 +18,7 @@ export const useToast = () => {
 			clearTimeout(timer.current)
 		}
 		timer.current = window.setTimeout(() => {
-			console.log("Время вышло")
+			// console.log("Время вышло")
 			setIsFade(true)
 		}, duration)
 	}, [duration])
