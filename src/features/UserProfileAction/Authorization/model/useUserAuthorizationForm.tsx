@@ -1,8 +1,11 @@
 import { IUser, userAPI } from "@/entities/User"
 import { apiErrorCatcher } from "@/shared"
+import { useUserStore } from "@/entities/User"
 import { useForm } from "react-hook-form"
 
-export const useUserChangingForm = () => {
+export const useUserAuthorizationForm = () => {
+    const setCurrentUser = useUserStore((state) => state.setCurrentUser)
+
     const {
         handleSubmit,
         register,
@@ -10,9 +13,10 @@ export const useUserChangingForm = () => {
         reset,
     } = useForm<IUser>()
 
-    const handleSaveChanges = async (user: IUser) => {
+    const handleLogin = async (data: IUser) => {
         try {
-            await userAPI.updateProfile(user)
+            const user = await userAPI.login({ login: data.login, password: data.password })
+            setCurrentUser(user)
         } catch (error) {
             apiErrorCatcher(error as Error)
         }
@@ -24,6 +28,6 @@ export const useUserChangingForm = () => {
         errors,
         isDirty,
         reset,
-        handleSaveChanges,
+        handleLogin,
     }
 }

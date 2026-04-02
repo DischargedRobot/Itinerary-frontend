@@ -2,6 +2,7 @@ export { type ICatergory } from "./lib"
 export { enrich } from "./lib"
 export { getCachedData } from "./lib"
 
+export { apiErrorCatcher } from "./api"
 export { showToast } from "./model"
 
 export { Avatar } from "./ui"

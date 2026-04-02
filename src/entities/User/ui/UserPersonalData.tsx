@@ -13,37 +13,6 @@ export const UserPersonalData = ({ register, errors }: Props) => {
     return (
         <>
             <PersonalInput
-                type="login"
-                name="login"
-                placeholder="Логин"
-                rules={{
-                    required: {
-                        value: true,
-                        message: "Это поле обязательно для заполнения",
-                    },
-                }}
-                register={register}
-                error={errors?.login}
-            />
-            <PersonalInput
-                type="password"
-                name="password"
-                placeholder="Пароль"
-                rules={{
-                    required: {
-                        value: true,
-                        message: "Это поле обязательно для заполнения",
-                    },
-                    minLength: {
-                        value: 6,
-                        message:
-                            "Пароль должен состоять минимум из 6 символов",
-                    },
-                }}
-                register={register}
-                error={errors?.password}
-            />
-            <PersonalInput
                 type="email"
                 name="email"
                 placeholder="Почта"

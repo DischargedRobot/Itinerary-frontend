@@ -1,7 +1,7 @@
 import { Avatar } from "@/shared"
 import { Button } from "antd"
 import { UserForm } from "@/entities/User"
-import { useUserChangingForm } from "../model/useUserChangingForm"
+import { useUserChangingForm } from "../model"
 
 export const UserChangingForm = () => {
     const {
@@ -31,6 +31,7 @@ export const UserChangingForm = () => {
                 </div>
             </div>
             <div className="flex flex-col gap-9">
+                <UserForm.UserAuthData register={register} errors={errors} />
                 <UserForm.UserPersonalData register={register} errors={errors} />
             </div>
             <div className="flex justify-between">
