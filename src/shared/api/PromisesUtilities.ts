@@ -14,5 +14,5 @@ export const PromiseAllNamed = async <
 		),
 	)
 
-	return Object.fromEntries(results)
+	return Promise.resolve(Object.fromEntries(results))
 }
