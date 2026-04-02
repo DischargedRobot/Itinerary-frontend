@@ -19,7 +19,11 @@ export const UserAuthorization = () => {
             </div>
 
             <div className="flex justify-between">
-                <Button className="max-w-50 w-full" htmlType="submit" disabled={!isDirty}>
+                <Button
+                    className="max-w-50 w-full"
+                    htmlType="submit"
+                    disabled={!isDirty}
+                >
                     Войти
                 </Button>
                 <Button

@@ -2,8 +2,8 @@ export interface IUser {
 	id: number
 	login: string
 	password: string
-	firstName: string
-	lastName: string
+	name: string
+	secondName: string
 	middleName?: string
 	email: string
 	phoneNumber?: string

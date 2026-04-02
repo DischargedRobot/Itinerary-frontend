@@ -7,13 +7,14 @@ import { UseFormRegister, FieldErrors } from "react-hook-form"
 interface Props {
     register: UseFormRegister<IUser>
     errors: FieldErrors<IUser>
+    user?: IUser | null
 }
 
-export const UserFullName = ({ register, errors }: Props) => {
+export const UserFullName = ({ register, errors, user }: Props) => {
     return (
         <>
             <PersonalInput
-                name="firstName"
+                name="name"
                 placeholder="Имя"
                 rules={{
                     required: {
@@ -22,10 +23,11 @@ export const UserFullName = ({ register, errors }: Props) => {
                     },
                 }}
                 register={register}
-                error={errors?.firstName}
+                error={errors?.name}
+                defaultValue={user?.name}
             />
             <PersonalInput
-                name="lastName"
+                name="secondName"
                 placeholder="Фамилия"
                 rules={{
                     required: {
@@ -34,7 +36,8 @@ export const UserFullName = ({ register, errors }: Props) => {
                     },
                 }}
                 register={register}
-                error={errors?.lastName}
+                error={errors?.secondName}
+                defaultValue={user?.secondName}
             />
             <PersonalInput
                 name="middleName"
@@ -47,6 +50,7 @@ export const UserFullName = ({ register, errors }: Props) => {
                 }}
                 register={register}
                 error={errors?.middleName}
+                defaultValue={user?.middleName}
             />
         </>
 

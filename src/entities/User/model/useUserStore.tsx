@@ -2,7 +2,7 @@ import { IUser } from "../lib"
 import { create } from "zustand"
 
 interface IUserStore {
-    currentUser: IUser | null
+    currentUser: IUser
 
     setCurrentUser: (user: IUser | null) => void
     clearUser: () => void

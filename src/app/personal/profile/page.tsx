@@ -1,7 +1,7 @@
-import { User } from "@/widgets/User"
+import { UserChangingForm } from "@/features/UserProfileAction/ChangeData"
 
 const Profile = () => {
-	return <User />
+	return <UserChangingForm />
 }
 
 export default Profile

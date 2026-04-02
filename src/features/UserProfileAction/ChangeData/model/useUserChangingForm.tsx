@@ -1,4 +1,4 @@
-import { IUser, userAPI } from "@/entities/User"
+import { IUser, userAPI, useUserStore } from "@/entities/User"
 import { apiErrorCatcher } from "@/shared"
 import { useForm } from "react-hook-form"
 
@@ -18,6 +18,8 @@ export const useUserChangingForm = () => {
         }
     }
 
+    const currentUser = useUserStore(state => state.currentUser)
+
     return {
         handleSubmit,
         register,
@@ -25,5 +27,6 @@ export const useUserChangingForm = () => {
         isDirty,
         reset,
         handleSaveChanges,
+        currentUser,
     }
 }

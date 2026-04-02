@@ -9,14 +9,15 @@ import { UserPersonalData } from "./UserPersonalData"
 interface Props {
     register: UseFormRegister<IUser>
     errors: FieldErrors<IUser>
+    user?: IUser
 }
 
-export const UserForm = ({ register, errors }: Props) => {
+export const UserForm = ({ register, errors, user }: Props) => {
     return (
         <>
-            <UserFullName register={register} errors={errors} />
-            <UserAuthData register={register} errors={errors} />
-            <UserPersonalData register={register} errors={errors} />
+            <UserFullName register={register} errors={errors} user={user} />
+            <UserAuthData register={register} errors={errors} user={user} />
+            <UserPersonalData register={register} errors={errors} user={user} />
         </>
     )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { Avatar } from "@/shared"
 import { Button } from "antd"
 import { UserForm } from "@/entities/User"
@@ -11,6 +13,7 @@ export const UserChangingForm = () => {
         isDirty,
         reset,
         handleSaveChanges,
+        currentUser,
     } = useUserChangingForm()
 
     return (
@@ -27,12 +30,12 @@ export const UserChangingForm = () => {
                     className={" self-center justify-self-center"}
                 />
                 <div className="flex flex-col gap-6">
-                    <UserForm.UserFullName register={register} errors={errors} />
+                    <UserForm.UserFullName register={register} errors={errors} user={currentUser} />
                 </div>
             </div>
             <div className="flex flex-col gap-9">
-                <UserForm.UserAuthData register={register} errors={errors} />
-                <UserForm.UserPersonalData register={register} errors={errors} />
+                <UserForm.UserAuthData register={register} errors={errors} user={currentUser} />
+                <UserForm.UserPersonalData register={register} errors={errors} user={currentUser} />
             </div>
             <div className="flex justify-between">
                 <Button
@@ -46,8 +49,8 @@ export const UserChangingForm = () => {
                     className="max-w-50 w-full"
                     onClick={() =>
                         reset({
-                            firstName: "",
-                            lastName: "",
+                            name: "",
+                            secondName: "",
                             middleName: "",
                             login: "",
                             password: "",

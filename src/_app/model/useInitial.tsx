@@ -26,6 +26,7 @@ export const useInitial = () => {
 		(state) => state.setOperationsTypes,
 	)
 
+	console.log("useInitial")
 	// const { data: categories, error: categoriesError } = useSWR('/api/categories', () => categoryAPI.getCategories());
 	// const { data: equipments, error: equipmentsError } = useSWR('/api/equipments', () => equipmentAPI.getEquipments());
 	// const { data: products, error: productsError } = useSWR('/api/products', () => productAPI.getProducts());
@@ -51,6 +52,7 @@ export const useInitial = () => {
 	// )
 
 	useEffect(() => {
+		console.log("useEffect useInitial")
 		PromiseAllNamed({
 			categories: categoryAPI.getCategories(),
 			equipments: equipmentAPI.getEquipments(),

@@ -7,9 +7,10 @@ import { UseFormRegister, FieldErrors } from "react-hook-form"
 interface Props {
     register: UseFormRegister<IUser>
     errors: FieldErrors<IUser>
+    user?: IUser
 }
 
-export const UserAuthData = ({ register, errors }: Props) => {
+export const UserAuthData = ({ register, errors, user }: Props) => {
     return (
         <>
             <PersonalInput
@@ -24,6 +25,7 @@ export const UserAuthData = ({ register, errors }: Props) => {
                 }}
                 register={register}
                 error={errors?.login}
+                defaultValue={user?.login}
             />
             <PersonalInput
                 type="password"
@@ -41,6 +43,7 @@ export const UserAuthData = ({ register, errors }: Props) => {
                 }}
                 register={register}
                 error={errors?.password}
+                defaultValue={user?.password}
             />
         </>
     )
