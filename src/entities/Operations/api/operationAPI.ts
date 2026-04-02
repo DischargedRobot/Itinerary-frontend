@@ -9,15 +9,20 @@ type RelationKeys =
 	| "equipment"
 	| "executor"
 
-type IOperationResponse = Omit<IOperation, RelationKeys> & {
+export type IOperationResponse = Omit<IOperation, RelationKeys> & {
 	[K in RelationKeys as `${K}Id`]: number
 }
 
 export const operationAPI = {
-	getOperationByExecutorId: (executorID: number) => {
-		const response = APIJSONRequest<IOperationResponse>(
+	getOperationByExecutorId: async (executorID: number) => {
+		return APIJSONRequest<IOperationResponse>(
 			`OperationsOfItinerary/by-executor/${executorID}`,
 		)
-		return response
+	},
+
+	getOperationsByItineraryId: async (itineraryId: number) => {
+		return APIJSONRequest<IOperationResponse>(
+			`OperationsOfItinerary/by-itinerary/${itineraryId}`,
+		)
 	},
 }

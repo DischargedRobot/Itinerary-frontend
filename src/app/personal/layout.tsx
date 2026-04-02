@@ -10,6 +10,7 @@ interface Props {
 const PersonalLayout = (props: Props) => {
 	const { children } = props
 
+
 	return (
 		<Layout className="flex w-full gap-5 relative">
 			<Header style={{ padding: 0 }} className="sticky top-0 w-full">

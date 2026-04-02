@@ -145,7 +145,7 @@ export const ItineraryOperationsTable = ({ operations }: Props) => {
 			dataSource={operations}
 			size="small"
 			rowClassName=" text text_tiny text_2very-litle max-h-5.5 overflow-hidden"
-			className="itinerary-operation-table max-w-[900px]! "
+			className="itinerary-operation-table max-w-225! "
 			pagination={false}
 			rowKey={"id"}
 			scroll={{ y: 100, x: "min-content" }}

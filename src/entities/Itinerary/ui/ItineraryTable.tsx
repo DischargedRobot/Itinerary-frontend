@@ -3,7 +3,7 @@
 import "./ItineraryTable.scss"
 
 import { ItineraryOperationsTable } from "@/entities/Operations"
-import { useItineraryStore } from "../model"
+import { useItineraryStore, useItineraryTable } from "../model"
 import { Table } from "antd"
 import { Tag } from "antd"
 import type { ColumnsType } from "antd/es/table"
@@ -94,6 +94,7 @@ export const getItineraryColumns = (): ColumnsType<IItineraryWithFullOpearions> 
 ]
 export const ItineraryTable = () => {
 	const itineraries = useFilteredItineraries()
+	const { handleExpand } = useItineraryTable()
 
 	return (
 		// <ItineraryOperationsTable operations={itineraries[0].operations}/>
@@ -105,6 +106,11 @@ export const ItineraryTable = () => {
 			dataSource={itineraries}
 			pagination={{ placement: ["bottomCenter"], pageSize: 20 }}
 			expandable={{
+				onExpand: (expanded, itinerary) => {
+					if (expanded) {
+						handleExpand(itinerary)
+					}
+				},
 				expandedRowRender: (itinerary) => (
 					<ItineraryOperationsTable
 						operations={itinerary.operations}

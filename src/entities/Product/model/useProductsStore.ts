@@ -11,7 +11,7 @@ interface IProductSore {
 }
 
 export const useProductStore = create<IProductSore>((set) => ({
-	products: mockProducts,
+	products: [],
 
 	setProducts: (products) => set({ products }),
 	addProducts: (newProducts) =>

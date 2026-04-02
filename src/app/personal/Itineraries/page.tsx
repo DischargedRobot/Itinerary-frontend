@@ -1,10 +1,12 @@
 "use client"
+import { useInitial } from "@/_app"
 import { useInitialItinerariesPage } from "@/_page/ItinerariesPage/model"
 import { ItineraryTable } from "@/entities/Itinerary"
 import { FilterItineraries } from "@/features/FilterItineraries"
 // import { ItineraryOperationsTable } from "@/entities/Operations"
 
 const ItinerariesPage = () => {
+	useInitial()
 	useInitialItinerariesPage()
 
 	return (

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
 import { useFilteredOperations } from "./useFilteredOperations"
 import { IProduct, useProductStore } from "@/entities/Product"
-import { useOperationStore } from "./createOperationStore"
+import {
+	useOperationStore,
+	useSelectedOperationsStore,
+} from "./createOperationStore"
 import { useExecutorsStore } from "@/entities/Executors"
 import { IOperation, isIOperation } from "../lib"
 import { useSelectedExecutorsStore } from "@/entities/Executors/model"
@@ -9,13 +12,17 @@ import { useSelectedExecutorsStore } from "@/entities/Executors/model"
 export const useOperationTable = () => {
 	const [isVisible, setIsVisible] = useState<boolean>()
 	const setProducts = useProductStore((state) => state.setProducts)
-	// console.log('opper', operations)
-	// const {filte} = useFilteredOperations()
 	// TODO: мб перенести в сторе продуктов? но тогда он будет зависимым от другого стора, хм...
 	const { filteredOperations } = useFilteredOperations()
 
+	const addSelectedOperation = useSelectedOperationsStore(
+		(state) => state.addOperations,
+	)
+	const removeSelectedOperation = useSelectedOperationsStore(
+		(state) => state.removeOperations,
+	)
+
 	useEffect(() => {
-		// console.log('add prod', filteredOperations)
 		setProducts(
 			filteredOperations
 				.map<IProduct>(
@@ -58,5 +65,13 @@ export const useOperationTable = () => {
 		)
 	}, [selectedExecutors, setOperations])
 
-	return { operations: filteredOperations, isVisible, setIsVisible }
+	return {
+		operations: filteredOperations,
+		isVisible,
+		setIsVisible,
+		handleRowSelect: (operation: IOperation) =>
+			addSelectedOperation([operation]),
+		handleRowUnSelect: (operation: IOperation) =>
+			removeSelectedOperation([operation]),
+	}
 }

@@ -6,7 +6,6 @@ import { IPlanPosition } from "@/entities/PlanPosition/lib"
 import { IProduct, useProductStore } from "@/entities/Product"
 import { getCachedData, showToast } from "@/shared"
 import { APIError, mapAPIError } from "@/shared/api/apiError"
-import { error } from "console"
 import { useSWRConfig } from "swr"
 
 export const useByProduct = () => {

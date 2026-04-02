@@ -9,7 +9,12 @@ export const CreateTask = () => {
 
     return (
         <Button
+            title="Сформировать"
+            className="w-30"
+            size="medium"
             onClick={handleClick}
-        />
+        >
+            Сформировать
+        </Button>
     )
 }

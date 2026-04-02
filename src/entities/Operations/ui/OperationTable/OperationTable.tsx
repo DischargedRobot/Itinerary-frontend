@@ -60,11 +60,19 @@ const createColumn = (): TableProps<IOperation>["columns"] => [
 ]
 
 export const OperationTable = () => {
-	const { operations, setIsVisible, isVisible } = useOperationTable()
+	const { operations, setIsVisible, isVisible, handleRowUnSelect, handleRowSelect } = useOperationTable()
 
 	return (
 		<Table
-			rowSelection={{ onSelect: () => { } }}
+			rowSelection={{
+				onSelect: (operation, selected) => {
+					if (selected) {
+						handleRowSelect(operation)
+					} else {
+						handleRowUnSelect(operation)
+					}
+				},
+			}}
 			footer={() => <></>}
 			title={() => (
 				<div

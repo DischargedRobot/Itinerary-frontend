@@ -2,6 +2,7 @@ export { operationAPI } from "./api"
 
 export { type IOperation } from "./lib"
 export { isIOperation } from "./lib"
+export { enrichOperation } from "./lib"
 
 export { useOperationFiltersStore } from "./model"
 export { useOperationTable } from "./model"

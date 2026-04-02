@@ -7,6 +7,7 @@ import { FullExecutorList } from "@/widgets/FullExecutorList"
 import { FullOperationsTable } from "@/widgets/FullOperationsTable/ui"
 import { FullProductTable } from "@/widgets/FullProductTable"
 import { TopItineraryFilters } from "@/widgets/TopItineraryFilters"
+import { CreateTask } from "@/features/CreateTask"
 
 const TaskLists = () => {
 	useInitial()
@@ -14,6 +15,7 @@ const TaskLists = () => {
 	return (
 		<div className="flex flex-col gap-5 w-full">
 			<TopItineraryFilters />
+			<CreateTask />
 			<div className="grid grid-cols-[auto_1fr] gap-3">
 				<FullExecutorList />
 				<div className="flex flex-col gap-5">

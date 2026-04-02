@@ -89,14 +89,15 @@ const createOperationStore = <T extends { id: number }, E = object>(
 // }));
 export const useSelectedOperationsStore = createOperationStore<IOperation>();
 
-export const useOperationStore = createOperationStore<IOperation, {
-    setIsFormed: (operationsIds: IOperation[]) => void
-}>((set, get) => ({
-    setIsFormed: (operation) => set(state => {
-        const formedOperationIds = operation.map(oper => oper.id)
-        const formedOper = operation.map(({ isFormed, ...opertion }) => ({ isFormed: true, ...opertion }))
-        const without = state.operations.filter(oper => !formedOperationIds.includes(oper.id))
+export const useOperationStore = createOperationStore<
+    IOperation, {
+        setIsFormed: (operationsIds: IOperation[]) => void
+    }>((set, get) => ({
+        setIsFormed: (operation) => set(state => {
+            const formedOperationIds = operation.map(oper => oper.id)
+            const formedOper = operation.map(({ isFormed, ...opertion }) => ({ isFormed: true, ...opertion }))
+            const without = state.operations.filter(oper => !formedOperationIds.includes(oper.id))
 
-        return { operations: [...without, ...formedOper] }
-    })
-}));
+            return { operations: [...without, ...formedOper] }
+        })
+    }));
