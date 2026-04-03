@@ -1,0 +1,1 @@
+export { ItineraryTableFull } from "./ItineraryTableFull"
