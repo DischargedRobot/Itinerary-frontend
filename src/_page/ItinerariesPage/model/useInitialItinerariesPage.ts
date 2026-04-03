@@ -1,6 +1,8 @@
+import { useItineraryStore } from "@/entities/Itinerary/model"
 import { productAPI, useProductStore } from "@/entities/Product"
 import { useCallback, useEffect } from "react"
 import { mutate } from "swr"
+import { useShallow } from "zustand/shallow"
 
 export const useInitialItinerariesPage = () => {
 	const setProducts = useProductStore((state) => state.setProducts)
@@ -22,6 +24,14 @@ export const useInitialItinerariesPage = () => {
 		},
 		[setProducts],
 	)
+
+	const setItineraries = useItineraryStore(
+		useShallow((state) => state.setItineraries),
+	)
+
+	useEffect(() => {
+		setItineraries([])
+	}, [])
 
 	useEffect(() => {
 		loadProducts(100, 1)

@@ -38,6 +38,9 @@ const filterByIsFormed: TOperationFilterFunctions["isFormed"] = (
 	return operations.filter((operation) => operation.isFormed == isFormed)
 }
 
+const toDay = (date: Date) =>
+	new Date(date.getFullYear(), date.getMonth(), date.getDate())
+
 const filterByDateExecution: TOperationFilterFunctions["dateExecution"] = (
 	operations,
 	date,
@@ -51,12 +54,13 @@ const filterByDateExecution: TOperationFilterFunctions["dateExecution"] = (
 		if (oper.dateExecution !== undefined) {
 			// можно и без !=== но так понятней
 			console.log("date", oper.dateExecution, date.fromDate)
+			const operTime = toDay(oper.dateExecution).getTime()
 			return (
 				(date.fromDate !== undefined
-					? oper.dateExecution.getTime() >= date.fromDate.getTime()
+					? operTime >= date.fromDate.getTime()
 					: true) &&
 				(date.toDate !== undefined
-					? oper.dateExecution.getTime() <= date.toDate.getTime()
+					? operTime <= date.toDate.getTime()
 					: true)
 			)
 		}

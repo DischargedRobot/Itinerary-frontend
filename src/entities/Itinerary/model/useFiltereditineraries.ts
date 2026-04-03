@@ -50,12 +50,16 @@ const filterByProductId: TFilteredFunction["productId"] = (
 }
 
 // Фильтр по дате
+const toDay = (date: Date) =>
+	new Date(date.getFullYear(), date.getMonth(), date.getDate())
+
 const filterByDate: TFilteredFunction["date"] = (itineraries, date) => {
 	const { fromDate, toDate } = date
 	if (!fromDate && !toDate) return itineraries
 	return itineraries.filter(({ date: itinDate }) => {
-		if (fromDate && itinDate <= fromDate) return false
-		if (toDate && itinDate >= toDate) return false
+		const day = toDay(itinDate)
+		if (fromDate && day < toDay(fromDate)) return false
+		if (toDate && day > toDay(toDate)) return false
 		return true
 	})
 }
@@ -99,20 +103,6 @@ export const useFilteredItineraries = () => {
 			filterArgs,
 		)
 	}, [itineraries, filterArgs])
-
-	// // Синхронизация выбранных маршрутов (если нужно)
-	// const selectedItineraries = useSelectedItinerariesStore(
-	//     useShallow(state => state.selectedItineraries)
-	// )
-	// const setSelectedItineraries = useSelectedItinerariesStore(
-	//     state => state.setSelectedItineraries
-	// )
-
-	// useEffect(() => {
-	//         selectedItineraries.filter(selectedItin =>
-	//             filteredItineraries.includes(selectedItin)
-	//         )
-	// }, [selectedItineraries, setSelectedItineraries, filteredItineraries])
 
 	const allOperationsAreIOperation = filteredItineraries.every((itiner) =>
 		itiner.operations.every((op) => isIOperation(op)),

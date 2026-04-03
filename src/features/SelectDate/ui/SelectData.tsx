@@ -12,6 +12,7 @@ interface Props {
 }
 dayjs.extend(localizedFormat)
 dayjs.locale("ru")
+
 export const SelectDate = ({ onSelect, defaultDate }: Props) => {
 	const [isVisible, setIsVisible] = useState<boolean>(false)
 
