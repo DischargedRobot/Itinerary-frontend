@@ -4,10 +4,11 @@ import { IEquipment } from "@/shared/lib"
 
 interface Props {
 	defaultValue?: IEquipment
+	onChange?: (equipment: IEquipment) => void
 }
 
 export const SelectEquipment = (props: Props) => {
-	const { defaultValue } = props
+	const { defaultValue, onChange } = props
 
 	const { equipments } = useSelectEquipment()
 
@@ -28,9 +29,11 @@ export const SelectEquipment = (props: Props) => {
 				label: equip.name,
 				value: equip.id,
 			}))}
-			defaultValue={{
-				label: defaultValue?.name,
-				value: defaultValue?.id,
+			defaultValue={defaultValue?.id}
+			onChange={(value) => {
+				console.log("equip", value)
+				const equipment = equipments.find((e) => e.id === value)
+				if (equipment) onChange?.(equipment)
 			}}
 		/>
 	)

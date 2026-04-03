@@ -8,6 +8,7 @@ import { ITypeOperation } from "@/entities/OperationType/lib/OpertionTypeTypes"
 
 export interface IOperation {
 	id: number
+	name: string
 	product: IProduct // подгружаем при входе все
 	itineraryId: number // подгружаем при входе все
 	department: IDepartment // подгружаем при входе все

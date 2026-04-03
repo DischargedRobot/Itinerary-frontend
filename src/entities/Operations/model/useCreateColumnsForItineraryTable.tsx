@@ -5,8 +5,8 @@ import { ICatergory, IEquipment } from "@/shared/lib"
 import { ITypeOperation } from "@/entities/OperationType"
 
 export const useCreateColumnsForItineraryTable = (
-	renderEquipment?: (equipment: IEquipment) => React.ReactNode,
-	renderExecutor?: (executor?: IExecutor) => React.ReactNode,
+	renderEquipment?: (operation: IOperation) => React.ReactNode,
+	renderExecutor?: (operation: IOperation) => React.ReactNode,
 ) => {
 	const columns: ColumnsType<IOperation> = [
 		{
@@ -71,9 +71,7 @@ export const useCreateColumnsForItineraryTable = (
 			key: "equipment",
 			width: "100px",
 			ellipsis: true,
-			render: (equipment: IEquipment) => {
-				return renderEquipment?.(equipment) ?? equipment.name
-			},
+			render: renderEquipment ? (_, record) => renderEquipment(record) : (equipment: IEquipment) => equipment.name,
 		},
 		// {
 		//   title: 'Назначена',
@@ -91,7 +89,7 @@ export const useCreateColumnsForItineraryTable = (
 			align: "left",
 			width: 110,
 			ellipsis: true,
-			render: (executor?: IExecutor) => renderExecutor?.(executor) ?? (executor?.name || ""),
+			render: renderExecutor ? (_, record) => renderExecutor(record) : (executor?: IExecutor) => executor?.name || "",
 		},
 		{
 			title: "К",

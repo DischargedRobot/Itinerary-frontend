@@ -1,3 +1,4 @@
+import { DatePickerProps } from "antd"
 import { IOperation } from "../lib"
 import { APIJSONRequest } from "@/shared/api"
 
@@ -9,8 +10,14 @@ type RelationKeys =
 	| "equipment"
 	| "executor"
 
-export type IOperationResponse = Omit<IOperation, RelationKeys> & {
+export type IOperationResponse = Omit<
+	IOperation,
+	RelationKeys | "dateIssue" | "dateExecution"
+> & {
 	[K in RelationKeys as `${K}Id`]: number
+} & {
+	dateIssue?: Date
+	dateExecution?: Date
 }
 
 export type IOperationResponseWithDatesSting = Omit<
@@ -52,6 +59,13 @@ export const operationAPI = {
 		return APIJSONRequest(`OperationsOfItinerary/isFormed`, {
 			method: "PUT",
 			body: JSON.stringify(operationIds),
+		})
+	},
+
+	putOperation: async (operation: IOperationResponseWithDatesSting) => {
+		return APIJSONRequest(`OperationsOfItinerary/${operation.id}`, {
+			method: "PUT",
+			body: JSON.stringify(operation),
 		})
 	},
 }

@@ -4,10 +4,11 @@ import { IExecutor } from "@/entities/Executors"
 
 interface Props {
 	defaultValue?: IExecutor
+	onChange?: (executor: IExecutor) => void
 }
 
 export const SelectExecutorInTable = (props: Props) => {
-	const { defaultValue } = props
+	const { defaultValue, onChange } = props
 
 	const { executors } = useSelectExecutorInTable()
 
@@ -28,9 +29,10 @@ export const SelectExecutorInTable = (props: Props) => {
 				label: executor.name,
 				value: executor.id,
 			}))}
-			defaultValue={{
-				label: defaultValue?.name,
-				value: defaultValue?.id,
+			defaultValue={defaultValue?.id}
+			onChange={(value) => {
+				const executor = executors.find((e) => e.id === value)
+				if (executor) onChange?.(executor)
 			}}
 		/>
 	)

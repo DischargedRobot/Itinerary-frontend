@@ -4,14 +4,12 @@ import "./ItineraryOperationTable.scss"
 
 import { Table } from "antd"
 import { IOperation } from "../../lib"
-import { IExecutor } from "@/entities/Executors/lib/ExecutorTypes"
-import { IEquipment } from "@/shared/lib"
 import { useCreateColumnsForItineraryTable } from "../../model/useCreateColumnsForItineraryTable"
 
 interface Props {
 	operations: IOperation[]
-	renderEquipment?: (equipment: IEquipment) => React.ReactNode
-	renderExecutor?: (executor?: IExecutor) => React.ReactNode
+	renderEquipment?: (operation: IOperation) => React.ReactNode
+	renderExecutor?: (operation: IOperation) => React.ReactNode
 }
 
 // TODO: это виджет, так-то
