@@ -6,6 +6,7 @@ import Avatar from "@/shared/ui/Avatar/Avatar"
 import { Menu, MenuProps } from "antd"
 import Link from "next/link"
 import { useNavBar } from "../model"
+import { UserLogOut } from "@/features/UserProfileAction"
 
 const MENU_ITEMS: MenuProps["items"] = [
 	{
@@ -23,6 +24,11 @@ const MENU_ITEMS: MenuProps["items"] = [
 				<Avatar size={32} />
 			</Link>
 		),
+		className: "no-hover",
+	},
+	{
+		key: "logout",
+		label: <UserLogOut />,
 		className: "no-hover",
 	},
 ]

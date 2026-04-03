@@ -21,7 +21,7 @@ export const userAPI = {
 	},
 
 	register: async (user: IUser) => {
-		return APIJSONRequest<IUserAuthResponse>(`${USERS_URL}/auth/register`, {
+		return APIJSONRequest<IUserAuthResponse>(`${USERS_URL}/register`, {
 			method: "POST",
 			body: JSON.stringify(user),
 		})
@@ -36,5 +36,11 @@ export const userAPI = {
 
 	getProfile: async (id: number) => {
 		return APIJSONRequest<IUser>(`${USERS_URL}/${id}`)
+	},
+
+	logout: async () => {
+		return APIJSONRequest<void>(`${USERS_URL}/logout`, {
+			method: "POST",
+		})
 	},
 }

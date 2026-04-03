@@ -22,9 +22,6 @@ export const useUserAuthorizationForm = () => {
             setCurrentUser(user)
             isAuthenticated = true
         } catch (error) {
-            if (isAPIError(error) && error.status == 401) {
-
-            }
             apiErrorCatcher(error as Error)
         }
         if (isAuthenticated) {

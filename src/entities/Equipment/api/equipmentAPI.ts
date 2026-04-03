@@ -7,6 +7,6 @@ export interface IEquipmentResponse extends Omit<IEquipment, "operationType"> {
 
 export const equipmentAPI = {
 	getEquipments: async (): Promise<IEquipmentResponse[]> => {
-		return APIJSONRequest<IEquipmentResponse>("Equipment")
+		return APIJSONRequest<IEquipmentResponse[]>("Equipment")
 	},
 }

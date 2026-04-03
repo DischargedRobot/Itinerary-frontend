@@ -44,9 +44,9 @@ export const mapAPIError = (status: IResponseError["status"]) => {
 		case 400:
 			return APIErrors.BAD_REQUEST
 		case 401:
-			return APIErrors.FORBIDEN
-		case 403:
 			return APIErrors.UNAUTHORIZED
+		case 403:
+			return APIErrors.FORBIDEN
 		case 404:
 			return APIErrors.NOT_FOUND
 		case 500:
