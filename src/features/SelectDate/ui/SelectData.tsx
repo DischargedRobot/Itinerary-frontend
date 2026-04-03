@@ -1,15 +1,19 @@
 "use client"
 
-import { Calendar } from "antd"
+import { Calendar, CalendarProps } from "antd"
 import { useEffect, useRef, useState } from "react"
-
+import type { Dayjs } from "dayjs"
+import dayjs from "dayjs"
+import "dayjs/locale/ru"
+import localizedFormat from "dayjs/plugin/localizedFormat"
 interface Props {
 	onSelect: (date: Date) => void
+	defaultDate?: Date
 }
-
-export const SelectDate = ({ onSelect }: Props) => {
+dayjs.extend(localizedFormat)
+dayjs.locale("ru")
+export const SelectDate = ({ onSelect, defaultDate }: Props) => {
 	const [isVisible, setIsVisible] = useState<boolean>(false)
-	const [date, setDate] = useState<Date>(new Date())
 
 	const calendarRef = useRef<HTMLDivElement>(null)
 	useEffect(() => {
@@ -27,10 +31,21 @@ export const SelectDate = ({ onSelect }: Props) => {
 			document.removeEventListener("mousedown", handleClickOutside)
 	}, [])
 
+	const [selectedDate, setSelectedDate] = useState<Dayjs>(
+		defaultDate ? dayjs(defaultDate) : dayjs(),
+	)
+
+	// Обработчик изменения даты
+	const onDateChange: CalendarProps<Dayjs>["onChange"] = (date) => {
+		console.log("Выбрана дата:", date.format("YYYY-MM-DD"))
+		setSelectedDate(date)
+	}
+
 	return (
 		<div ref={calendarRef} className="relative">
 			{isVisible ? (
 				<Calendar
+					value={selectedDate}
 					classNames={{
 						item: "hover:text-active-text!",
 					}}
@@ -39,11 +54,11 @@ export const SelectDate = ({ onSelect }: Props) => {
 					onSelect={(date, mode) => {
 						const Date = date.toDate()
 						onSelect(Date)
-						setDate(Date)
 						if (mode.source === "date") {
 							setIsVisible(false)
 						}
 					}}
+					onChange={onDateChange}
 					onPanelChange={(_, mode) => console.log(mode, "mode")}
 				/>
 			) : (
@@ -55,7 +70,7 @@ export const SelectDate = ({ onSelect }: Props) => {
 					setIsVisible((prev) => !prev)
 				}}
 			>
-				{date.toLocaleDateString()}
+				{selectedDate.format("L")}
 			</span>
 		</div>
 	)

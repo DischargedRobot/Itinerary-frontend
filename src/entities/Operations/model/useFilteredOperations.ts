@@ -42,19 +42,21 @@ const filterByDateExecution: TOperationFilterFunctions["dateExecution"] = (
 	operations,
 	date,
 ) => {
-	if (date.fromDate && date.toDate) {
+	// console.log(operations, date, 'operations')
+	if (!date.fromDate && !date.toDate) {
 		return operations
 	}
 
 	return operations.filter((oper) => {
 		if (oper.dateExecution !== undefined) {
 			// можно и без !=== но так понятней
+			console.log("date", oper.dateExecution, date.fromDate)
 			return (
 				(date.fromDate !== undefined
-					? oper.dateExecution >= date.fromDate
+					? oper.dateExecution.getTime() >= date.fromDate.getTime()
 					: true) &&
 				(date.toDate !== undefined
-					? oper.dateExecution <= date.toDate
+					? oper.dateExecution.getTime() <= date.toDate.getTime()
 					: true)
 			)
 		}

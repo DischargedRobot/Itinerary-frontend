@@ -1,5 +1,4 @@
 import { IExecutor } from "@/entities/Executors/lib/ExecutorTypes"
-import { IItinerary } from "@/entities/Itinerary/lib/ItineraryTypes"
 import { IProduct } from "@/entities/Product"
 import { ICatergory } from "@/shared"
 import { IDepartment } from "@/shared/lib"

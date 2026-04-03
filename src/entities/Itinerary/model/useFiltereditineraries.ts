@@ -5,9 +5,15 @@ import { IItinerary, IItineraryWithFullOpearions } from "../lib/ItineraryTypes"
 import { useItineraryStore } from "./useItineraryStore"
 import { IOperation, isIOperation } from "@/entities/Operations"
 
+export interface DateFilter {
+	fromDate?: Date
+	toDate?: Date
+}
+
 export interface ItineraryFilters {
 	planPositionId?: number
 	productId?: number
+	date: DateFilter
 }
 
 type TFilterKey = keyof ItineraryFilters
@@ -43,10 +49,22 @@ const filterByProductId: TFilteredFunction["productId"] = (
 	return itineraries.filter((itinerary) => itinerary.product.id === productId)
 }
 
+// Фильтр по дате
+const filterByDate: TFilteredFunction["date"] = (itineraries, date) => {
+	const { fromDate, toDate } = date
+	if (!fromDate && !toDate) return itineraries
+	return itineraries.filter(({ date: itinDate }) => {
+		if (fromDate && itinDate <= fromDate) return false
+		if (toDate && itinDate >= toDate) return false
+		return true
+	})
+}
+
 // Объект с функциями фильтрации
 const FilterFunction: TFilteredFunction = {
 	planPositionId: filterByPositionPlanId,
 	productId: filterByProductId,
+	date: filterByDate,
 }
 
 // Общая функция для применения фильтров
@@ -69,13 +87,14 @@ export const useFilteredItineraries = () => {
 		useShallow((state) => ({
 			planPositionId: state.planPositionId,
 			productId: state.productId,
+			date: state.date,
 		})),
 	)
 	const itineraries = useItineraryStore((state) => state.itineraries)
 
 	const filteredItineraries = useMemo(() => {
 		return filterItineraries(
-			["planPositionId", "productId"],
+			["planPositionId", "productId", "date"],
 			itineraries,
 			filterArgs,
 		)
