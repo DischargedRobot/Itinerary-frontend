@@ -1,58 +1,22 @@
-import { DatePickerProps } from "antd"
-import { IOperation } from "../lib"
+import { convertOperationsDate } from "../lib"
 import { APIJSONRequest } from "@/shared/api"
+import { IOperationResponse, IOperationResponseWithDatesSting } from "./operationAPITypes"
 
-type RelationKeys =
-	| "itinerary"
-	| "department"
-	| "category"
-	| "type"
-	| "equipment"
-	| "executor"
-
-export type IOperationResponse = Omit<
-	IOperation,
-	RelationKeys | "dateIssue" | "dateExecution"
-> & {
-	[K in RelationKeys as `${K}Id`]: number
-} & {
-	dateIssue?: Date
-	dateExecution?: Date
-}
-
-export type IOperationResponseWithDatesSting = Omit<
-	IOperation,
-	RelationKeys | "dateIssue" | "dateExecution"
-> & {
-	[K in RelationKeys as `${K}Id`]: number
-} & {
-	dateIssue?: string
-	dateExecution?: string
-}
+export type { IOperationResponse, IOperationResponseWithDatesSting }
 
 export const operationAPI = {
 	getOperationByExecutorId: async (executorID: number) => {
-		return APIJSONRequest<IOperationResponse>(
+		const operations = await APIJSONRequest<IOperationResponseWithDatesSting[]>(
 			`OperationsOfItinerary/by-executor/${executorID}`,
 		)
+		return operations.map(convertOperationsDate)
 	},
 
 	getOperationsByItineraryId: async (itineraryId: number) => {
-		const operations = await APIJSONRequest<
-			IOperationResponseWithDatesSting[]
-		>(`OperationsOfItinerary/by-itinerary/${itineraryId}`)
-
-		return operations.map<IOperationResponse>(
-			({ dateIssue, dateExecution, ...operation }) => {
-				return {
-					dateIssue: dateIssue ? new Date(dateIssue) : undefined,
-					dateExecution: dateExecution
-						? new Date(dateExecution)
-						: undefined,
-					...operation,
-				}
-			},
+		const operations = await APIJSONRequest<IOperationResponseWithDatesSting[]>(
+			`OperationsOfItinerary/by-itinerary/${itineraryId}`,
 		)
+		return operations.map(convertOperationsDate)
 	},
 
 	markOperationsAsFormed: async (operationIds: number[]) => {
