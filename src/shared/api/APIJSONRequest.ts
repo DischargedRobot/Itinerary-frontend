@@ -22,6 +22,10 @@ export const APIJSONRequest = async <T>(
 			throw mapAPIError(response.status)
 		}
 
+		if (response.status === 204) {
+			return {} as T
+		}
+
 		return response.json()
 	} catch (error) {
 		console.log(error)

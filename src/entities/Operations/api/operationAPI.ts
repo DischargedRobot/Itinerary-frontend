@@ -13,6 +13,16 @@ export type IOperationResponse = Omit<IOperation, RelationKeys> & {
 	[K in RelationKeys as `${K}Id`]: number
 }
 
+export type IOperationResponseWithDatesSting = Omit<
+	IOperation,
+	RelationKeys | "dateIssue" | "dateExecution"
+> & {
+	[K in RelationKeys as `${K}Id`]: number
+} & {
+	dateIssue?: string
+	dateExecution?: string
+}
+
 export const operationAPI = {
 	getOperationByExecutorId: async (executorID: number) => {
 		return APIJSONRequest<IOperationResponse>(
@@ -21,12 +31,12 @@ export const operationAPI = {
 	},
 
 	getOperationsByItineraryId: async (itineraryId: number) => {
-		const operations = await APIJSONRequest<IOperationResponse>(
-			`OperationsOfItinerary/by-itinerary/${itineraryId}`,
-		)
+		const operations = await APIJSONRequest<
+			IOperationResponseWithDatesSting[]
+		>(`OperationsOfItinerary/by-itinerary/${itineraryId}`)
 
-		return operations.map(({ dateIssue, dateExecution, ...operation }) => {
-			if (dateExecution)
+		return operations.map<IOperationResponse>(
+			({ dateIssue, dateExecution, ...operation }) => {
 				return {
 					dateIssue: dateIssue ? new Date(dateIssue) : undefined,
 					dateExecution: dateExecution
@@ -34,6 +44,14 @@ export const operationAPI = {
 						: undefined,
 					...operation,
 				}
+			},
+		)
+	},
+
+	markOperationsAsFormed: async (operationIds: number[]) => {
+		return APIJSONRequest(`OperationsOfItinerary/isFormed`, {
+			method: "PUT",
+			body: JSON.stringify(operationIds),
 		})
 	},
 }

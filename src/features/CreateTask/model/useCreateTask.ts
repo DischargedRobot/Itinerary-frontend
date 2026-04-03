@@ -1,8 +1,9 @@
-import { IOperation } from "@/entities/Operations"
+import { operationAPI } from "@/entities/Operations/api"
 import {
 	useOperationStore,
 	useSelectedOperationsStore,
 } from "@/entities/Operations/model"
+import { apiErrorCatcher } from "@/shared"
 
 export const useCreateTask = () => {
 	const setSelectedOperations = useSelectedOperationsStore(
@@ -15,9 +16,16 @@ export const useCreateTask = () => {
 	// const operations = useOperationStore((state) => state.operations)
 	const setIsFormed = useOperationStore((state) => state.setIsFormed)
 
-	const handleClick = () => {
-		setSelectedOperations([])
-		setIsFormed(selectedOperations)
+	const handleClick = async () => {
+		try {
+			await operationAPI.markOperationsAsFormed(
+				selectedOperations.map((op) => op.id),
+			)
+			setSelectedOperations([])
+			setIsFormed(selectedOperations)
+		} catch (error) {
+			apiErrorCatcher(error as Error)
+		}
 	}
 
 	return { handleClick }
