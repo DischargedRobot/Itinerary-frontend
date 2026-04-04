@@ -123,7 +123,10 @@ export const SearchDropDownMenu = <T,>({
 	return (
 		<div
 			ref={containerRef}
-			className={`relative w-full max-w-xs ${className}`}
+			className={`relative w-full max-w-xs border rounded-[9px] transition-colors 
+						duration-200 ease-out border-stroke stroke-stroke hover:border-hover
+						 focus:border-active hover:stroke-hover
+						 focus:stroke-active ${className}`}
 		>
 			<input
 				ref={inputRef}
@@ -135,7 +138,7 @@ export const SearchDropDownMenu = <T,>({
 				placeholder={placeholder}
 				disabled={disabled}
 				className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-foreground 
-                         focus:outline-none focus:ring-2 focus:ring-blue-500 
+                         focus:outline-none 
                          disabled:bg-gray-100"
 				autoComplete="off"
 			/>
@@ -150,9 +153,8 @@ export const SearchDropDownMenu = <T,>({
 				className="absolute right-3 top-1/2 -translate-y-1/2 text-text"
 			>
 				<svg
-					className={`w-5 h-5 transition-transform ${isOpen ? "rotate-180" : ""}`}
+					className={`w-5 h-5  transition-transform ${isOpen ? "rotate-180" : ""}`}
 					fill="none"
-					stroke="currentColor"
 					viewBox="0 0 24 24"
 				>
 					<path

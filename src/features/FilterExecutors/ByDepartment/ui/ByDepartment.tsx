@@ -1,6 +1,6 @@
 "use client"
 
-import { SearchDropDownMenu } from "./SearchDropDownMenu"
+import { SearchDropDownMenu } from "@/shared"
 import { useByDepartment } from "../model"
 
 export const ByDepartment = () => {

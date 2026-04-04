@@ -66,7 +66,7 @@ export const SelectDate = ({ onSelect, defaultDate }: Props) => {
 				""
 			)}
 			<span
-				className=" p-2 bg-foreground border borde-stroke rounded-md"
+				className=" p-2 bg-foreground border borde-stroke rounded-md hover:text-hover hover:border-active"
 				onClick={() => {
 					setIsVisible((prev) => !prev)
 				}}
