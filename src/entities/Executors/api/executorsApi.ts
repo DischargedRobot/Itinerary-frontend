@@ -17,7 +17,7 @@ export const executorsAPI = {
 	getExecutors: async (): Promise<IExecutorResponse[]> => {
 		try {
 			const executors =
-				await APIJSONRequest<IExecutorResponse>("Executors")
+				await APIJSONRequest<IExecutorResponse[]>("Executors")
 			return executors
 		} catch (error) {
 			// if (error instanceof APIError) {
@@ -34,7 +34,7 @@ export const executorsAPI = {
 	},
 
 	getExecutorsByDepartmentId: async (departmentId: IDepartment["id"]) => {
-		const executors = await APIJSONRequest<IExecutorResponse>(
+		const executors = await APIJSONRequest<IExecutorResponse[]>(
 			`Executors/by-division?divisionID=${departmentId}`,
 		)
 		return executors

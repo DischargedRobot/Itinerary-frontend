@@ -7,7 +7,7 @@ export const useTaskLists = () => {
 	const setExecutors = useExecutorsStore((state) => state.setExecutors)
 
 	const { data: executorsResponce } = useSWR(
-		[["executors", "divisionId"], []],
+		[["executors", "departmentId"], []],
 		() => executorsAPI.getExecutors(),
 	)
 

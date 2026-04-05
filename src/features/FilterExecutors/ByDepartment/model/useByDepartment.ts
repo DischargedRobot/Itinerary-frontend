@@ -1,14 +1,18 @@
-import {
-	executorsAPI,
-	IExecutor,
-	useExecutorsStore,
-} from "@/entities/Executors"
-import { enrich } from "@/shared"
+import { executorsAPI, useExecutorsStore } from "@/entities/Executors"
 import { mapAPIError } from "@/shared/api/apiError"
 import { enrichAddObject, IDepartment } from "@/shared/lib"
 import { useDepartmentStore } from "@/shared/model"
 import { useState } from "react"
-import useSWR from "swr"
+import useSWR, { mutate } from "swr"
+
+interface IExecutorResponse {
+	id: number
+	name: string
+	departmentId: number
+	members: string[]
+	isBrigade: boolean
+	operationsIds: number[]
+}
 
 export const useByDepartment = () => {
 	const [value, setValue] = useState<number | null>()
@@ -16,22 +20,29 @@ export const useByDepartment = () => {
 	const departments = useDepartmentStore((state) => state.departments)
 	const setExecutors = useExecutorsStore((state) => state.setExecutors)
 
-	const { data: executorsResponce, mutate } = useSWR(
-		[["executors", "divisionId"], []],
-		() => {
-			if (value) {
-				return executorsAPI.getExecutorsByDepartmentId(value)
-			}
-			return []
-		},
-	)
+	// const { data: executorsResponce, mutate } = useSWR(
+	// 	[
+	// 		["executors", "departmentId"],
+	// 		["all", value],
+	// 	].toString(),
+	// 	() => {
+	// 		if (value) {
+	// 			return executorsAPI.getExecutorsByDepartmentId(value)
+	// 		}
+	// 		return [] as IExecutorResponse[]
+	// 	},
+	// )
 
 	const handleSelect = async (departmentId: number) => {
 		// console.log(departmentId, 'departmentId')
 		setValue(departmentId)
 
 		const executors =
-			(await mutate(
+			(await mutate<IExecutorResponse[]>(
+				[
+					["executors", "departmentId"],
+					["all", value],
+				].toString(),
 				() => executorsAPI.getExecutorsByDepartmentId(departmentId),
 				{ revalidate: false },
 			).then((executorsResponse) =>
