@@ -1,3 +1,4 @@
+import { useIntl } from "react-intl"
 import { useState } from "react"
 import { IExecutor } from "../lib"
 import { useSelectedExecutorsStore } from "./useSelectedExecutorsStore"
@@ -11,7 +12,9 @@ import { useOperationTypeStore } from "@/entities/OperationType/model"
 import { useEquipmentStore } from "@/entities/Equipment"
 import { APIError, mapAPIError } from "@/shared/api/apiError"
 import { useProductStore } from "@/entities/Product"
+
 export const useExecutorCard = () => {
+	const intl = useIntl()
 	const [isSelected, setIsSelected] = useState<boolean>(false)
 	const { cache } = useSWRConfig() // получаем доступ к кэшу
 
@@ -100,9 +103,9 @@ export const useExecutorCard = () => {
 			if (error instanceof APIError) {
 				showToast({
 					type: "warning",
-					title: "Операций нет",
+					title: intl.formatMessage({ id: "warning" }),
 					duration: 2000,
-					text: error.message,
+					text: intl.formatMessage({ id: "noOperations" }),
 				})
 			}
 		}

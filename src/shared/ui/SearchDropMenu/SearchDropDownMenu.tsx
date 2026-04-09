@@ -8,6 +8,7 @@ import {
 	ChangeEvent,
 	KeyboardEvent,
 } from "react"
+import { useIntl } from "react-intl"
 
 export interface DropdownOption<T> {
 	value: T
@@ -27,10 +28,14 @@ export const SearchDropDownMenu = <T,>({
 	options,
 	value,
 	onSelect,
-	placeholder = "Выберите...",
+	placeholder,
 	disabled = false,
 	className = "",
 }: SearchableDropdownProps<T>) => {
+	const intl = useIntl()
+	const defaultPlaceholder = intl.formatMessage({ id: "selectPlaceholder" })
+	const finalPlaceholder = placeholder || defaultPlaceholder
+
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 	const [userInput, setUserInput] = useState<string>("")
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -135,7 +140,7 @@ export const SearchDropDownMenu = <T,>({
 				onChange={handleInputChange}
 				onClick={handleInputClick}
 				onKeyDown={handleKeyDown}
-				placeholder={placeholder}
+				placeholder={finalPlaceholder}
 				disabled={disabled}
 				className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-foreground 
                          focus:outline-none 

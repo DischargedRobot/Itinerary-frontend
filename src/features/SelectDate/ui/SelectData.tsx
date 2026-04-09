@@ -1,5 +1,6 @@
 "use client"
 
+import { useIntl } from "react-intl"
 import { Calendar, CalendarProps } from "antd"
 import { useEffect, useRef, useState } from "react"
 import type { Dayjs } from "dayjs"
@@ -14,6 +15,7 @@ dayjs.extend(localizedFormat)
 dayjs.locale("ru")
 
 export const SelectDate = ({ onSelect, defaultDate }: Props) => {
+	const intl = useIntl()
 	const [isVisible, setIsVisible] = useState<boolean>(false)
 
 	const calendarRef = useRef<HTMLDivElement>(null)
@@ -38,7 +40,10 @@ export const SelectDate = ({ onSelect, defaultDate }: Props) => {
 
 	// Обработчик изменения даты
 	const onDateChange: CalendarProps<Dayjs>["onChange"] = (date) => {
-		console.log("Выбрана дата:", date.format("YYYY-MM-DD"))
+		console.log(
+			intl.formatMessage({ id: "selectDate" }),
+			date.format("YYYY-MM-DD"),
+		)
 		setSelectedDate(date)
 	}
 

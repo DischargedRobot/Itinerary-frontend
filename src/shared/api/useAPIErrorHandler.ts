@@ -22,7 +22,7 @@ export const useAPIErrorHandler = ({ customHandlers = [] }: Props = {}) => {
 		(error: APIError | Error) => {
 			const apiError: APIError = isAPIError(error)
 				? error
-				: mapAPIError(5443)
+				: mapAPIError(0)
 
 			// Сначала проверяем кастомные обработчики
 			const customHandler = customHandlers.find(

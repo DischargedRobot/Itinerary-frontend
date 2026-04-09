@@ -4,7 +4,7 @@ import { LOCALES } from "../../../locales/lolales"
 import { messages } from "../../../locales/messages"
 
 export async function generateStaticParams() {
-	Object.values(LOCALES).map((locale) => ({
+	return Object.values(LOCALES).map((locale) => ({
 		lang: locale,
 	}))
 }

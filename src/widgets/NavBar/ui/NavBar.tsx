@@ -2,39 +2,49 @@
 
 import "./NavBar.scss"
 
+import { useIntl } from "react-intl"
 import Avatar from "@/shared/ui/Avatar/Avatar"
 import { Menu, MenuProps } from "antd"
 import Link from "next/link"
 import { useNavBar } from "../model"
 import { UserLogOut } from "@/features/UserProfileAction"
 
-const MENU_ITEMS: MenuProps["items"] = [
-	{
-		key: "/personal/itineraries",
-		label: <Link href="/personal/itineraries">{"Маршуртные листы"}</Link>,
-	},
-	{
-		key: "/personal/tasklists",
-		label: <Link href="/personal/tasklists">{"Наряды заданий"}</Link>,
-	},
-	{
-		key: "/personal/profile",
-		label: (
-			<Link href="/personal/profile">
-				<Avatar size={32} />
-			</Link>
-		),
-		className: "no-hover",
-	},
-	{
-		key: "logout",
-		label: <UserLogOut />,
-		className: "no-hover",
-	},
-]
-
 export const NavBar = () => {
-	const { selectedKeys } = useNavBar()
+	const { selectedKeys, lang } = useNavBar()
+	const intl = useIntl()
+
+	const MENU_ITEMS: MenuProps["items"] = [
+		{
+			key: `/${lang}/personal/itineraries`,
+			label: (
+				<Link href={`/${lang}/personal/itineraries`}>
+					{intl.formatMessage({ id: "itineraries" })}
+				</Link>
+			),
+		},
+		{
+			key: `/${lang}/personal/tasklists`,
+			label: (
+				<Link href={`/${lang}/personal/tasklists`}>
+					{intl.formatMessage({ id: "tasklists" })}
+				</Link>
+			),
+		},
+		{
+			key: `/${lang}/personal/profile`,
+			label: (
+				<Link href={`/${lang}/personal/profile`}>
+					<Avatar size={32} />
+				</Link>
+			),
+			className: "no-hover",
+		},
+		{
+			key: "logout",
+			label: <UserLogOut />,
+			className: "no-hover",
+		},
+	]
 
 	return (
 		<nav className="w-full border-b border-b-gray-300 shadow-sm">

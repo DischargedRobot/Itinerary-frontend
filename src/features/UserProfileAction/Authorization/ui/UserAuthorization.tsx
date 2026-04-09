@@ -1,8 +1,10 @@
 "use client"
 
+import { useIntl } from "react-intl"
 import { Button } from "antd"
 import { UserAuthData } from "@/entities/User"
 import { useUserAuthorizationForm } from "../model"
+import { FormattedMessageWithValues } from "@/shared/lang"
 
 export const UserAuthorization = () => {
 	const {
@@ -15,6 +17,7 @@ export const UserAuthorization = () => {
 		formErrors,
 		setFormErrors,
 	} = useUserAuthorizationForm()
+	const intl = useIntl()
 
 	const handleClearErrors = () => {
 		setFormErrors(null)
@@ -47,7 +50,7 @@ export const UserAuthorization = () => {
 					htmlType="submit"
 					disabled={!isDirty}
 				>
-					Войти
+					<FormattedMessageWithValues id="login" />
 				</Button>
 				<Button
 					className="max-w-50 w-full"
@@ -59,7 +62,7 @@ export const UserAuthorization = () => {
 					}
 					disabled={!isDirty}
 				>
-					Очистить
+					<FormattedMessageWithValues id="clear" />
 				</Button>
 			</div>
 		</form>

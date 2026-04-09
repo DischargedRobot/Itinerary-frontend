@@ -1,7 +1,8 @@
+import { useIntl } from "react-intl"
 import { userAPI, IUser } from "@/entities/User"
 import { useUserStore } from "@/entities/User"
 import { useForm } from "react-hook-form"
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 import { isAPIError, useAPIErrorHandler } from "@/shared/api"
 import { useState } from "react"
 import { TErrorForm } from "@/shared/lib"
@@ -11,6 +12,9 @@ interface FormErrors {
 }
 
 export const useUserAuthorizationForm = () => {
+	const intl = useIntl()
+	const params = useParams()
+	const lang = params.lang as string
 	const setCurrentUser = useUserStore((state) => state.setCurrentUser)
 	const [formErrors, setFormErrors] = useState<TErrorForm<FormErrors> | null>(
 		null,
@@ -25,7 +29,7 @@ export const useUserAuthorizationForm = () => {
 
 	const apiErrorCatcher = useAPIErrorHandler()
 
-	const routter = useRouter()
+	const router = useRouter()
 
 	const handleLogin = async (data: IUser) => {
 		let isAuthenticated = false
@@ -40,14 +44,14 @@ export const useUserAuthorizationForm = () => {
 		} catch (error) {
 			if (isAPIError(error) && error.status === 404) {
 				setFormErrors({
-					common: "Пользователь с таким логином и паролем не найден",
+					common: intl.formatMessage({ id: "invalidCredentials" }),
 				})
 			} else {
 				apiErrorCatcher(error as Error)
 			}
 		}
 		if (isAuthenticated) {
-			routter.push("/personal/profile")
+			router.push(`/${lang}/personal/profile`)
 		}
 	}
 

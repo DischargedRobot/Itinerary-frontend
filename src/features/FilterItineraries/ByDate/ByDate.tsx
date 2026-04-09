@@ -1,3 +1,4 @@
+import { useIntl } from "react-intl"
 import { useItineraryFiltersStore } from "@/entities/Itinerary/model/useItineraryFiltersStore"
 import { SelectDate } from "@/features/SelectDate"
 
@@ -8,10 +9,11 @@ const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0)
 export const ByDate = () => {
 	const setDate = useItineraryFiltersStore((state) => state.setDate)
 	const date = useItineraryFiltersStore((state) => state.date)
+	const intl = useIntl()
 
 	return (
 		<div className="flex items-center gap-1.5 title">
-			Дата
+			{intl.formatMessage({ id: "date" })}
 			<SelectDate
 				onSelect={(fromDate) => setDate({ ...date, fromDate })}
 				defaultDate={startOfMonth}

@@ -1,5 +1,6 @@
 "use client"
 
+import { useIntl } from "react-intl"
 import { PersonalInput } from "@/shared"
 import { IUser } from "../lib"
 import { UseFormRegister, FieldErrors } from "react-hook-form"
@@ -15,16 +16,18 @@ interface Props {
 }
 
 export const UserAuthData = ({ register, errors, user, onChanges }: Props) => {
+	const intl = useIntl()
+
 	return (
 		<>
 			<PersonalInput
 				type="login"
 				name="login"
-				placeholder="Логин"
+				placeholder={intl.formatMessage({ id: "loginPlaceholder" })}
 				rules={{
 					required: {
 						value: true,
-						message: "Это поле обязательно для заполнения",
+						message: intl.formatMessage({ id: "fieldRequired" }),
 					},
 				}}
 				register={register}
@@ -35,15 +38,17 @@ export const UserAuthData = ({ register, errors, user, onChanges }: Props) => {
 			<PersonalInput
 				type="password"
 				name="password"
-				placeholder="Пароль"
+				placeholder={intl.formatMessage({ id: "passwordPlaceholder" })}
 				rules={{
 					required: {
 						value: true,
-						message: "Это поле обязательно для заполнения",
+						message: intl.formatMessage({ id: "fieldRequired" }),
 					},
 					minLength: {
 						value: 6,
-						message: "Пароль должен состоять минимум из 6 символов",
+						message: intl.formatMessage({
+							id: "passwordMinLength",
+						}),
 					},
 				}}
 				register={register}

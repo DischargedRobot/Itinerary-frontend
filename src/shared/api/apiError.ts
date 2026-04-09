@@ -1,3 +1,5 @@
+import { IntlShape } from "react-intl"
+
 interface IResponseError {
 	status: number | null
 	errorType: string
@@ -32,24 +34,62 @@ export function isAPIError(error: unknown): error is APIError {
 	)
 }
 
-const APIErrors = {
-	NETWORK: new APIError(null, "NETWORK", "Проблемы с соединением"),
-	BAD_REQUEST: new APIError(400, "BAD_REQUEST", "Некорретные данные запроса"),
+const fallbackMessages: Record<string, string> = {
+	networkError: "Проблемы с соединением",
+	badRequestError: "Некорретные данные запроса",
+	unauthorizedError: "Для доступа требуется авторизация",
+	forbiddenError: "У Вас нету доступа к этому ресурсу",
+	notFoundError: "Ресурс не найден :(",
+	serverError: "Ошибка сервера",
+	unknownError: "Неизвестная ошибка",
+}
+
+const getLocalizedMessage = (messageId: string, intl?: IntlShape): string => {
+	if (intl) {
+		return intl.formatMessage({ id: messageId })
+	}
+	return fallbackMessages[messageId] || "Неизвестная ошибка"
+}
+
+const createAPIErrors = (intl?: IntlShape) => ({
+	NETWORK: new APIError(
+		null,
+		"NETWORK",
+		getLocalizedMessage("networkError", intl),
+	),
+	BAD_REQUEST: new APIError(
+		400,
+		"BAD_REQUEST",
+		getLocalizedMessage("badRequestError", intl),
+	),
 	UNAUTHORIZED: new APIError(
 		401,
 		"UNAUTHORIZED",
-		"Для доступа требуется авторизация",
+		getLocalizedMessage("unauthorizedError", intl),
 	),
 	FORBIDEN: new APIError(
 		403,
 		"FORBIDDEN",
-		"У Вас нету доступа к этому ресурсу",
+		getLocalizedMessage("forbiddenError", intl),
 	),
-	NOT_FOUND: new APIError(404, "NOT_FOUND", "Ресурс не найден :("),
-	SERVER: new APIError(500, "SERVER_ERROR", "Ошибка сервера"),
-}
+	NOT_FOUND: new APIError(
+		404,
+		"NOT_FOUND",
+		getLocalizedMessage("notFoundError", intl),
+	),
+	SERVER: new APIError(
+		500,
+		"SERVER_ERROR",
+		getLocalizedMessage("serverError", intl),
+	),
+})
 
-export const mapAPIError = (status: IResponseError["status"]) => {
+export const mapAPIError = (
+	status: IResponseError["status"],
+	intl?: IntlShape,
+) => {
+	const APIErrors = createAPIErrors()
+
 	switch (status) {
 		case null:
 			return APIErrors.NETWORK
@@ -64,6 +104,10 @@ export const mapAPIError = (status: IResponseError["status"]) => {
 		case 500:
 			return APIErrors.SERVER
 		default:
-			return new APIError(status, "UNKNOW", "Неизвестная ошибка")
+			return new APIError(
+				status,
+				"UNKNOWN",
+				getLocalizedMessage("unknownError", intl),
+			)
 	}
 }

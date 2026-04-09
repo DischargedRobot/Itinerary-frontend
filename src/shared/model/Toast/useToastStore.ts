@@ -27,12 +27,7 @@ interface IToastStore {
 	) => void
 }
 
-const defaultTitle = new Map<TToast, string>([
-	["warning", "Предупреждение"],
-	["success", "Успех"],
-	["error", "Ошибка"],
-])
-
+// Titles will be set dynamically through context
 export const useToastStore = create<IToastStore>((set) => {
 	let toastId = 0
 	return {
@@ -44,8 +39,7 @@ export const useToastStore = create<IToastStore>((set) => {
 					...state.toasts,
 					{
 						...newToast,
-						title:
-							newToast.title ?? defaultTitle.get(newToast.type),
+						title: newToast.title,
 						duration: newToast.duration ?? 3000,
 						id: ++toastId,
 					},

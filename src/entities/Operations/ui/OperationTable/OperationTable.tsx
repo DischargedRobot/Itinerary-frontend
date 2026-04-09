@@ -5,20 +5,20 @@ import "./OperationTable.scss"
 import { Table, TableProps } from "antd"
 import { useOperationTable } from "../../model/useOperationTable"
 import { IOperation } from "../../lib"
-import { IItinerary } from "@/entities/Itinerary"
 import { DownOutlined } from "@ant-design/icons"
 import { IProduct } from "@/entities/Product"
+import { FormattedMessageWithValues } from "@/shared/lang/FormattedMessageWithValues"
 
 const createColumn = (): TableProps<IOperation>["columns"] => [
 	{
 		key: "typeOperation",
-		title: "Операция",
+		title: <FormattedMessageWithValues id="operation" />,
 		dataIndex: "name",
 		ellipsis: true,
 	},
 	{
 		key: "product",
-		title: "Изделие",
+		title: <FormattedMessageWithValues id="product" />,
 		dataIndex: "product",
 		render: (product: IProduct) => {
 			return `${product.name}`
@@ -27,40 +27,46 @@ const createColumn = (): TableProps<IOperation>["columns"] => [
 	},
 	{
 		key: "numberPositions",
-		title: "N",
+		title: <FormattedMessageWithValues id="number" />,
 		dataIndex: "numberPositions",
 	},
 	{
 		key: "dateExecution",
-		title: "Дата исполнения",
+		title: <FormattedMessageWithValues id="dateExecution" />,
 		dataIndex: "dateExecution",
 	},
 	{
 		key: "normTime",
-		title: "Норма времени",
+		title: <FormattedMessageWithValues id="normTime" />,
 		dataIndex: "normTime",
 	},
 	{
 		key: "pymentCoefficient",
-		title: "К",
+		title: <FormattedMessageWithValues id="paymentCoefficient2" />,
 		dataIndex: "pymentCoefficient",
 	},
 	{
 		key: "x2",
-		title: "x2",
+		title: <FormattedMessageWithValues id="x2" />,
 		render: () => {
 			return <input type="checkbox" />
 		},
 	},
 	{
 		key: "award",
-		title: "% Премия",
+		title: <FormattedMessageWithValues id="awardPercent" />,
 		dataIndex: "award",
 	},
 ]
 
 export const OperationTable = () => {
-	const { operations, setIsVisible, isVisible, handleRowUnSelect, handleRowSelect } = useOperationTable()
+	const {
+		operations,
+		setIsVisible,
+		isVisible,
+		handleRowUnSelect,
+		handleRowSelect,
+	} = useOperationTable()
 
 	return (
 		<Table
@@ -79,7 +85,9 @@ export const OperationTable = () => {
 					onClick={() => setIsVisible((prev) => !prev)}
 					className="operation-table__title w-full flex justify-between"
 				>
-					<span>Операции</span>
+					<span>
+						<FormattedMessageWithValues id="operation" />
+					</span>
 					<DownOutlined
 						className={`${isVisible ? "" : "arrow_collapsed"}`}
 					/>

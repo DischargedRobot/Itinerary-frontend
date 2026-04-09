@@ -2,11 +2,12 @@ import type { ColumnsType } from "antd/es/table"
 import { Tag } from "antd"
 import { IProduct } from "@/entities/Product"
 import { IItineraryWithFullOpearions } from "../lib"
+import { FormattedMessageWithValues } from "@/shared/lang/FormattedMessageWithValues"
 
 export const useCreateItineraryColumns = () => {
 	const columns: ColumnsType<IItineraryWithFullOpearions> = [
 		{
-			title: "Дата",
+			title: <FormattedMessageWithValues id="date" />,
 			dataIndex: "date",
 			key: "date",
 			width: 120,
@@ -17,7 +18,7 @@ export const useCreateItineraryColumns = () => {
 			render: (date: Date) => date.toLocaleDateString(),
 		},
 		{
-			title: "Код ДСЕ",
+			title: <FormattedMessageWithValues id="productCode" />,
 			dataIndex: "product",
 			key: "productCode",
 			width: 180,
@@ -30,7 +31,7 @@ export const useCreateItineraryColumns = () => {
 			},
 		},
 		{
-			title: "Наименование ДСЕ",
+			title: <FormattedMessageWithValues id="productName" />,
 			dataIndex: "product",
 			key: "productName",
 			width: 200,
@@ -40,7 +41,7 @@ export const useCreateItineraryColumns = () => {
 			},
 		},
 		{
-			title: "N",
+			title: <FormattedMessageWithValues id="number" />,
 			dataIndex: "numberPositions",
 			key: "numberPositions",
 			width: 100,
@@ -50,7 +51,7 @@ export const useCreateItineraryColumns = () => {
 			render: (value: number) => value,
 		},
 		{
-			title: "Комплект",
+			title: <FormattedMessageWithValues id="kit" />,
 			key: "kit",
 			width: 100,
 			align: "right",
@@ -61,7 +62,7 @@ export const useCreateItineraryColumns = () => {
 			),
 		},
 		{
-			title: "Маршрут",
+			title: <FormattedMessageWithValues id="route" />,
 			dataIndex: "route",
 			key: "route",
 			width: 150,

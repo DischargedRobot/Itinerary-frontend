@@ -1,5 +1,6 @@
 "use client"
 
+import { useIntl } from "react-intl"
 import { useOperationFiltersStore } from "@/entities/Operations"
 import { SelectDate } from "@/features/SelectDate/ui/SelectData"
 
@@ -14,10 +15,11 @@ export const FilterOperationByDate = () => {
 	const setToDateExecution = useOperationFiltersStore(
 		(state) => state.setToDate,
 	)
+	const intl = useIntl()
 
 	return (
 		<div className="flex items-center gap-1.5 title ">
-			Дата
+			{intl.formatMessage({ id: "date" })}
 			<SelectDate
 				defaultDate={startOfMonth}
 				onSelect={(fromDate) => setFromDateExecution(fromDate)}

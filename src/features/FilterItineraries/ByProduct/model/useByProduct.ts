@@ -1,3 +1,4 @@
+import { useIntl } from "react-intl"
 import { itineraryAPI } from "@/entities/Itinerary/api"
 import { useItineraryStore } from "@/entities/Itinerary/model"
 import { useItineraryFiltersStore } from "@/entities/Itinerary/model/useItineraryFiltersStore"
@@ -9,6 +10,7 @@ import { APIError, mapAPIError } from "@/shared/api/apiError"
 import { useSWRConfig } from "swr"
 
 export const useByProduct = () => {
+	const intl = useIntl()
 	const { cache } = useSWRConfig()
 	const products = useProductStore((state) => state.products)
 	const setPlanPositions = usePlanPositionStore(
@@ -98,16 +100,20 @@ export const useByProduct = () => {
 				if (error.status !== 404) {
 					showToast({
 						type: "warning",
-						title: "Что-то пошло не так в процессе запроса к серверу",
-						text: error.message,
+						title: intl.formatMessage({ id: "warning" }),
+						text: intl.formatMessage({ id: "serverRequestError" }),
 						duration: 2000,
 					})
 				}
 			} else {
-				console.log("Неизвестная ошибка", error)
+				console.log(
+					intl.formatMessage({ id: "unknownErrorOccurred" }),
+					error,
+				)
 				showToast({
 					type: "error",
-					text: "Неизвестна ошибка",
+					title: intl.formatMessage({ id: "error" }),
+					text: intl.formatMessage({ id: "unknownErrorOccurred" }),
 					duration: 2000,
 				})
 			}

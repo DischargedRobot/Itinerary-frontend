@@ -1,5 +1,6 @@
 "use client"
 
+import { useIntl } from "react-intl"
 import { FilterExecutors } from "@/features/FilterExecutors"
 import { FilterOperationByDate } from "@/features/FilterOperationByDate"
 import { IDepartment } from "@/shared/lib"
@@ -9,6 +10,7 @@ import { FilterOperationByIsFormed } from "@/features/FilterOperationByIsFormed"
 export const TopItineraryFilters = () => {
 	const { handleSelect, departments, selectedValue } =
 		useTopItineraryFilters()
+	const intl = useIntl()
 
 	return (
 		<div className="flex gap-3 ">
@@ -17,7 +19,9 @@ export const TopItineraryFilters = () => {
 				options={departments}
 				value={selectedValue}
 				onChange={handleSelect}
-				placeholder="Цех"
+				placeholder={intl.formatMessage({
+					id: "department_placeholder",
+				})}
 			/>
 			<FilterOperationByIsFormed />
 		</div>
