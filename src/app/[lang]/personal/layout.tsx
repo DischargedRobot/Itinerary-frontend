@@ -9,6 +9,7 @@ interface Props {
 
 const PersonalLayout = (props: Props) => {
 	const { children } = props
+	console.log("PersonalLayout")
 
 	return (
 		<Layout className="flex w-full gap-5 relative">

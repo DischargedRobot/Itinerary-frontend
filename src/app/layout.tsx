@@ -70,6 +70,7 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode
 }>) {
+	console.log("RootLayout")
 	return (
 		<html className={`h-full antialiased`}>
 			<ConfigProvider theme={token} locale={ruRU}>
