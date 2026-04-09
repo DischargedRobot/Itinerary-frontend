@@ -3,3 +3,4 @@ export { type ITypeOperation } from "../../../entities/OperationType/lib/Opertio
 export { type IDepartment } from "./IDepartment"
 export { type IEquipment } from "./IEquipment"
 export { type MakeOptional } from "./MakeOptional"
+export { type TErrorForm } from "./TErrorForm"

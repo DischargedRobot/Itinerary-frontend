@@ -1,11 +1,20 @@
-import { IUser, userAPI } from "@/entities/User"
+import { userAPI, IUser } from "@/entities/User"
 import { useUserStore } from "@/entities/User"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
-import { useAPIErrorHandler } from "@/shared/api"
+import { isAPIError, useAPIErrorHandler } from "@/shared/api"
+import { useState } from "react"
+import { TErrorForm } from "@/shared/lib"
+
+interface FormErrors {
+	common: string
+}
 
 export const useUserAuthorizationForm = () => {
 	const setCurrentUser = useUserStore((state) => state.setCurrentUser)
+	const [formErrors, setFormErrors] = useState<TErrorForm<FormErrors> | null>(
+		null,
+	)
 
 	const {
 		handleSubmit,
@@ -20,6 +29,7 @@ export const useUserAuthorizationForm = () => {
 
 	const handleLogin = async (data: IUser) => {
 		let isAuthenticated = false
+		setFormErrors(null)
 		try {
 			const user = await userAPI.login({
 				login: data.login,
@@ -28,8 +38,13 @@ export const useUserAuthorizationForm = () => {
 			setCurrentUser(user)
 			isAuthenticated = true
 		} catch (error) {
-			console.log("тут")
-			apiErrorCatcher(error as Error)
+			if (isAPIError(error) && error.status === 404) {
+				setFormErrors({
+					common: "Пользователь с таким логином и паролем не найден",
+				})
+			} else {
+				apiErrorCatcher(error as Error)
+			}
 		}
 		if (isAuthenticated) {
 			routter.push("/personal/profile")
@@ -43,5 +58,7 @@ export const useUserAuthorizationForm = () => {
 		isDirty,
 		reset,
 		handleLogin,
+		formErrors,
+		setFormErrors,
 	}
 }

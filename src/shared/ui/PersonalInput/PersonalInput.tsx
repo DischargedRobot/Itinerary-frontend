@@ -14,6 +14,7 @@ interface Props<T extends FieldValues> {
 	placeholder?: string
 	type?: HTMLInputElement["type"]
 	defaultValue?: string
+	onChange?: () => void
 }
 
 export const PersonalInput = <T extends FieldValues>(props: Props<T>) => {
@@ -24,17 +25,22 @@ export const PersonalInput = <T extends FieldValues>(props: Props<T>) => {
 		placeholder,
 		name,
 		type = "text",
-		defaultValue
+		defaultValue,
+		onChange,
 	} = props
 
 	return (
-		<label className="p-2 rounded-xl bg-foreground border-2 border-stroke hover:border-hover has-focus:border-active focus:border-active active:border-active">
+		<label className="text-red-400">
 			<input
 				defaultValue={defaultValue ?? ""}
-				className="bg-transparent w-full"
+				className=" w-full p-2 rounded-xl text-text bg-foreground border-2 border-stroke hover:border-hover has-focus:border-active focus:border-active active:border-active"
 				type={type}
 				placeholder={placeholder ?? name}
 				{...register(name, rules)}
+				onChange={(e) => {
+					onChange?.()
+					register(name, rules).onChange?.(e)
+				}}
 			/>
 			{error?.message}
 		</label>

@@ -9,7 +9,7 @@ export const useLogOut = () => {
 	const logout = async () => {
 		setIsLoading(true)
 		try {
-			window.location.href = "/auth"
+			window.location.pathname = "/auth"
 			await userAPI.logout()
 		} catch (error) {
 			apiErrorCatcher(error as Error)

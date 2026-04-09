@@ -39,7 +39,7 @@ export const APIJSONRequest = async <T>(
 		}
 		if (error instanceof APIError && error.status === 401) {
 			console.log("Unauthorized, redirecting to /auth")
-			window.location.href = "/auth"
+			window.location.pathname = "/auth"
 		}
 		throw error as APIError
 	}
