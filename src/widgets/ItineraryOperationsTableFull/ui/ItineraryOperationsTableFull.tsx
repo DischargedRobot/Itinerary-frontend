@@ -17,6 +17,7 @@ export const ItineraryOperationsTableFull = ({ operations }: Props) => {
 			operations={operations}
 			renderEquipment={(operation) => (
 				<SelectEquipment
+					operationTypeId={operation.type.id}
 					defaultValue={operation.equipment}
 					onChange={(equipment) =>
 						handleEquipmentChange(operation, equipment.id)
@@ -25,6 +26,7 @@ export const ItineraryOperationsTableFull = ({ operations }: Props) => {
 			)}
 			renderExecutor={(operation) => (
 				<SelectExecutorInTable
+					filters={{ departmentId: operation.department.id }}
 					defaultValue={operation.executor}
 					onChange={(executor) =>
 						handleExecutorChange(operation, executor.id)

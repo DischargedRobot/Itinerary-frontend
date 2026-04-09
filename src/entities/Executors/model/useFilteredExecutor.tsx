@@ -59,7 +59,7 @@ const FilterFunction: TFilteredFunction = {
 	departmentId: filterByDepartmentId,
 }
 
-const filterExecutors = <T extends TFilterKey>(
+export const filterExecutors = <T extends TFilterKey>(
 	filterKeys: T[],
 	executors: IExecutor[],
 	filterArgs: ExecutorFilters,

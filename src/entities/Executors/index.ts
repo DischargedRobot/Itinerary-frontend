@@ -2,7 +2,11 @@ export { executorsAPI } from "./api"
 
 export { type IExecutor } from "./lib"
 
-export { useExecutorFiltersStore } from "./model"
+export {
+	useExecutorFiltersStore,
+	filterExecutors,
+	type ExecutorFilters,
+} from "./model"
 export { useExecutorsStore } from "./model"
 
 export { ExecutorList } from "./ui"

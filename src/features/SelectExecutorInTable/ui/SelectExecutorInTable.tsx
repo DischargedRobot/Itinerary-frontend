@@ -1,16 +1,18 @@
 import { Select } from "antd"
 import { useSelectExecutorInTable } from "../model"
 import { IExecutor } from "@/entities/Executors"
+import { ExecutorFilters } from "@/entities/Executors/model/useFilteredExecutor"
 
 interface Props {
 	defaultValue?: IExecutor
 	onChange?: (executor: IExecutor) => void
+	filters?: Partial<ExecutorFilters>
 }
 
 export const SelectExecutorInTable = (props: Props) => {
-	const { defaultValue, onChange } = props
+	const { defaultValue, onChange, filters } = props
 
-	const { executors } = useSelectExecutorInTable()
+	const { executors } = useSelectExecutorInTable(filters)
 
 	return (
 		<Select
