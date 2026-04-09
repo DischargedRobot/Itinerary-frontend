@@ -1,7 +1,15 @@
 "use client"
 
-import { OperationTable } from "@/entities/Operations/ui/OperationTable"
+import { memo } from "react"
+import OperationTable from "@/entities/Operations/ui/OperationTable"
+import { IOperation } from "@/entities/Operations/lib/OperationTypes"
 
-export const FullOperationsTable = () => {
-	return <OperationTable />
+interface FullOperationsTableProps {
+	operations: IOperation[]
 }
+
+const FullOperationsTable = ({ operations }: FullOperationsTableProps) => {
+	return <OperationTable operations={operations} />
+}
+
+export default memo(FullOperationsTable)

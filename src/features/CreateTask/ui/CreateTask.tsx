@@ -1,9 +1,10 @@
+import { memo } from "react"
 import { Button } from "antd"
 import { useIntl } from "react-intl"
 import { useCreateTask } from "../model"
 import { FormattedMessageWithValues } from "@/shared/lang"
 
-export const CreateTask = () => {
+const CreateTask = () => {
 	const { handleClick } = useCreateTask()
 	const intl = useIntl()
 
@@ -18,3 +19,5 @@ export const CreateTask = () => {
 		</Button>
 	)
 }
+
+export default memo(CreateTask)

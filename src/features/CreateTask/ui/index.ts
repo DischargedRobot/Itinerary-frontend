@@ -1,1 +1,1 @@
-export { CreateTask } from "./CreateTask"
+export { default } from "./CreateTask"

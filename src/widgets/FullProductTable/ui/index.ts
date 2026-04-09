@@ -1,1 +1,1 @@
-export { FullProductTable } from "./FullProductTable"
+export { default } from "./FullProductTable"

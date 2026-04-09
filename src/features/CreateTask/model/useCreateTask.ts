@@ -18,6 +18,7 @@ export const useCreateTask = () => {
 
 	const apiErrorCatcher = useAPIErrorHandler()
 	const handleClick = async () => {
+		console.log("useCreateTask", selectedOperations)
 		try {
 			await operationAPI.markOperationsAsFormed(
 				selectedOperations.map((op) => op.id),

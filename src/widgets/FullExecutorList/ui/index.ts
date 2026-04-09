@@ -1,1 +1,1 @@
-export { FullExecutorList } from "./FullExecutorList"
+export { default } from "./FullExecutorList"
