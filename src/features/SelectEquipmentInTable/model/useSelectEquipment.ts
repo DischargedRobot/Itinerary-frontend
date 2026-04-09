@@ -1,7 +1,10 @@
-import { useEquipmentStore } from "@/entities/Equipment"
+import { useFilteredEquipment } from "@/entities/Equipment"
 
-export const useSelectEquipment = () => {
-	const equipments = useEquipmentStore((state) => state.equipments)
+export const useSelectEquipment = (operationTypeId: number | null = null) => {
+	const filteredEquipments = useFilteredEquipment({
+		name: "",
+		operationTypeId,
+	})
 
-	return { equipments }
+	return { equipments: filteredEquipments }
 }

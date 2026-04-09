@@ -5,13 +5,15 @@ import { IEquipment } from "@/shared/lib"
 interface Props {
 	defaultValue?: IEquipment
 	onChange?: (equipment: IEquipment) => void
+	operationTypeId?: number | null
 }
 
 export const SelectEquipment = (props: Props) => {
-	const { defaultValue, onChange } = props
+	const { defaultValue, onChange, operationTypeId = null } = props
 
-	const { equipments } = useSelectEquipment()
+	const { equipments } = useSelectEquipment(operationTypeId)
 
+	console.log(operationTypeId, equipments, "operation")
 	return (
 		<Select
 			className="w-full text text_2very-litle text_tiny border-0! hover:border-0! active:border-0! shadow-none!"
