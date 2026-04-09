@@ -13,8 +13,8 @@ export const useTopItineraryFilters = () => {
 	const departments = useMemo(
 		() =>
 			departmentsRaw.map((item) => ({
-				value: item.id,
-				label: item.name,
+				id: item.id,
+				name: item.name,
 			})),
 		[departmentsRaw],
 	)

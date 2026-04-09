@@ -1,6 +1,5 @@
 import { create } from "zustand"
 import { IProduct } from "../lib"
-import { mockProducts } from "@/shared/testData/testData"
 
 interface IProductSore {
 	products: IProduct[]

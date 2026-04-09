@@ -3,23 +3,32 @@
 import { SearchDropDownMenu } from "@/shared"
 import { useByDepartment } from "../model"
 
-export const ByDepartment = () => {
-	const { value, handleSelect, departments } = useByDepartment()
+interface ByDepartmentProps<T> {
+	options: Array<{ id: T; name: string }>
+	value: T | null
+	onChange: (value: T) => void
+	placeholder?: string
+}
 
+export const ByDepartment = <T,>({
+	options,
+	value,
+	onChange,
+	placeholder,
+}: ByDepartmentProps<T>) => {
 	return (
 		<SearchDropDownMenu
 			value={value}
-			onSelect={(value) => {
-				if (value) {
-					console.log(value, "value")
-
-					handleSelect(value)
+			onSelect={(val) => {
+				if (val) {
+					onChange(val)
 				}
 			}}
-			options={departments.map((dep) => ({
+			options={options.map((dep) => ({
 				value: dep.id,
 				label: dep.name,
 			}))}
+			placeholder={placeholder}
 		/>
 	)
 }

@@ -1,6 +1,5 @@
 import { create } from "zustand"
 import { IExecutor } from "../lib/ExecutorTypes"
-import { mockExecutors } from "@/shared/testData/testData"
 
 interface IExecutorsStore {
 	executors: IExecutor[]

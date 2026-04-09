@@ -1,5 +1,4 @@
 import { IEquipment } from "@/shared/lib"
-import { mockEquipment } from "@/shared/testData/testData"
 import { create } from "zustand"
 
 interface IEquipmentStore {
@@ -9,7 +8,7 @@ interface IEquipmentStore {
 }
 
 export const useEquipmentStore = create<IEquipmentStore>((set) => ({
-	equipments: mockEquipment,
+	equipments: [],
 
 	setEquipments: (equipments) => set({ equipments }),
 }))

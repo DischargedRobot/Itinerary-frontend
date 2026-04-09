@@ -1,5 +1,6 @@
 export { APIJSONRequest } from "./APIJSONRequest"
-export { APIError } from "./apiError"
+export { APIExcelRequesDownload } from "./APIExcelRequesDownload"
+export { APIError, mapAPIError } from "./apiError"
 export { useAPIErrorHandler } from "./useAPIErrorHandler"
 export { isAPIError } from "./apiError"
 

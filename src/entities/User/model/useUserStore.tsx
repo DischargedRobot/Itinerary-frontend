@@ -2,27 +2,27 @@ import { IUser } from "../lib"
 import { create } from "zustand"
 
 interface IUserStore {
-    currentUser: IUser
+	currentUser: IUser | undefined
 
-    setCurrentUser: (user: IUser | null) => void
-    clearUser: () => void
-    updateUser: (user: Partial<IUser>) => void
+	setCurrentUser: (user: IUser) => void
+	// clearUser: () => void
+	updateUser: (user: Partial<IUser>) => void
 }
 
 export const useUserStore = create<IUserStore>((set) => ({
-    currentUser: null,
+	currentUser: undefined,
 
-    setCurrentUser: (user) => set({ currentUser: user }),
+	setCurrentUser: (user) => set({ currentUser: user }),
 
-    clearUser: () => set({ currentUser: null }),
+	// clearUser: () => set({ currentUser: null }),
 
-    updateUser: (updatedData) =>
-        set((state) => ({
-            currentUser: state.currentUser
-                ? {
-                    ...state.currentUser,
-                    ...updatedData,
-                }
-                : null,
-        })),
+	updateUser: (updatedData) =>
+		set((state) => ({
+			currentUser: state.currentUser
+				? {
+						...state.currentUser,
+						...updatedData,
+					}
+				: undefined,
+		})),
 }))

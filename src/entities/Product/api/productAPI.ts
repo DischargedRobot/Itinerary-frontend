@@ -10,7 +10,7 @@ export const productAPI = {
 		count: number = 100,
 		page: number = 1,
 	): Promise<IProduct[]> => {
-		return await APIJSONRequest<IProduct>(
+		return await APIJSONRequest<IProduct[]>(
 			`Products?count=${count}&page=${page}`,
 		)
 

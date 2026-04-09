@@ -2,16 +2,16 @@ import { IntlShape } from "react-intl"
 
 interface IResponseError {
 	status: number | null
-	errorType: string
+	errorType?: string
 	customMessage?: string
 }
 
 export class APIError extends Error implements IResponseError {
 	constructor(
 		public status: number | null,
-		public errorType: string,
 		public message: string,
 		public customMessage?: string,
+		public errorType?: string,
 	) {
 		super(message || `Error ${errorType}`)
 		this.name = `APIError`

@@ -3,6 +3,6 @@ import { IDepartment } from "@/shared/lib"
 
 export const departmentAPI = {
 	getDepartments: async (): Promise<IDepartment[]> => {
-		return APIJSONRequest<IDepartment>("Divisions")
+		return APIJSONRequest<IDepartment[]>("Divisions")
 	},
 }

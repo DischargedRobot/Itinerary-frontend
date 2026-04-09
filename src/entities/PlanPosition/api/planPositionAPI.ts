@@ -5,7 +5,7 @@ export const planPositionAPI = {
 	getPlanPositionsByProduct: async (
 		productId: number,
 	): Promise<IPlanPosition[]> => {
-		const planPosotions = await APIJSONRequest<IPlanPosition>(
+		const planPosotions = await APIJSONRequest<IPlanPosition[]>(
 			`PlanPositions/by-product/${productId}`,
 		)
 

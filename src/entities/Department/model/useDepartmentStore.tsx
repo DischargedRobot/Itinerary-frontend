@@ -1,5 +1,4 @@
 import { IDepartment } from "@/shared/lib"
-import { mockDepartments } from "@/shared/testData/testData"
 import { create } from "zustand"
 
 interface IDepartmentStore {
