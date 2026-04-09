@@ -3,7 +3,7 @@ import {
 	useOperationStore,
 	useSelectedOperationsStore,
 } from "@/entities/Operations/model"
-import { apiErrorCatcher } from "@/shared"
+import { useAPIErrorHandler } from "@/shared/api"
 
 export const useCreateTask = () => {
 	const setSelectedOperations = useSelectedOperationsStore(
@@ -16,6 +16,7 @@ export const useCreateTask = () => {
 	// const operations = useOperationStore((state) => state.operations)
 	const setIsFormed = useOperationStore((state) => state.setIsFormed)
 
+	const apiErrorCatcher = useAPIErrorHandler()
 	const handleClick = async () => {
 		try {
 			await operationAPI.markOperationsAsFormed(

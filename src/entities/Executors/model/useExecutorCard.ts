@@ -3,11 +3,9 @@ import { IExecutor } from "../lib"
 import { useSelectedExecutorsStore } from "./useSelectedExecutorsStore"
 import { mutate, useSWRConfig } from "swr"
 
-import { IOperation, operationAPI } from "@/entities/Operations"
+import { operationAPI } from "@/entities/Operations"
 import { useExecutorsStore } from "./useExecutorsStore"
-import { enrichAddObject, IDepartment } from "@/shared/lib"
 import { showToast, useDepartmentStore } from "@/shared/model"
-import { execFile } from "child_process"
 import { useCategoriesStore } from "@/entities/Category"
 import { useOperationTypeStore } from "@/entities/OperationType/model"
 import { useEquipmentStore } from "@/entities/Equipment"
@@ -104,7 +102,7 @@ export const useExecutorCard = () => {
 					type: "warning",
 					title: "Операций нет",
 					duration: 2000,
-					message: error.message,
+					text: error.message,
 				})
 			}
 		}

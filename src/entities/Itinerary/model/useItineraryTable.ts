@@ -11,7 +11,7 @@ import { useCategoriesStore } from "@/entities/Category"
 import { useEquipmentStore } from "@/entities/Equipment"
 import { useOperationTypeStore } from "@/entities/OperationType/model"
 import { useDepartmentStore } from "@/shared/model"
-import { APIError, apiErrorCatcher } from "@/shared/api"
+import { APIError, useAPIErrorHandler } from "@/shared/api"
 
 export const useItineraryTable = () => {
 	const { cache } = useSWRConfig()
@@ -25,6 +25,8 @@ export const useItineraryTable = () => {
 	const addOperationsToItinerary = useItineraryStore(
 		(state) => state.addOperationsToIitnerary,
 	)
+
+	const apiErrorCatcher = useAPIErrorHandler()
 
 	const handleExpand = async (itinerary: IItinerary) => {
 		try {

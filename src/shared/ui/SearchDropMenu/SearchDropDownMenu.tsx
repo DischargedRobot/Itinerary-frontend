@@ -43,7 +43,7 @@ export const SearchDropDownMenu = <T,>({
 		}
 
 		if (userInput.length === 0 && value !== null) {
-			console.log(userInput, "ss", value)
+			// console.log(userInput, "ss", value)
 			return userInput
 		}
 

@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { userAPI } from "@/entities/User/api/userAPI"
-import { apiErrorCatcher } from "@/shared"
+import { useAPIErrorHandler } from "@/shared/api"
 
 export const useLogOut = () => {
+	const apiErrorCatcher = useAPIErrorHandler()
 	const [isLoading, setIsLoading] = useState(false)
 
 	const logout = async () => {

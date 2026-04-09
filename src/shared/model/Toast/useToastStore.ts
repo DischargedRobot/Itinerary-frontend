@@ -1,21 +1,30 @@
-import { MakeOptional } from "@/shared/lib"
 import { create } from "zustand"
 
-export type TToast = "error" | "warning" | `success`
+export type TToast = "error" | "warning" | "success"
 
-interface IToast {
-	duration: number
-	title: string
+export interface IToast {
 	type: TToast
-	message: string
-	key: number
+	text: string
+	title?: string
+	duration?: number
 }
 
-interface IToastStore extends IToast {
-	isVisible: boolean
+export interface IToastItem extends IToast {
+	id: number
+}
 
-	setToast: (newToast: Omit<MakeOptional<IToast, "title">, "key">) => void
-	setIsVisible: (isVisible: boolean) => void
+interface IToastStore {
+	toasts: IToastItem[]
+	activeToast: {
+		id: number
+		position: { top: number; left: number }
+		activatedAt: number
+	} | null
+	addToast: (toast: IToast) => void
+	removeToast: (id: number) => void
+	setActiveToast: (
+		toast: { id: number; position: { top: number; left: number } } | null,
+	) => void
 }
 
 const defaultTitle = new Map<TToast, string>([
@@ -24,27 +33,37 @@ const defaultTitle = new Map<TToast, string>([
 	["error", "Ошибка"],
 ])
 
-export const useToastStore = create<IToastStore>((set) => ({
-	type: "warning",
-	message: "Тут текст тоста",
-	title: defaultTitle.get("warning") ?? "",
-	duration: 3000,
-	key: 0,
-	isVisible: false,
+export const useToastStore = create<IToastStore>((set) => {
+	let toastId = 0
+	return {
+		toasts: [],
+		activeToast: null,
+		addToast: (newToast) =>
+			set((state) => ({
+				toasts: [
+					...state.toasts,
+					{
+						...newToast,
+						title:
+							newToast.title ?? defaultTitle.get(newToast.type),
+						duration: newToast.duration ?? 3000,
+						id: ++toastId,
+					},
+				],
+			})),
+		removeToast: (id) =>
+			set((state) => ({
+				toasts: state.toasts.filter((toast) => toast.id !== id),
+			})),
+		setActiveToast: (activeToast) =>
+			set({
+				activeToast: activeToast
+					? { ...activeToast, activatedAt: Date.now() }
+					: null,
+			}),
+	}
+})
 
-	setToast: (newToast) =>
-		set((state) => ({
-			...newToast,
-			title: newToast.title ?? defaultTitle.get(newToast.type),
-			key: ++state.key,
-			isVisible: true,
-		})),
-	setIsVisible: (isVisible) => set({ isVisible }),
-}))
-
-export const showToast = (
-	toast: Omit<MakeOptional<IToast, "title">, "key">,
-) => {
-	useToastStore.getState().setToast(toast)
-	console.log("show", useToastStore.getState().key)
+export const showToast = (props: IToast) => {
+	useToastStore.getState().addToast(props)
 }

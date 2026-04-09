@@ -6,15 +6,12 @@ import {
 	useEquipmentStore,
 } from "@/entities/Equipment"
 import { useExecutorsStore } from "@/entities/Executors"
-import { executorsAPI } from "@/entities/Executors"
 import { operationTypeAPI } from "@/entities/OperationType"
 import { useOperationTypeStore } from "@/entities/OperationType/model"
-import { productAPI, useProductStore } from "@/entities/Product"
-import { PromiseAllNamed } from "@/shared/api"
-import { mapAPIError } from "@/shared/api/apiError"
-import { IEquipment } from "@/shared/lib"
+import { useProductStore } from "@/entities/Product"
+import { PromiseAllNamed, useAPIErrorHandler } from "@/shared/api"
+import { error } from "console"
 import { useEffect } from "react"
-import useSWR from "swr"
 
 export const useInitial = () => {
 	const setExecutors = useExecutorsStore((state) => state.setExecutors)
@@ -26,6 +23,7 @@ export const useInitial = () => {
 		(state) => state.setOperationsTypes,
 	)
 
+	const apiErrorCatcher = useAPIErrorHandler()
 	console.log("useInitial")
 	// const { data: categories, error: categoriesError } = useSWR('/api/categories', () => categoryAPI.getCategories());
 	// const { data: equipments, error: equipmentsError } = useSWR('/api/equipments', () => equipmentAPI.getEquipments());
@@ -60,27 +58,29 @@ export const useInitial = () => {
 			operationsTypes: operationTypeAPI.getOperationsTypes(),
 			// executorsAPI.getExecutors().then(resolve => executors = resolve),
 			departments: departmentAPI.getDepartments(),
-		}).then(
-			({
-				equipments,
-				operationsTypes,
-				// products,
-				categories,
-				departments,
-			}) => {
-				setCategories(categories)
-				// setProducts(products)
-				setOperationsTypes(operationsTypes)
-				console.log(departments, "depsss")
-				setDepartments(departments)
-				const res = equipmentAPIUtilities.enrichEquipmentResponse(
+		})
+			.then(
+				({
 					equipments,
 					operationsTypes,
-				)
-				console.log(res, "res")
-				setEquipment(res)
-			},
-		)
+					// products,
+					categories,
+					departments,
+				}) => {
+					setCategories(categories)
+					// setProducts(products)
+					setOperationsTypes(operationsTypes)
+					console.log(departments, "depsss")
+					setDepartments(departments)
+					const res = equipmentAPIUtilities.enrichEquipmentResponse(
+						equipments,
+						operationsTypes,
+					)
+					console.log(res, "res")
+					setEquipment(res)
+				},
+			)
+			.catch(apiErrorCatcher)
 		// Promise.all([
 		//     categoryAPI.getCategories().then(resolve => console.log(resolve)),
 		//     equipmentAPI.getEquipments().then(equipments => console.log(equipments)),

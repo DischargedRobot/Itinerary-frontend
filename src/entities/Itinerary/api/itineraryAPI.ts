@@ -22,7 +22,7 @@ export const itineraryAPI = {
 	},
 
 	getItinerariesByPlanPositionIds: async (planPositionIds: number[]) => {
-		return APIJSONRequest<IItineraryResponse>(
+		return APIJSONRequest<IItineraryResponse[]>(
 			`Itinerary/by-plan-positions`,
 			{ method: "POST", body: JSON.stringify(planPositionIds) },
 		)

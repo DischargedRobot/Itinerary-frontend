@@ -99,7 +99,7 @@ export const useByProduct = () => {
 					showToast({
 						type: "warning",
 						title: "Что-то пошло не так в процессе запроса к серверу",
-						message: error.message,
+						text: error.message,
 						duration: 2000,
 					})
 				}
@@ -107,7 +107,7 @@ export const useByProduct = () => {
 				console.log("Неизвестная ошибка", error)
 				showToast({
 					type: "error",
-					message: "Неизвестна ошибка",
+					text: "Неизвестна ошибка",
 					duration: 2000,
 				})
 			}

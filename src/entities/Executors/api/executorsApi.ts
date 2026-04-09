@@ -1,7 +1,5 @@
 import { APIJSONRequest } from "@/shared/api"
 import { APIError } from "@/shared/api"
-import { showToast } from "@/shared/model"
-import { IExecutor } from "../lib"
 import { IDepartment } from "@/shared/lib"
 
 interface IExecutorResponse {
