@@ -1,27 +1,37 @@
 "use client"
 
+import { useEffect } from "react"
 import { SearchDropDownMenu } from "@/shared"
 import { useByDepartment } from "../model"
 
-interface ByDepartmentProps<T> {
-	options: Array<{ id: T; name: string }>
-	value: T | null
-	onChange: (value: T) => void
+interface Props {
+	options: Array<{ id: number; name: string }>
+	defaultValue?: number | null
+	onChange?: (value: number) => void
 	placeholder?: string
 }
 
-export const ByDepartment = <T,>({
+export const ByDepartment = ({
 	options,
-	value,
+	defaultValue,
 	onChange,
 	placeholder,
-}: ByDepartmentProps<T>) => {
+}: Props) => {
+	const { value, handleSelect } = useByDepartment()
+
+	useEffect(() => {
+		if (defaultValue && !value) {
+			handleSelect(defaultValue as number)
+		}
+	}, [defaultValue, value, handleSelect])
+
 	return (
-		<SearchDropDownMenu
+		<SearchDropDownMenu<number>
 			value={value}
 			onSelect={(val) => {
 				if (val) {
-					onChange(val)
+					handleSelect(val as number)
+					onChange?.(val)
 				}
 			}}
 			options={options.map((dep) => ({

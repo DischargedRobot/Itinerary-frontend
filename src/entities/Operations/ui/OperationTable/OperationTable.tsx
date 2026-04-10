@@ -1,7 +1,7 @@
 "use client"
 
 import "./OperationTable.scss"
-
+import { memo } from "react"
 import { Table, TableProps } from "antd"
 import { useOperationTable } from "../../model/useOperationTable"
 import { IOperation } from "../../lib"
@@ -59,19 +59,19 @@ const createColumn = (): TableProps<IOperation>["columns"] => [
 	},
 ]
 
-export const OperationTable = () => {
-	const {
-		operations,
-		setIsVisible,
-		isVisible,
-		handleRowUnSelect,
-		handleRowSelect,
-	} = useOperationTable()
+interface OperationTableProps {
+	operations: IOperation[]
+}
+
+const OperationTable = ({ operations }: OperationTableProps) => {
+	const { setIsVisible, isVisible, handleRowUnSelect, handleRowSelect } =
+		useOperationTable(operations)
 
 	return (
 		<Table
 			rowSelection={{
 				onSelect: (operation, selected) => {
+					console.log(operation, "opertions for select")
 					if (selected) {
 						handleRowSelect(operation)
 					} else {
@@ -102,3 +102,5 @@ export const OperationTable = () => {
 		/>
 	)
 }
+
+export default memo(OperationTable)

@@ -27,7 +27,6 @@ interface IToastStore {
 	) => void
 }
 
-// Titles will be set dynamically through context
 export const useToastStore = create<IToastStore>((set) => {
 	let toastId = 0
 	return {
@@ -39,7 +38,7 @@ export const useToastStore = create<IToastStore>((set) => {
 					...state.toasts,
 					{
 						...newToast,
-						title: newToast.title,
+						title: newToast.title ?? `${newToast.type}`,
 						duration: newToast.duration ?? 3000,
 						id: ++toastId,
 					},

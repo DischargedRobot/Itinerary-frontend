@@ -1,22 +1,15 @@
 import { useState } from "react"
-import { APIError, APIExcelRequesDownload } from "@/shared/api"
-import { useAPIErrorHandler } from "@/shared/api"
+import { APIExcelRequesDownload } from "@/shared/api"
+import { ExcelGenerationRequest } from "@/shared/api/APIExcelRequesDownload"
+import { showToast } from "@/shared"
 
-interface ExcelGenerationRequest {
-	executors: {
-		id: number
-		products: {
-			id: number
-			operations: {
-				id: number
-			}[]
-		}[]
-	}[]
-}
-
-export const useDownloadTask = () => {
+export const useDownloadTask = (): {
+	handleDownload: (
+		executors: ExcelGenerationRequest["executors"],
+	) => Promise<void>
+	isLoading: boolean
+} => {
 	const [isLoading, setIsLoading] = useState(false)
-	const handleError = useAPIErrorHandler()
 
 	const handleDownload = async (
 		executors: ExcelGenerationRequest["executors"],
@@ -24,9 +17,34 @@ export const useDownloadTask = () => {
 		setIsLoading(true)
 
 		try {
-			await APIExcelRequesDownload({ executors })
+			const blob = await APIExcelRequesDownload({ executors })
+
+			// создаём URL для blob
+			const url = window.URL.createObjectURL(blob)
+			const fileName = `Расчеты_${new Date().toISOString().slice(0, 19).replace(/:/g, "-")}.xlsx`
+
+			// создаём ссылку и автоматически кликаем
+			const link = document.createElement("a")
+			link.href = url
+			link.download = fileName
+			link.rel = "noopener noreferrer"
+			link.style.display = "none"
+
+			document.body.appendChild(link)
+			link.click()
+			document.body.removeChild(link)
+
+			// освобождаем память
+			window.URL.revokeObjectURL(url)
 		} catch (error) {
-			handleError(error as APIError)
+			console.error("Ошибка при скачивании файла:", error)
+			showToast({
+				type: "error",
+				text:
+					error instanceof Error
+						? error.message
+						: "Ошибка при скачивании файла",
+			})
 		} finally {
 			setIsLoading(false)
 		}

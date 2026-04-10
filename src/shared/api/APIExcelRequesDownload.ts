@@ -1,20 +1,25 @@
-import { mapAPIError } from "."
+import { mapAPIError, APIError } from "."
 
-interface ExcelGenerationRequest {
+export interface ExcelGenerationRequest {
 	executors: {
 		id: number
 		products: {
 			id: number
-			operations: {
+			itineraries: {
 				id: number
+				operations: {
+					id: number
+				}[]
 			}[]
 		}[]
 	}[]
 }
 
+const URL = process.env.NEXT_PUBLIC_API_URL
+
 export async function APIExcelRequesDownload(request: ExcelGenerationRequest) {
 	try {
-		const response = await fetch("/api/calculations/excel", {
+		const response = await fetch(`${URL}/Calculations/excel`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -26,26 +31,20 @@ export async function APIExcelRequesDownload(request: ExcelGenerationRequest) {
 			throw mapAPIError(response.status)
 		}
 
-		// создаём файл
-		const blob = await response.blob()
-
-		const url = window.URL.createObjectURL(blob)
-
-		const link = document.createElement("a")
-		link.href = url
-
-		const fileName = `Расчеты_${new Date().toISOString().slice(0, 19).replace(/:/g, "-")}.xlsx`
-		link.download = fileName
-
-		// качаем
-		document.body.appendChild(link)
-		link.click()
-		document.body.removeChild(link)
-
-		// освобождаем память
-		window.URL.revokeObjectURL(url)
+		return response.blob()
 	} catch (error) {
-		console.error("Ошибка при скачивании файла:", error)
-		throw error
+		console.log(error)
+		if (error instanceof TypeError && error.message === "Failed to fetch") {
+			throw mapAPIError(null)
+		}
+		// не наш
+		if (!(error instanceof APIError)) {
+			throw mapAPIError(0)
+		}
+		if (error instanceof APIError && error.status === 401) {
+			console.log("Unauthorized, redirecting to /auth")
+			window.location.pathname = "/auth"
+		}
+		throw error as APIError
 	}
 }

@@ -1,1 +1,1 @@
-export { DownloadTask } from "./ui/DownloadTask"
+export { default as DownloadTask } from "./ui"

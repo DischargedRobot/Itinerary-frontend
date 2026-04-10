@@ -1,1 +1,1 @@
-export { FullExecutorList } from "./ui"
+export { default as FullExecutorList } from "./ui"

@@ -1,9 +1,8 @@
 import { executorsAPI, useExecutorsStore } from "@/entities/Executors"
 import { mapAPIError } from "@/shared/api/apiError"
-import { enrichAddObject, IDepartment } from "@/shared/lib"
 import { useDepartmentStore } from "@/shared/model"
 import { useState } from "react"
-import useSWR, { mutate } from "swr"
+import { mutate } from "swr"
 
 interface IExecutorResponse {
 	id: number
@@ -15,7 +14,7 @@ interface IExecutorResponse {
 }
 
 export const useByDepartment = () => {
-	const [value, setValue] = useState<number | null>()
+	const [value, setValue] = useState<number | null>(null)
 
 	const departments = useDepartmentStore((state) => state.departments)
 	const setExecutors = useExecutorsStore((state) => state.setExecutors)
@@ -34,14 +33,13 @@ export const useByDepartment = () => {
 	// )
 
 	const handleSelect = async (departmentId: number) => {
-		// console.log(departmentId, 'departmentId')
 		setValue(departmentId)
 
 		const executors =
 			(await mutate<IExecutorResponse[]>(
 				[
 					["executors", "departmentId"],
-					["all", value],
+					["all", departmentId],
 				].toString(),
 				() => executorsAPI.getExecutorsByDepartmentId(departmentId),
 				{ revalidate: false },
@@ -50,35 +48,25 @@ export const useByDepartment = () => {
 					const department = departments.find(
 						(dep) => dep.id === departmentId,
 					)
-					// связываем отделы с айдишниками отделов в эксекьюторе
-					const enrichExecutor = enrichAddObject<
-						(typeof executorsResponse)[number],
-						IDepartment
-					>()(
-						{ sourceKey: "id", inputKey: "departmentId" },
-						"all",
-						departments,
-						"department",
-					)
 
-					const { operationsIds, ...data } =
-						enrichExecutor(executor).object
-					// console.log(executor, 'executor', operationsIds)
-					if (department) {
-						return {
-							...data,
-							operations:
-								operationsIds?.map((operationId) => ({
-									id: operationId,
-								})) || [],
-						}
+					if (!department) {
+						throw mapAPIError(404)
 					}
 
-					// если ошибка в данных (экзекьютор содержит отсутствующий айди отдела)
-					throw mapAPIError(404)
+					return {
+						id: executor.id,
+						name: executor.name,
+						members: executor.members,
+						isBrigade: executor.isBrigade,
+						department,
+						operations:
+							executor.operationsIds?.map((operationId) => ({
+								id: operationId,
+							})) || [],
+					}
 				}),
 			)) || []
-		// console.log(executors, 'executors')
+
 		setExecutors(executors)
 	}
 

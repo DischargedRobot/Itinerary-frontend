@@ -1,20 +1,22 @@
 "use client"
 
+import { memo } from "react"
 import { useIntl } from "react-intl"
 import { FilterExecutors } from "@/features/FilterExecutors"
 import { FilterOperationByDate } from "@/features/FilterOperationByDate"
-import { useTopItineraryFilters } from "../model/useTopItineraryFilters"
+import { IDepartment } from "@/shared/lib"
+import { useTopTaskListsFilters } from "../model/useTopTaskListsFilters"
 import { FilterOperationByIsFormed } from "@/features/FilterOperationByIsFormed"
 
-export const TopItineraryFilters = () => {
+const TopTaskListsFilters = () => {
 	const { handleSelect, departments, selectedValue } =
-		useTopItineraryFilters()
+		useTopTaskListsFilters()
 	const intl = useIntl()
 
 	return (
 		<div className="flex gap-3 ">
 			<FilterOperationByDate />
-			<FilterExecutors.ByDepartment
+			<FilterExecutors.ByDepartment<IDepartment["id"]>
 				options={departments}
 				defaultValue={selectedValue}
 				onChange={handleSelect}
@@ -26,3 +28,5 @@ export const TopItineraryFilters = () => {
 		</div>
 	)
 }
+
+export default memo(TopTaskListsFilters)

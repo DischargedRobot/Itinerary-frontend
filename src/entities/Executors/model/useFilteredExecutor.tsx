@@ -49,7 +49,7 @@ const filterByDepartmentId: TFilteredFunction["departmentId"] = (
 		return executors
 	}
 	return executors.filter(
-		(executor) => executor.department.id === departmentId,
+		(executor) => executor.department?.id === departmentId,
 	)
 }
 

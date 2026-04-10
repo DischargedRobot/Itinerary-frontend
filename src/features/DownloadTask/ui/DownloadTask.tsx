@@ -1,5 +1,6 @@
 "use client"
 
+import { memo } from "react"
 import { Button } from "antd"
 import { DownloadOutlined } from "@ant-design/icons"
 import { useIntl } from "react-intl"
@@ -10,15 +11,18 @@ interface DownloadTaskProps {
 		id: number
 		products: {
 			id: number
-			operations: {
+			itineraries: {
 				id: number
+				operations: {
+					id: number
+				}[]
 			}[]
 		}[]
 	}[]
 	disabled?: boolean
 }
 
-export const DownloadTask = ({ executors, disabled }: DownloadTaskProps) => {
+const DownloadTask = ({ executors, disabled }: DownloadTaskProps) => {
 	const { handleDownload, isLoading } = useDownloadTask()
 	const intl = useIntl()
 
@@ -33,3 +37,5 @@ export const DownloadTask = ({ executors, disabled }: DownloadTaskProps) => {
 		</Button>
 	)
 }
+
+export default memo(DownloadTask)

@@ -32,8 +32,12 @@ const createColumns = (): TableProps<IProduct>["columns"] => [
 	// }
 ]
 
-export const ProductTable = () => {
-	const { products, isVisible, setIsVisible } = useProductTable()
+interface ProductTableProps {
+	products: IProduct[]
+}
+
+export const ProductTable = ({ products }: ProductTableProps) => {
+	const { isVisible, setIsVisible } = useProductTable()
 
 	return (
 		<Table

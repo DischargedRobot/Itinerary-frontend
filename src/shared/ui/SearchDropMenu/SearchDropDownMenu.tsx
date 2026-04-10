@@ -130,7 +130,7 @@ export const SearchDropDownMenu = <T,>({
 			ref={containerRef}
 			className={`relative w-full max-w-xs border rounded-[9px] transition-colors 
 						duration-200 ease-out border-stroke stroke-stroke hover:border-hover
-						 focus:border-active hover:stroke-hover
+						 focus:border-active hover:stroke-hover bg-foreground
 						 focus:stroke-active ${className}`}
 		>
 			<input
@@ -142,7 +142,7 @@ export const SearchDropDownMenu = <T,>({
 				onKeyDown={handleKeyDown}
 				placeholder={finalPlaceholder}
 				disabled={disabled}
-				className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-foreground 
+				className="w-full h-full px-4 py-2 rounded-lg  
                          focus:outline-none 
                          disabled:bg-gray-100"
 				autoComplete="off"
