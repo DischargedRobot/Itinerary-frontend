@@ -16,7 +16,7 @@ const TopTaskListsFilters = () => {
 	return (
 		<div className="flex gap-3 ">
 			<FilterOperationByDate />
-			<FilterExecutors.ByDepartment<IDepartment["id"]>
+			<FilterExecutors.ByDepartment
 				options={departments}
 				defaultValue={selectedValue}
 				onChange={handleSelect}

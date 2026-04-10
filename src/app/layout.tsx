@@ -57,6 +57,8 @@ const token: ConfigProviderProps["theme"] = {
 		Table: {
 			// colorBgBase: COLORS.hover,
 			// headerBg: COLORS.hover,
+
+			rowSelectedBg: COLORS.foreground,
 		},
 		Calendar: {
 			colorPrimary: COLORS.active,
@@ -70,7 +72,7 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode
 }>) {
-	console.log("RootLayout")
+	// console.log("RootLayout")
 	return (
 		<html className={`h-full antialiased`}>
 			<ConfigProvider theme={token} locale={ruRU}>
