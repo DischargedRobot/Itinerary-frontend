@@ -42,10 +42,10 @@ export const useAPIErrorHandler = ({ customHandlers = [] }: Props = {}) => {
 					router.push("/auth")
 					break
 				case 404:
-					router.push("/notFound")
+					// router.push("/notFound")
 					break
 				case 409:
-					router.push("/notFound")
+					// router.push("/notFound")
 					break
 				case 500:
 					router.push("/internal")

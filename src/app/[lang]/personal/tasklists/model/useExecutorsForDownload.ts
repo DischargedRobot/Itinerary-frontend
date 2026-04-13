@@ -110,5 +110,9 @@ export const useExecutorsForDownload = () => {
 		}))
 	}, [selectedOperations])
 
-	return { executorsForDownload }
+	const hasFormedOperations = useMemo(() => {
+		return selectedOperations.some((op: IOperation) => op.isFormed)
+	}, [selectedOperations])
+
+	return { executorsForDownload, hasFormedOperations }
 }

@@ -11,20 +11,30 @@ import { CreateTask } from "@/features/CreateTask"
 import { DownloadTask } from "@/features/DownloadTask"
 import { useFilteredProduct } from "@/entities/Product/model/useFilteredProduct"
 import { useFilteredOperations } from "@/entities/Operations/model/useFilteredOperations"
+import { useOperationFiltersStore } from "@/entities/Operations/model"
 import { useExecutorsForDownload } from "./model/useExecutorsForDownload"
 
 const TaskLists = () => {
 	useInitial()
 	const { products } = useFilteredProduct()
 	const { filteredOperations } = useFilteredOperations()
-	const { executorsForDownload } = useExecutorsForDownload()
+	const { executorsForDownload, hasFormedOperations } =
+		useExecutorsForDownload()
+	const isFormedFilterActive = useOperationFiltersStore(
+		(state) => state.isFormed,
+	)
 
 	return (
 		<div className="flex flex-col gap-5 w-full">
 			<TopTaskListsFilters />
 			<div className="flex gap-3">
 				<CreateTask />
-				<DownloadTask executors={executorsForDownload} />
+				{isFormedFilterActive && (
+					<DownloadTask
+						executors={executorsForDownload}
+						hasFormedOperations={hasFormedOperations}
+					/>
+				)}
 			</div>
 			<div className="grid grid-cols-[auto_1fr] gap-3">
 				<FullExecutorList />

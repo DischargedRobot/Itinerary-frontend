@@ -20,9 +20,14 @@ interface DownloadTaskProps {
 		}[]
 	}[]
 	disabled?: boolean
+	hasFormedOperations?: boolean
 }
 
-const DownloadTask = ({ executors, disabled }: DownloadTaskProps) => {
+const DownloadTask = ({
+	executors,
+	disabled,
+	hasFormedOperations,
+}: DownloadTaskProps) => {
 	const { handleDownload, isLoading } = useDownloadTask()
 	const intl = useIntl()
 
@@ -30,10 +35,10 @@ const DownloadTask = ({ executors, disabled }: DownloadTaskProps) => {
 		<Button
 			icon={<DownloadOutlined />}
 			loading={isLoading}
-			disabled={disabled || executors.length === 0}
+			disabled={disabled || !hasFormedOperations}
 			onClick={() => handleDownload(executors)}
 		>
-			{intl.formatMessage({ id: "download_excel" })}
+			{intl.formatMessage({ id: "download_report" })}
 		</Button>
 	)
 }

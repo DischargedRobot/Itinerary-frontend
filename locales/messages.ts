@@ -64,7 +64,7 @@ export type MessagesWithoutVaribles = {
 	unknownErrorOccurred: string
 	selectDate: string
 	department_placeholder: string
-	download_excel: string
+	download_report: string
 }
 
 export type MessageVariables = {
@@ -149,7 +149,7 @@ export const messages: TMessages = {
 		unknownErrorOccurred: "Неизвестна ошибка",
 		selectDate: "Выбрана дата:",
 		department_placeholder: "Цех",
-		download_excel: "Скачать Excel",
+		download_report: "Скачать отчёт",
 	},
 
 	[LOCALES.ENGLISH]: {
@@ -216,6 +216,6 @@ export const messages: TMessages = {
 		unknownErrorOccurred: "Unknown error occurred",
 		selectDate: "Date selected:",
 		department_placeholder: "Department",
-		download_excel: "Download Excel",
+		download_report: "Download Report",
 	},
 }
