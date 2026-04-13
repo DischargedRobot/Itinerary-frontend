@@ -13,7 +13,7 @@ export const UserChangingForm = () => {
 		register,
 		errors,
 		isDirty,
-		reset,
+		onReset,
 		handleSaveChanges,
 		currentUser,
 	} = useUserChangingForm()
@@ -61,17 +61,7 @@ export const UserChangingForm = () => {
 				</Button>
 				<Button
 					className="max-w-50 w-full"
-					onClick={() =>
-						reset({
-							name: "",
-							secondName: "",
-							middleName: "",
-							login: "",
-							password: "",
-							email: "",
-							phoneNumber: "",
-						})
-					}
+					onClick={onReset}
 					disabled={!isDirty}
 				>
 					<FormattedMessageWithValues id="cancle" />

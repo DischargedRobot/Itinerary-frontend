@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation"
 import { APIError, mapAPIError } from "./apiError"
 
 const URL = process.env.NEXT_PUBLIC_API_URL
@@ -39,7 +38,9 @@ export const APIJSONRequest = async <T>(
 		}
 		if (error instanceof APIError && error.status === 401) {
 			console.log("Unauthorized, redirecting to /auth")
-			window.location.pathname = "/auth"
+			if (typeof window !== "undefined") {
+				window.location.pathname = "/auth"
+			}
 		}
 		throw error as APIError
 	}

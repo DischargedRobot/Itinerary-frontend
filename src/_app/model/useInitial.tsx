@@ -1,3 +1,5 @@
+"use client"
+
 import { categoryAPI, useCategoriesStore } from "@/entities/Category"
 import { departmentAPI, useDepartmentStore } from "@/entities/Department"
 import {

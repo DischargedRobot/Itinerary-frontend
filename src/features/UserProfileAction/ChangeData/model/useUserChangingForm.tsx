@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form"
 
 export const useUserChangingForm = () => {
 	const apiErrorCatcher = useAPIErrorHandler()
+	const currentUser = useUserStore((state) => state.currentUser)
+
 	const {
 		handleSubmit,
 		register,
 		formState: { errors, isDirty },
 		reset,
-	} = useForm<IUser>()
+	} = useForm<IUser>({ defaultValues: currentUser })
 
 	const handleSaveChanges = async (user: IUser) => {
 		try {
@@ -19,14 +21,17 @@ export const useUserChangingForm = () => {
 		}
 	}
 
-	const currentUser = useUserStore((state) => state.currentUser)
+
+	const onReset = () => {
+		reset(currentUser)
+	}
 
 	return {
 		handleSubmit,
 		register,
 		errors,
 		isDirty,
-		reset,
+		onReset,
 		handleSaveChanges,
 		currentUser,
 	}

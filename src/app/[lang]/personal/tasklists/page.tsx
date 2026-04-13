@@ -1,6 +1,5 @@
 "use client"
 
-import { useInitial } from "@/_app"
 import "./TaskLists.scss"
 
 import { FullExecutorList } from "@/widgets/FullExecutorList"
@@ -15,7 +14,6 @@ import { useOperationFiltersStore } from "@/entities/Operations/model"
 import { useExecutorsForDownload } from "./model/useExecutorsForDownload"
 
 const TaskLists = () => {
-	useInitial()
 	const { products } = useFilteredProduct()
 	const { filteredOperations } = useFilteredOperations()
 	const { executorsForDownload, hasFormedOperations } =

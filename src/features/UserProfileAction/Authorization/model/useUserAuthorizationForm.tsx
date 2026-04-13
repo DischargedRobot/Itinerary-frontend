@@ -42,6 +42,7 @@ export const useUserAuthorizationForm = () => {
 			setCurrentUser(user)
 			isAuthenticated = true
 		} catch (error) {
+			console.error(error, "Login error:")
 			if (isAPIError(error) && error.status === 404) {
 				setFormErrors({
 					common: intl.formatMessage({ id: "invalidCredentials" }),

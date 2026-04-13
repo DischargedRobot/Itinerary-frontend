@@ -38,6 +38,12 @@ export const userAPI = {
 		return APIJSONRequest<IUser>(`${USERS_URL}/${id}`)
 	},
 
+	getMe: async (cookieHeader?: string) => {
+		return APIJSONRequest<IUser>(`${USERS_URL}/me`, {
+			headers: cookieHeader ? { Cookie: cookieHeader } : undefined,
+		})
+	},
+
 	logout: async () => {
 		return APIJSONRequest<void>(`${USERS_URL}/logout`, {
 			method: "POST",

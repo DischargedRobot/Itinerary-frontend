@@ -1,0 +1,1 @@
+export { InitApplication } from "./InitApplication"
