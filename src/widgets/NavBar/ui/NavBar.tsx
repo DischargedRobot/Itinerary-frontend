@@ -8,6 +8,7 @@ import { Menu, MenuProps } from "antd"
 import Link from "next/link"
 import { useNavBar } from "../model"
 import { UserLogOut } from "@/features/UserProfileAction"
+import { LanguageSwitcher } from "@/features/LanguageSwitcher"
 
 export const NavBar = () => {
 	const { selectedKeys, lang } = useNavBar()
@@ -37,6 +38,11 @@ export const NavBar = () => {
 					<Avatar size={32} />
 				</Link>
 			),
+			className: "no-hover",
+		},
+		{
+			key: "language",
+			label: <LanguageSwitcher />,
 			className: "no-hover",
 		},
 		{

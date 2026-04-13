@@ -1,0 +1,62 @@
+.language-switcher {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	border-radius: 20px;
+	user-select: none;
+	cursor: default;
+
+	.language-label {
+		font-size: 12px;
+		font-weight: 600;
+		color: #999;
+		transition: color 0.3s ease;
+		min-width: 20px;
+		text-align: center;
+		cursor: pointer;
+
+		&.active {
+			color: #1890ff;
+		}
+	}
+
+	.switch-toggle {
+		position: relative;
+		width: 40px;
+		height: 20px;
+		background-color: #1890ff;
+		border: none;
+		border-radius: 10px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+		padding: 0;
+		outline: none;
+
+		&::after {
+			content: "";
+			position: absolute;
+			width: 16px;
+			height: 16px;
+			background-color: white;
+			border-radius: 50%;
+			top: 2px;
+			left: 2px;
+			transition: left 0.3s ease;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		}
+
+		&.en {
+			&::after {
+				left: 22px;
+			}
+		}
+
+		&:hover {
+			opacity: 0.8;
+		}
+
+		&:active {
+			opacity: 0.9;
+		}
+	}
+}
