@@ -24,6 +24,7 @@ export async function APIExcelRequesDownload(request: ExcelGenerationRequest) {
 			headers: {
 				"Content-Type": "application/json",
 			},
+			credentials: "include",
 			body: JSON.stringify(request),
 		})
 
