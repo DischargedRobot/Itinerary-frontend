@@ -53,7 +53,7 @@ export const NavBar = () => {
 	]
 
 	return (
-		<nav className="w-full border-b border-b-gray-300 shadow-sm">
+		<nav className="z-100 w-full border-b border-b-gray-300 shadow-sm">
 			<Menu
 				selectedKeys={[selectedKeys ?? ""]}
 				className="nav-bar title title_very-litle w-full items-center justify-center"

@@ -15,6 +15,8 @@
 	--roboto-mono: "Roboto Mono", sans-serif;
 	--inter: "Inter", sans-serif;
 
+	--hover-selected: color-mix(in srgb, var(--active-element), #ffffff99 50%);
+
 	/* Toasts colors */
 	--toast-error: #a31c1c;
 	--toast-success: #32a82a;

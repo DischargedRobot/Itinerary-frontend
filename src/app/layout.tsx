@@ -16,6 +16,8 @@ const COLORS = {
 	active: "var(--active)",
 	activeElement: "var(--active-element)",
 	placeholder: "var(--placeholder-color)",
+
+	hoverSelected: "var(--hover-selected)",
 	// --text-color: var(--color-gray-500),
 	// --hover: theme('colors.blue.400'),
 	// --active: theme('colors.blue.600'),
@@ -58,7 +60,13 @@ const token: ConfigProviderProps["theme"] = {
 			// colorBgBase: COLORS.hover,
 			// headerBg: COLORS.hover,
 
+			rowSelectedHoverBg: COLORS.hoverSelected,
+
 			rowSelectedBg: COLORS.foreground,
+		},
+		Checkbox: {
+			colorPrimary: COLORS.activeElement,
+			colorPrimaryHover: COLORS.activeElement,
 		},
 		Calendar: {
 			colorPrimary: COLORS.active,

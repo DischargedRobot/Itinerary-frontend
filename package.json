@@ -6,7 +6,9 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "eslint"
+		"lint": "eslint",
+		"test": "jest",
+		"test:watch": "jest --watch"
 	},
 	"dependencies": {
 		"@ant-design/icons": "^6.1.1",
@@ -30,6 +32,8 @@
 	"devDependencies": {
 		"@conarti/eslint-plugin-feature-sliced": "^1.0.5",
 		"@tailwindcss/postcss": "^4.2.2",
+		"@testing-library/jest-dom": "^6.9.1",
+		"@types/jest": "^30.0.0",
 		"@types/negotiator": "^0.6.4",
 		"@types/node": "^20",
 		"@types/react": "^19",
@@ -37,8 +41,12 @@
 		"eslint": "^9.39.4",
 		"eslint-config-next": "16.2.1",
 		"eslint-plugin-feature-sliced": "^0.0.2",
+		"jest": "^30.3.0",
+		"jest-environment-jsdom": "^30.3.0",
 		"postcss": "^8.5.8",
 		"tailwindcss": "^4.2.2",
+		"ts-jest": "^29.4.9",
+		"ts-node": "^10.9.2",
 		"typescript": "^5"
 	}
 }
