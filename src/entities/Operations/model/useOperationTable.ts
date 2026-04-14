@@ -8,7 +8,7 @@ import { IOperation, isIOperation } from "../lib"
 import { useSelectedExecutorsStore } from "@/entities/Executors/model"
 
 export const useOperationTable = (filteredOperations: IOperation[]) => {
-	const [isVisible, setIsVisible] = useState<boolean>()
+	const [isVisible, setIsVisible] = useState<boolean>(true)
 	const setProducts = useProductStore((state) => state.setProducts)
 	// TODO: мб перенести в сторе продуктов? но тогда он будет зависимым от другого стора, хм...
 

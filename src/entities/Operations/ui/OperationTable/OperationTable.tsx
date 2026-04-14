@@ -1,81 +1,159 @@
 "use client"
 
 import "./OperationTable.scss"
-import { memo } from "react"
-import { Table, TableProps } from "antd"
+import "react-resizable/css/styles.css"
+import { memo, useMemo, useState, useCallback, ThHTMLAttributes } from "react"
+import { Table, TableColumnType } from "antd"
+import { Resizable, ResizeCallbackData } from "react-resizable"
 import { useOperationTable } from "../../model/useOperationTable"
+import { useSelectedOperationsStore } from "../../model"
 import { IOperation } from "../../lib"
 import { DownOutlined } from "@ant-design/icons"
 import { IProduct } from "@/entities/Product"
 import { FormattedMessageWithValues } from "@/shared/lang/FormattedMessageWithValues"
 
-const createColumn = (): TableProps<IOperation>["columns"] => [
+interface ResizableTitleProps extends ThHTMLAttributes<HTMLElement> {
+	onResize?: (e: React.SyntheticEvent, data: ResizeCallbackData) => void
+	width?: number
+}
+
+const ResizableTitle = ({ onResize, width, ...restProps }: ResizableTitleProps) => {
+	if (!width) return <th {...restProps} />
+	return (
+		<Resizable
+			width={width}
+			height={0}
+			onResize={onResize!}
+			draggableOpts={{ enableUserSelectHack: false }}
+		>
+			<th {...restProps} />
+		</Resizable>
+	)
+}
+
+type ColumnWithWidth = TableColumnType<IOperation> & { width?: number }
+
+const initialColumns: ColumnWithWidth[] = [
 	{
 		key: "typeOperation",
 		title: <FormattedMessageWithValues id="operation" />,
 		dataIndex: "name",
 		ellipsis: true,
+		width: 160,
 	},
 	{
 		key: "product",
 		title: <FormattedMessageWithValues id="product" />,
 		dataIndex: "product",
-		render: (product: IProduct) => {
-			return `${product.name}`
-		},
+		render: (product: IProduct) => product.name,
 		ellipsis: true,
+		width: 160,
 	},
 	{
 		key: "numberPositions",
 		title: <FormattedMessageWithValues id="number" />,
 		dataIndex: "numberPositions",
+		ellipsis: true,
+		width: 80,
 	},
 	{
 		key: "dateExecution",
 		title: <FormattedMessageWithValues id="dateExecution" />,
 		dataIndex: "dateExecution",
+		width: 120,
+		ellipsis: true,
 	},
 	{
 		key: "normTime",
 		title: <FormattedMessageWithValues id="normTime" />,
 		dataIndex: "normTime",
+		ellipsis: true,
+		width: 80,
 	},
 	{
 		key: "pymentCoefficient",
 		title: <FormattedMessageWithValues id="paymentCoefficient2" />,
 		dataIndex: "pymentCoefficient",
+		width: 80,
+		ellipsis: true,
 	},
 	{
 		key: "x2",
 		title: <FormattedMessageWithValues id="x2" />,
-		render: () => {
-			return <input type="checkbox" />
-		},
+		render: () => <input type="checkbox" />,
+		width: 60,
+		ellipsis: true,
 	},
 	{
 		key: "award",
 		title: <FormattedMessageWithValues id="awardPercent" />,
 		dataIndex: "award",
+		width: 80,
+		ellipsis: true,
 	},
 ]
 
 interface OperationTableProps {
 	operations: IOperation[]
+	selectedProductIds?: number[]
+	onProductDeselect?: (productId: number) => void
 }
 
-const OperationTable = ({ operations }: OperationTableProps) => {
+const OperationTable = ({ operations, selectedProductIds, onProductDeselect }: OperationTableProps) => {
 	const { setIsVisible, isVisible, handleRowUnSelect, handleRowSelect } =
 		useOperationTable(operations)
 
+	const selectedOperations = useSelectedOperationsStore((state) => state.operations)
+	const selectedRowKeys = useMemo(
+		() => selectedOperations.map((op) => op.id),
+		[selectedOperations],
+	)
+
+	const addOperations = useSelectedOperationsStore((state) => state.addOperations)
+	const removeOperations = useSelectedOperationsStore((state) => state.removeOperations)
+
+	const [columns, setColumns] = useState<ColumnWithWidth[]>(initialColumns)
+
+	const handleResize = useCallback(
+		(index: number) =>
+			(_: React.SyntheticEvent, { size }: ResizeCallbackData) => {
+				setColumns((prev) => {
+					const next = [...prev]
+					next[index] = { ...next[index], width: size.width }
+					return next
+				})
+			},
+		[],
+	)
+
+	const mergedColumns = columns.map<ColumnWithWidth>((col, index) => ({
+		...col,
+		onHeaderCell: (column: TableColumnType<IOperation>) => ({
+			width: typeof column.width === "number" ? column.width : undefined,
+			onResize: handleResize(index),
+		}),
+	}))
+
 	return (
 		<Table
+			components={{ header: { cell: ResizableTitle } }}
 			rowSelection={{
+				selectedRowKeys,
 				onSelect: (operation, selected) => {
-					console.log(operation, "opertions for select")
 					if (selected) {
 						handleRowSelect(operation)
 					} else {
 						handleRowUnSelect(operation)
+						if (selectedProductIds?.includes(operation.product.id)) {
+							onProductDeselect?.(operation.product.id)
+						}
+					}
+				},
+				onSelectAll: (selected, _, changeRows) => {
+					if (selected) {
+						addOperations(changeRows)
+					} else {
+						removeOperations(changeRows)
 					}
 				},
 			}}
@@ -96,7 +174,7 @@ const OperationTable = ({ operations }: OperationTableProps) => {
 			className={`operation-table w-full rounded-2xl ${isVisible ? "" : "collapsed"}`}
 			size="small"
 			pagination={{ placement: ["bottomCenter"], pageSize: 7 }}
-			columns={createColumn()}
+			columns={mergedColumns}
 			dataSource={operations}
 			rowKey={"id"}
 		/>

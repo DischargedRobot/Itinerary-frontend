@@ -36,7 +36,7 @@ const PersonalLayout = async (props: Props) => {
 		<>
 			<InitApplication user={currentUser} />
 			<Layout className="flex w-full gap-5 relative">
-				<Header className="sticky top-0 w-full p-0 z-20 ">
+				<Header className="sticky top-0 w-full p-0! z-20 ">
 					<NavBar />
 				</Header>
 				<Content className="mx-auto px-4 max-w-5xl w-full justify-items-center ">

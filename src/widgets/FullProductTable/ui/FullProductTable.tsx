@@ -6,10 +6,12 @@ import { IProduct } from "@/entities/Product/lib/ProductTypes"
 
 interface FullProductTableProps {
 	products: IProduct[]
+	selectedRowKeys?: number[]
+	onChangeSelect?: (selectedRows: IProduct[]) => void
 }
 
-const FullProductTable = ({ products }: FullProductTableProps) => {
-	return <ProductTable products={products} />
+const FullProductTable = ({ products, selectedRowKeys, onChangeSelect }: FullProductTableProps) => {
+	return <ProductTable products={products} selectedRowKeys={selectedRowKeys} onChangeSelect={onChangeSelect} />
 }
 
 export default memo(FullProductTable)

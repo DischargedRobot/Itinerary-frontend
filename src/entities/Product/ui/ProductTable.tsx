@@ -34,9 +34,11 @@ const createColumns = (): TableProps<IProduct>["columns"] => [
 
 interface ProductTableProps {
 	products: IProduct[]
+	selectedRowKeys?: number[]
+	onChangeSelect?: (selectedRows: IProduct[]) => void
 }
 
-export const ProductTable = ({ products }: ProductTableProps) => {
+export const ProductTable = ({ products, selectedRowKeys, onChangeSelect }: ProductTableProps) => {
 	const { isVisible, setIsVisible } = useProductTable()
 
 	return (
@@ -56,10 +58,15 @@ export const ProductTable = ({ products }: ProductTableProps) => {
 				</div>
 			)}
 			size="small"
-			className={`product-table ${isVisible ? "" : "collapsed"}`}
+			className={`product-table w-full ${isVisible ? "" : "collapsed"}`}
+
 			pagination={{ placement: ["bottomCenter"], pageSize: 7 }}
 			columns={createColumns()}
-			rowSelection={{ type: "checkbox" }}
+			rowSelection={{
+				type: "checkbox",
+				selectedRowKeys: selectedRowKeys ?? [],
+				onChange: (_, selectedRows) => onChangeSelect?.(selectedRows),
+			}}
 			dataSource={products}
 			rowKey={"id"}
 		/>
