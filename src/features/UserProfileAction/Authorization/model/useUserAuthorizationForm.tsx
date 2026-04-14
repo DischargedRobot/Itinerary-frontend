@@ -1,11 +1,16 @@
 import { useIntl } from "react-intl"
-import { userAPI, IUser } from "@/entities/User"
+import { userAPI } from "@/entities/User"
 import { useUserStore } from "@/entities/User"
 import { useForm } from "react-hook-form"
 import { useRouter, useParams } from "next/navigation"
 import { isAPIError, useAPIErrorHandler } from "@/shared/api"
 import { useState } from "react"
 import { TErrorForm } from "@/shared/lib"
+import { IUser } from "@/entities/User"
+
+interface IAuthorizationForm extends Pick<IUser, "login" | "password"> {
+	remember: boolean
+}
 
 interface FormErrors {
 	common: string
@@ -23,15 +28,21 @@ export const useUserAuthorizationForm = () => {
 	const {
 		handleSubmit,
 		register,
+		control,
 		formState: { errors, isDirty },
 		reset,
-	} = useForm<IUser>()
+	} = useForm<IAuthorizationForm>({
+		defaultValues: {
+			login: "",
+			password: "",
+		},
+	})
 
 	const apiErrorCatcher = useAPIErrorHandler()
 
 	const router = useRouter()
 
-	const handleLogin = async (data: IUser) => {
+	const handleLogin = async (data: IAuthorizationForm) => {
 		let isAuthenticated = false
 		setFormErrors(null)
 		try {
@@ -59,6 +70,7 @@ export const useUserAuthorizationForm = () => {
 	return {
 		handleSubmit,
 		register,
+		control,
 		errors,
 		isDirty,
 		reset,

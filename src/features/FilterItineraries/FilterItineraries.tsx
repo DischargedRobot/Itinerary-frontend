@@ -1,10 +1,14 @@
 import { ByDate } from "./ByDate"
 import { ByProduct } from "./ByProduct"
 
-export const FilterItineraries = () => {
+interface Props {
+	setLoading?: (v: boolean) => void
+}
+
+export const FilterItineraries = ({ setLoading }: Props) => {
 	return (
 		<div className="flex gap-10">
-			<FilterItineraries.ByProduct />
+			<FilterItineraries.ByProduct setLoading={setLoading} />
 			<FilterItineraries.ByDate />
 		</div>
 	)

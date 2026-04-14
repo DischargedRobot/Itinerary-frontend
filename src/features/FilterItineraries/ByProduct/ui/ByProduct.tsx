@@ -4,8 +4,12 @@ import { useIntl } from "react-intl"
 import { Select } from "antd"
 import { useByProduct } from "../model"
 
-export const ByProduct = () => {
-	const { products, handleSelect } = useByProduct()
+interface Props {
+	setLoading?: (v: boolean) => void
+}
+
+export const ByProduct = ({ setLoading }: Props) => {
+	const { products, handleSelect } = useByProduct(setLoading)
 	const intl = useIntl()
 
 	return (

@@ -6,7 +6,7 @@ import { ExecutorFilters } from "@/entities/Executors/model/useFilteredExecutor"
 interface Props {
 	defaultValue?: IExecutor
 	onChange?: (executor: IExecutor) => void
-	filters?: Partial<ExecutorFilters>
+	filters?: Pick<ExecutorFilters, "departmentId">
 }
 
 export const SelectExecutorInTable = (props: Props) => {

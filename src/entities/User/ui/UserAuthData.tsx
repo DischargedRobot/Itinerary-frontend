@@ -3,11 +3,22 @@
 import { useIntl } from "react-intl"
 import { PersonalInput } from "@/shared"
 import { IUser } from "../lib"
-import { UseFormRegister, FieldErrors } from "react-hook-form"
+import {
+	UseFormRegister,
+	FieldErrors,
+	FieldValues,
+	FieldError,
+	Path,
+} from "react-hook-form"
 
-interface Props {
-	register: UseFormRegister<IUser>
-	errors: FieldErrors<IUser>
+type AuthFields = {
+	login: string
+	password: string
+}
+
+interface Props<T extends FieldValues & AuthFields> {
+	register: UseFormRegister<T>
+	errors: FieldErrors<T>
 	user?: IUser
 	onChanges?: {
 		login?: () => void
@@ -15,14 +26,15 @@ interface Props {
 	}
 }
 
-export const UserAuthData = ({ register, errors, user, onChanges }: Props) => {
+export const UserAuthData = <T extends FieldValues & AuthFields>({ register, errors, user, onChanges }: Props<T>) => {
 	const intl = useIntl()
 
 	return (
 		<>
 			<PersonalInput
 				type="login"
-				name="login"
+				name={"login" as Path<T>}
+				autoComplete="username"
 				placeholder={intl.formatMessage({ id: "loginPlaceholder" })}
 				rules={{
 					required: {
@@ -31,13 +43,14 @@ export const UserAuthData = ({ register, errors, user, onChanges }: Props) => {
 					},
 				}}
 				register={register}
-				error={errors?.login}
+				error={errors?.login as FieldError | undefined}
 				defaultValue={user?.login}
 				onChange={onChanges?.login}
 			/>
 			<PersonalInput
 				type="password"
-				name="password"
+				name={"password" as Path<T>}
+				autoComplete="current-password"
 				placeholder={intl.formatMessage({ id: "passwordPlaceholder" })}
 				rules={{
 					required: {
@@ -52,7 +65,7 @@ export const UserAuthData = ({ register, errors, user, onChanges }: Props) => {
 					},
 				}}
 				register={register}
-				error={errors?.password}
+				error={errors?.password as FieldError | undefined}
 				defaultValue={user?.password}
 				onChange={onChanges?.password}
 			/>

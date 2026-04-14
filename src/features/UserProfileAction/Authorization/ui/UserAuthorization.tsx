@@ -1,7 +1,8 @@
 "use client"
 
 import { useIntl } from "react-intl"
-import { Button } from "antd"
+import { Button, Checkbox } from "antd"
+import { Controller } from "react-hook-form"
 import { UserAuthData } from "@/entities/User"
 import { useUserAuthorizationForm } from "../model"
 import { FormattedMessageWithValues } from "@/shared/lang"
@@ -10,6 +11,7 @@ export const UserAuthorization = () => {
 	const {
 		handleSubmit,
 		register,
+		control,
 		errors,
 		isDirty,
 		reset,
@@ -17,7 +19,6 @@ export const UserAuthorization = () => {
 		formErrors,
 		setFormErrors,
 	} = useUserAuthorizationForm()
-	const intl = useIntl()
 
 	const handleClearErrors = () => {
 		setFormErrors(null)
@@ -26,6 +27,7 @@ export const UserAuthorization = () => {
 	return (
 		<form
 			className="flex flex-col gap-12 w-full max-w-120"
+			autoComplete="on"
 			onSubmit={handleSubmit((data) => {
 				handleLogin(data)
 			})}
@@ -65,6 +67,6 @@ export const UserAuthorization = () => {
 					<FormattedMessageWithValues id="clear" />
 				</Button>
 			</div>
-		</form>
+		</form >
 	)
 }

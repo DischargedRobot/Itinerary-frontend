@@ -4,7 +4,11 @@ import { useIntl } from "react-intl"
 import { useCreateTask } from "../model"
 import { FormattedMessageWithValues } from "@/shared/lang"
 
-const CreateTask = () => {
+interface CreateTaskProps {
+	disabled?: boolean
+}
+
+const CreateTask = ({ disabled = false }: CreateTaskProps) => {
 	const { handleClick } = useCreateTask()
 	const intl = useIntl()
 
@@ -13,6 +17,7 @@ const CreateTask = () => {
 			title={intl.formatMessage({ id: "create" })}
 			className="w-30"
 			size="medium"
+			disabled={disabled}
 			onClick={handleClick}
 		>
 			<FormattedMessageWithValues id="create" />

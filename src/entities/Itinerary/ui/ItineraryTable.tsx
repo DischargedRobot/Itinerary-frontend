@@ -11,9 +11,10 @@ import { IOperation } from "@/entities/Operations/lib"
 
 interface Props {
 	renderOperationsTable?: (operations: IOperation[]) => React.ReactNode
+	isLoading?: boolean
 }
 
-export const ItineraryTable = ({ renderOperationsTable }: Props) => {
+export const ItineraryTable = ({ renderOperationsTable, isLoading }: Props) => {
 	const itineraries = useFilteredItineraries()
 	const { handleExpand } = useItineraryTable()
 	const columns = useCreateItineraryColumns()
@@ -21,6 +22,7 @@ export const ItineraryTable = ({ renderOperationsTable }: Props) => {
 	return (
 		// <ItineraryOperationsTable operations={itineraries[0].operations}/>
 		<Table
+			loading={isLoading}
 			columns={columns}
 			size="small"
 			className="itinerary-table"

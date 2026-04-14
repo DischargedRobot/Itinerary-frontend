@@ -6,7 +6,7 @@ import {
 } from "@/entities/Executors/model/useFilteredExecutor"
 
 export const useSelectExecutorInTable = (
-	filters?: Partial<ExecutorFilters>,
+	filters?: Pick<ExecutorFilters, "departmentId">,
 ) => {
 	const executors = useExecutorsStore((state) => state.executors)
 
@@ -15,17 +15,11 @@ export const useSelectExecutorInTable = (
 			return executors
 		}
 
-		const defaultFilters: ExecutorFilters = {
-			members: filters.members ?? [],
-			isBrigade: filters.isBrigade ?? false,
+		const defaultFilters: Pick<ExecutorFilters, "departmentId"> = {
 			departmentId: filters.departmentId ?? null,
 		}
 
-		return filterExecutors(
-			["members", "isBrigade", "departmentId"],
-			executors,
-			defaultFilters,
-		)
+		return filterExecutors(["departmentId"], executors, defaultFilters)
 	}, [executors, filters])
 
 	return { executors: filteredExecutors }

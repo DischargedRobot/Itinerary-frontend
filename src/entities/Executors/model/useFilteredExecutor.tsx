@@ -62,7 +62,7 @@ const FilterFunction: TFilteredFunction = {
 export const filterExecutors = <T extends TFilterKey>(
 	filterKeys: T[],
 	executors: IExecutor[],
-	filterArgs: ExecutorFilters,
+	filterArgs: Pick<ExecutorFilters, T>,
 ): IExecutor[] => {
 	return filterKeys.reduce((filteredExecutors, filterKey) => {
 		return FilterFunction[filterKey](

@@ -2,20 +2,25 @@ import { useIntl } from "react-intl"
 import { itineraryAPI } from "@/entities/Itinerary/api"
 import { useItineraryStore } from "@/entities/Itinerary/model"
 import { useItineraryFiltersStore } from "@/entities/Itinerary/model/useItineraryFiltersStore"
+import { operationAPI } from "@/entities/Operations"
 import { planPositionAPI, usePlanPositionStore } from "@/entities/PlanPosition"
 import { IPlanPosition } from "@/entities/PlanPosition/lib"
 import { IProduct, useProductStore } from "@/entities/Product"
+import { executorsAPI, useExecutorsStore } from "@/entities/Executors"
 import { getCachedData, showToast } from "@/shared"
 import { APIError, mapAPIError } from "@/shared/api/apiError"
+import { useDepartmentStore } from "@/shared/model"
 import { useSWRConfig } from "swr"
 
-export const useByProduct = () => {
+export const useByProduct = (setLoading?: (v: boolean) => void) => {
 	const intl = useIntl()
 	const { cache } = useSWRConfig()
 	const products = useProductStore((state) => state.products)
 	const setPlanPositions = usePlanPositionStore(
 		(state) => state.setPlanPositions,
 	)
+	const departments = useDepartmentStore((state) => state.departments)
+	const setExecutors = useExecutorsStore((state) => state.setExecutors)
 	const setProductId = useItineraryFiltersStore((state) => state.setProductId)
 	const setItineraries = useItineraryStore((state) => state.setItineraries)
 	// TODO: в lib
@@ -39,15 +44,16 @@ export const useByProduct = () => {
 	}
 
 	const handleSelect = async (productId: IProduct["id"]) => {
+		setLoading?.(true)
 		setProductId(productId)
 
-		const planPositions = await getCachedPlanPositions(productId)
-
-		if (planPositions) {
-			setPlanPositions(planPositions)
-		}
-
 		try {
+			const planPositions = await getCachedPlanPositions(productId)
+
+			if (planPositions) {
+				setPlanPositions(planPositions)
+			}
+
 			const itineraries = await getCachedData(
 				cache,
 				[
@@ -60,6 +66,7 @@ export const useByProduct = () => {
 					),
 			)
 			if (itineraries == undefined || itineraries.length == 0) {
+				setExecutors([])
 				throw mapAPIError(404)
 			}
 
@@ -70,13 +77,7 @@ export const useByProduct = () => {
 			setItineraries(
 				// TODO: в отдельную функцию
 				itineraries.map(
-					({
-						productId,
-						kitIncreasingKit,
-						operationsIds,
-						date,
-						...itiner
-					}) => {
+					({ kitIncreasingKit, operationsIds, date, ...itiner }) => {
 						const [kit, increasingKit] = kitIncreasingKit
 							.split("/")
 							.map((kits) => parseInt(kits))
@@ -95,6 +96,78 @@ export const useByProduct = () => {
 					},
 				),
 			)
+
+			const operationsByItineraries = await Promise.all(
+				itineraries.map((itinerary) =>
+					getCachedData(
+						cache,
+						[
+							["operations", "itineraryId"],
+							["all", itinerary.id],
+						].toString(),
+						() =>
+							operationAPI.getOperationsByItineraryId(
+								itinerary.id,
+							),
+					),
+				),
+			)
+
+			const departmentIds = Array.from(
+				new Set(
+					operationsByItineraries
+						.flatMap((operations) => operations ?? [])
+						.map((operation) => operation.departmentId),
+				),
+			)
+
+			const executorsByDepartments = await Promise.all(
+				departmentIds.map((departmentId) =>
+					getCachedData(
+						cache,
+						[
+							["executors", "departmentId"],
+							["all", departmentId],
+						].toString(),
+						() =>
+							executorsAPI.getExecutorsByDepartmentId(
+								departmentId,
+							),
+					),
+				),
+			)
+
+			const executors = executorsByDepartments.flatMap(
+				(executorsResponse, index) => {
+					const departmentId = departmentIds[index]
+					const department = departments.find(
+						(dep) => dep.id === departmentId,
+					)
+
+					if (!department) {
+						return []
+					}
+					console.log(
+						"executorResp",
+						executorsResponse,
+						"dep",
+						department,
+					)
+					return (executorsResponse ?? []).map((executor) => ({
+						id: executor.id,
+						name: executor.name,
+						members: executor.members,
+						isBrigade: executor.isBrigade,
+						department,
+						operations:
+							executor.operationsIds?.map((operationId) => ({
+								id: operationId,
+							})) || [],
+					}))
+				},
+			)
+
+			setExecutors(executors)
 		} catch (error) {
 			if (error instanceof APIError) {
 				if (error.status !== 404) {
@@ -117,6 +190,8 @@ export const useByProduct = () => {
 					duration: 2000,
 				})
 			}
+		} finally {
+			setLoading?.(false)
 		}
 	}
 
