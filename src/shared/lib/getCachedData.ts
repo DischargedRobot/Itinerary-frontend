@@ -1,5 +1,7 @@
 import { Cache, mutate } from "swr"
 
+// замена useSWR при mutate с revalidate: false,
+// чтобы не дергать лишний раз API при получении данных из кэша
 export const getCachedData = async <T>(
 	cache: Cache,
 	cacheKey: string,

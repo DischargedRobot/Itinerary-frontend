@@ -37,7 +37,7 @@ export const useAPIErrorHandler = ({ customHandlers = [] }: Props = {}) => {
 			// Если кастомного обработчика нет, используем что есть
 			switch (apiError.status) {
 				case null:
-					// router.push("/no-connection-server")
+					router.push("/no-connection-server")
 					break
 				case 401:
 					router.push("/auth")

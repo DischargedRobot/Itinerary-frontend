@@ -7,6 +7,7 @@ import { useUserChangingForm } from "../model"
 import { FormattedMessage } from "react-intl"
 import { FormattedMessageWithValues } from "@/shared/lang"
 
+// TODO: перенести в widget
 export const UserChangingForm = () => {
 	const {
 		handleSubmit,

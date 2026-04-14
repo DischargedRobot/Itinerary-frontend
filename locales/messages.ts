@@ -42,6 +42,7 @@ export type MessagesWithoutVaribles = {
 	formedOrders: string
 	login: string
 	clear: string
+	rememberPassword: string
 	selectPlaceholder: string
 	email: string
 	phone: string
@@ -65,6 +66,7 @@ export type MessagesWithoutVaribles = {
 	selectDate: string
 	department_placeholder: string
 	download_report: string
+	noSelectedOperations: string
 }
 
 export type MessageVariables = {
@@ -124,6 +126,7 @@ export const messages: TMessages = {
 		formedOrders: "Сформированные наряды:",
 		login: "Войти",
 		clear: "Очистить",
+		rememberPassword: "Запомнить пароль",
 		selectPlaceholder: "Выберите...",
 		email: "Почта",
 		phone: "Телефон",
@@ -150,6 +153,7 @@ export const messages: TMessages = {
 		selectDate: "Выбрана дата:",
 		department_placeholder: "Цех",
 		download_report: "Скачать отчёт",
+		noSelectedOperations: "Нет выделенных операций",
 	},
 
 	[LOCALES.ENGLISH]: {
@@ -191,6 +195,7 @@ export const messages: TMessages = {
 		formedOrders: "Formed Orders:",
 		login: "Login",
 		clear: "Clear",
+		rememberPassword: "Remember password",
 		selectPlaceholder: "Select...",
 		email: "Email",
 		phone: "Phone",
@@ -217,5 +222,6 @@ export const messages: TMessages = {
 		selectDate: "Date selected:",
 		department_placeholder: "Department",
 		download_report: "Download Report",
+		noSelectedOperations: "No selected operations",
 	},
 }
