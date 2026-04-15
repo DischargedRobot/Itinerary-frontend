@@ -19,6 +19,7 @@ import {
     useSelectedOperationsStore,
 } from "@/entities/Operations/model"
 import { useExecutorsForDownload } from "./model/useExecutorsForDownload"
+import { Can } from "@/shared/model"
 
 const TaskLists = () => {
     const [selectedProductIds, setSelectedProductIds] = useState<number[]>([])
@@ -35,38 +36,43 @@ const TaskLists = () => {
     const isFormedFilterActive = useOperationFiltersStore((state) => state.isFormed)
     const createDisabled = selectedOperations.length === 0
 
+    console.log(filteredOperations, "filtered ops")
     return (
         <div className="flex flex-col gap-5 w-full">
             <div className="flex gap-3 items-center justify-between">
                 <TopTaskListsFilters />
-                {!isFormedFilterActive ? (
-                    createDisabled ? (
-                        <Tooltip title={intl.formatMessage({ id: "noSelectedOperations" })}>
-                            <span>
-                                <CreateTask disabled={true} />
-                            </span>
-                        </Tooltip>
+                <Can I="create" a="Task">
+                    {!isFormedFilterActive ? (
+                        createDisabled ? (
+                            <Tooltip title={intl.formatMessage({ id: "noSelectedOperations" })}>
+                                <span>
+                                    <CreateTask disabled={true} />
+                                </span>
+                            </Tooltip>
+                        ) : (
+                            <CreateTask disabled={false} />
+                        )
                     ) : (
-                        <CreateTask disabled={false} />
-                    )
-                ) : (
-                    hasFormedOperations ? (
-                        <DownloadTask
-                            executors={executorsForDownload}
-                            hasFormedOperations={hasFormedOperations}
-                        />
-                    ) : (
-                        <Tooltip title={intl.formatMessage({ id: "noSelectedOperations" })}>
-                            <span>
-                                <DownloadTask
-                                    executors={executorsForDownload}
-                                    hasFormedOperations={hasFormedOperations}
-                                />
-                            </span>
-                        </Tooltip>
-                    )
-                )}
+                        hasFormedOperations ? (
+                            <DownloadTask
+                                executors={executorsForDownload}
+                                hasFormedOperations={hasFormedOperations}
+                            />
+                        ) : (
+                            <Tooltip title={intl.formatMessage({ id: "noSelectedOperations" })}>
+                                <span>
+                                    <DownloadTask
+                                        executors={executorsForDownload}
+                                        hasFormedOperations={hasFormedOperations}
+                                    />
+                                </span>
+                            </Tooltip>
+                        )
+                    )}
+                </Can>
+
             </div>
+
             <div className="grid grid-cols-[auto_1fr] gap-3">
                 <FullExecutorList />
                 <div className="flex flex-col gap-5">

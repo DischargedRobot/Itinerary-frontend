@@ -1,3 +1,5 @@
+import { TRole } from "@/shared/model"
+
 export interface IUser {
 	id: number
 	login: string
@@ -7,4 +9,5 @@ export interface IUser {
 	middleName?: string
 	email: string
 	phoneNumber?: string
+	role: TRole
 }

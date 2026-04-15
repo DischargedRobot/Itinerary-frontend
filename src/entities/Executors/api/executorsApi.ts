@@ -1,22 +1,36 @@
 import { APIJSONRequest } from "@/shared/api"
 import { APIError } from "@/shared/api"
 import { IDepartment } from "@/shared/lib"
+import { IExecutor } from "../lib"
 
 interface IExecutorResponse {
 	id: number
-	name: string
-	departmentId: number
+	divisionID: number
 	members: string[]
 	isBrigade: boolean
-	operationsIds: number[]
+	operationsIDs?: number[]
 }
 
+const toExecutor = (executor: IExecutorResponse): IExecutor => ({
+	id: executor.id,
+	members: executor.members,
+	name:
+		executor.members.length === 1
+			? executor.members[0]
+			: `Бригада${executor.id}`,
+	isBrigade: executor.isBrigade,
+	department: {
+		id: executor.divisionID,
+	} as IExecutor["department"],
+	operations: (executor.operationsIDs ?? []).map((id) => ({ id })),
+})
+
 export const executorsAPI = {
-	getExecutors: async (): Promise<IExecutorResponse[]> => {
+	getExecutors: async (): Promise<IExecutor[]> => {
 		try {
 			const executors =
 				await APIJSONRequest<IExecutorResponse[]>("Executors")
-			return executors
+			return executors.map(toExecutor)
 		} catch (error) {
 			// if (error instanceof APIError) {
 			//     console.log(error, 'error')
@@ -35,6 +49,6 @@ export const executorsAPI = {
 		const executors = await APIJSONRequest<IExecutorResponse[]>(
 			`Executors/by-division?divisionID=${departmentId}`,
 		)
-		return executors
+		return executors.map(toExecutor)
 	},
 }

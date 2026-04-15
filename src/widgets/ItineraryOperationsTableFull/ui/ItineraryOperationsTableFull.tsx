@@ -3,6 +3,7 @@ import { ItineraryOperationsTable } from "@/entities/Operations/ui/ItineraryOper
 import { SelectEquipment } from "@/features/SelectEquipmentInTable"
 import { SelectExecutorInTable } from "@/features/SelectExecutorInTable/ui/SelectExecutorInTable"
 import { useItineraryOperationsTableFull } from "../model"
+import { useAbility } from "@/shared/model"
 
 interface Props {
 	operations: IOperation[]
@@ -11,6 +12,7 @@ interface Props {
 export const ItineraryOperationsTableFull = ({ operations }: Props) => {
 	const { handleEquipmentChange, handleExecutorChange } =
 		useItineraryOperationsTableFull()
+	const ability = useAbility()
 
 	return (
 		<ItineraryOperationsTable
@@ -19,6 +21,7 @@ export const ItineraryOperationsTableFull = ({ operations }: Props) => {
 				<SelectEquipment
 					operationTypeId={operation.type.id}
 					defaultValue={operation.equipment}
+					disabled={ability.cannot("update", "Operation")}
 					onChange={(equipment) =>
 						handleEquipmentChange(operation, equipment.id)
 					}
@@ -28,6 +31,7 @@ export const ItineraryOperationsTableFull = ({ operations }: Props) => {
 				<SelectExecutorInTable
 					filters={{ departmentId: operation.department.id }}
 					defaultValue={operation.executor}
+					disabled={ability.cannot("update", "Executor")}
 					onChange={(executor) =>
 						handleExecutorChange(operation, executor.id)
 					}

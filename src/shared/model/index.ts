@@ -1,3 +1,5 @@
 export { useToastStore } from "./Toast"
 export { useDepartmentStore } from "../../entities/Department/model"
 export { showToast } from "./Toast"
+export { AbilityContext, AbilityProvider, Can, useAbility } from "./Ability"
+export type { TRole, AppAbility, Actions, Subjects } from "./Ability"

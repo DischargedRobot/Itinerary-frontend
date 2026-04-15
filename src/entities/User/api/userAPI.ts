@@ -9,22 +9,44 @@ type IUserAuthRequest = {
 }
 
 export interface IUserAuthResponse extends IUser {
-	id: number
+	roleId: number
+	roleName?: string
+}
+
+const mapRole = (user: IUser & { roleId: number; roleName?: string }) => {
+	if (!user) return user
+	const roleId = (user.roleId ?? user.role) as number | string | undefined
+	let role = user.role
+	if (roleId === 1 || roleId === "1") role = "Executor"
+	if (roleId === 2 || roleId === "2") role = "Foreman"
+
+	const { roleName, roleId: _, ...rest } = user
+	return { ...rest, role }
 }
 
 export const userAPI = {
 	login: async (payload: IUserAuthRequest) => {
-		return APIJSONRequest<IUserAuthResponse>(`${USERS_URL}/auth`, {
-			method: "POST",
-			body: JSON.stringify(payload),
-		})
+		const res = await APIJSONRequest<IUserAuthResponse>(
+			`${USERS_URL}/auth`,
+			{
+				method: "POST",
+				body: JSON.stringify(payload),
+			},
+		)
+
+		return mapRole(res) as IUserAuthResponse
 	},
 
 	register: async (user: IUser) => {
-		return APIJSONRequest<IUserAuthResponse>(`${USERS_URL}/register`, {
-			method: "POST",
-			body: JSON.stringify(user),
-		})
+		const res = await APIJSONRequest<IUserAuthResponse>(
+			`${USERS_URL}/register`,
+			{
+				method: "POST",
+				body: JSON.stringify(user),
+			},
+		)
+
+		return mapRole(res) as IUserAuthResponse
 	},
 
 	updateProfile: async (updates: Partial<IUser>) => {
@@ -35,13 +57,18 @@ export const userAPI = {
 	},
 
 	getProfile: async (id: number) => {
-		return APIJSONRequest<IUser>(`${USERS_URL}/${id}`)
+		const res = await APIJSONRequest<IUserAuthResponse>(
+			`${USERS_URL}/${id}`,
+		)
+		return mapRole(res) as IUser
 	},
 
 	getMe: async (cookieHeader?: string) => {
-		return APIJSONRequest<IUser>(`${USERS_URL}/me`, {
+		const res = await APIJSONRequest<IUserAuthResponse>(`${USERS_URL}/me`, {
 			headers: cookieHeader ? { Cookie: cookieHeader } : undefined,
 		})
+
+		return mapRole(res) as IUser
 	},
 
 	logout: async () => {

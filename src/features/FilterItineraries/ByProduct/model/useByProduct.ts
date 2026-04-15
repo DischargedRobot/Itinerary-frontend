@@ -136,7 +136,7 @@ export const useByProduct = (setLoading?: (v: boolean) => void) => {
 					),
 				),
 			)
-
+			console.log("executorsResp", executorsByDepartments)
 			const executors = executorsByDepartments.flatMap(
 				(executorsResponse, index) => {
 					const departmentId = departmentIds[index]
@@ -147,22 +147,10 @@ export const useByProduct = (setLoading?: (v: boolean) => void) => {
 					if (!department) {
 						return []
 					}
-					console.log(
-						"executorResp",
-						executorsResponse,
-						"dep",
-						department,
-					)
 					return (executorsResponse ?? []).map((executor) => ({
-						id: executor.id,
-						name: executor.name,
-						members: executor.members,
-						isBrigade: executor.isBrigade,
+						...executor,
 						department,
-						operations:
-							executor.operationsIds?.map((operationId) => ({
-								id: operationId,
-							})) || [],
+						operations: executor.operations ?? [],
 					}))
 				},
 			)

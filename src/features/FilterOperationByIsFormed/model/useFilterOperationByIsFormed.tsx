@@ -8,6 +8,7 @@ export const useFilterOperationByIsFormed = () => {
 	const handleChange = () => {
 		setIsFormed(!isChecked)
 		setIsChecked((prev) => !prev)
+		// console.log("isFormed filter changed:", !isChecked)
 	}
 	return {
 		isChecked,

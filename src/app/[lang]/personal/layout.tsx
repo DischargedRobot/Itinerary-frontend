@@ -2,6 +2,7 @@ import { InitApplication } from "@/_app/ui"
 import { userAPI } from "@/entities/User/api/userAPI"
 import { type IUser } from "@/entities/User/lib"
 import { isAPIError } from "@/shared/api"
+import { AbilityProvider } from "@/shared/model/Ability/AbilityProvider"
 import Toasts from "@/shared/ui/Toast/Toasts"
 import { NavBar } from "@/widgets/NavBar"
 import { Layout } from "antd"
@@ -22,6 +23,7 @@ const PersonalLayout = async (props: Props) => {
 	const cookieStore = await cookies()
 	const cookieHeader = cookieStore.toString()
 
+	console.log("PersonalLayout: Checking authentication with cookie header:", cookieHeader)
 	try {
 		currentUser = await userAPI.getMe(cookieHeader)
 	} catch (error) {
@@ -40,7 +42,9 @@ const PersonalLayout = async (props: Props) => {
 					<NavBar />
 				</Header>
 				<Content className="mx-auto px-4 max-w-5xl w-full justify-items-center ">
-					{children}
+					<AbilityProvider user={currentUser}>
+						{children}
+					</AbilityProvider>
 				</Content>
 				<Toasts />
 			</Layout>

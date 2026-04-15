@@ -69,21 +69,21 @@ export const useExecutorCard = () => {
 						(operationType) =>
 							operationType.id === executorOper.typeId,
 					)
-					console.log(
-						executor,
-						"sdfds",
-						department,
-						departments,
-						equipment,
-						category,
-						operationType,
-						executorOper.product,
-						products,
-						"no error",
-						executorOper,
-					)
 
 					if (department && equipment && category && operationType) {
+						console.log(
+							executor,
+							"sdfds",
+							department,
+							departments,
+							equipment,
+							category,
+							operationType,
+							executorOper.product,
+							products,
+							"no error",
+							executorOper,
+						)
 						const {
 							departmentId,
 							equipmentId,

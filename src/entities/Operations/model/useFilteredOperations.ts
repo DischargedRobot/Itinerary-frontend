@@ -95,6 +95,11 @@ export const useFilteredOperations = () => {
 		useShallow((state) => state.operations),
 	)
 
+	console.log(
+		operations,
+		filters,
+		"operations and filters in useFilteredOperations",
+	)
 	return useMemo(() => {
 		return {
 			filteredOperations: filter(

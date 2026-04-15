@@ -50,10 +50,14 @@ export const useOperationTable = (filteredOperations: IOperation[]) => {
 	// Сделать так, чтобы при
 	const setOperations = useOperationStore((state) => state.setOperations)
 	useEffect(() => {
+		console.log(
+			selectedExecutors,
+			"selected executors in useOperationTable",
+		)
 		setOperations(
 			selectedExecutors.reduce<IOperation[]>((allOperations, exec) => {
 				exec.operations.forEach((oper) => {
-					if (isIOperation(oper) && oper.isFormed) {
+					if (isIOperation(oper)) {
 						allOperations.push(oper)
 					}
 				})
