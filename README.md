@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Что это
 
-## Getting Started
+Данное приложение является фронтенд частью [другого приложения(бэкенд)](https://github.com/DischargedRobot/ItineraryOperations) и позволяет управлять маршрутными листами и нарядами заданий на предприятии
 
-First, run the development server:
+# Используемые технологии
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+| ![TypeScript](readme/stack/ts.png) | ![React](readme/stack/react.png) | ![Next.js](readme/stack/nextjs.png) | ![SCSS](readme/stack/scss.png) | ![Ant Design](readme/stack/antd.png) | ![CASL](readme/stack/casl.png) | ![React Intl](readme/stack/reactIntl.png) |
+| :--------------------------------: | :------------------------------: | :---------------------------------: | :----------------------------: | :----------------------------------: | :----------------------------: | :---------------------------------------: |
+|             TypeScript             |              React               |               Next.js               |              SCSS              |              Ant Design              |              CASL              |                React Intl                 |
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Интерфейс
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Страница профиля
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![Профиль](readme/interface/profile.png)
 
-## Learn More
+На данной странице пользователь может просмотреть и отредактировать свои личные данные, хранящиеся в организации.
 
-To learn more about Next.js, take a look at the following resources:
+## Страница с маршрутными листами
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Маршрутные листы](readme/interface/itineraries.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+На данной странице пользователь может отредактировать маршрутные листы, подготовив операции в них к выпуску, назначив исполнителя.
 
-## Deploy on Vercel
+## Страница с нарядами заданий
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Наряды заданий](readme/interface/taskOrder.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+На данной странице пользователь может просмотреть данные о сотрудниках, о их нарядах заданий (отфильтровав их по исполнителям, датам, сформированы они или нет) и сформировать наряды из выделенных операций.
