@@ -3,6 +3,7 @@
 import { memo } from "react"
 import { OperationTable } from "@/entities/Operations/ui/OperationTable"
 import { IOperation } from "@/entities/Operations/lib/OperationTypes"
+import { SelectDate } from "@/features/SelectDate"
 
 interface FullOperationsTableProps {
 	operations: IOperation[]
@@ -13,6 +14,7 @@ interface FullOperationsTableProps {
 const FullOperationsTable = ({ operations, selectedProductIds, onProductDeselect }: FullOperationsTableProps) => {
 	return (
 		<OperationTable
+			DateRenderer={SelectDate}
 			operations={operations}
 			selectedProductIds={selectedProductIds}
 			onProductDeselect={onProductDeselect}

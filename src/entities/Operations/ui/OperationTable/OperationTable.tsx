@@ -2,7 +2,7 @@
 
 import "./OperationTable.scss"
 import "react-resizable/css/styles.css"
-import { memo, useMemo, useState, useCallback, ThHTMLAttributes } from "react"
+import { memo, useMemo, useState, useCallback, ThHTMLAttributes, type FC } from "react"
 import { Table, TableColumnType } from "antd"
 import { Resizable, ResizeCallbackData } from "react-resizable"
 import { useOperationTable } from "../../model/useOperationTable"
@@ -33,7 +33,12 @@ const ResizableTitle = ({ onResize, width, ...restProps }: ResizableTitleProps) 
 
 type ColumnWithWidth = TableColumnType<IOperation> & { width?: number }
 
-const initialColumns: ColumnWithWidth[] = [
+type DateRendererProps = {
+	defaultDate?: Date | undefined
+	onSelect: (date: Date | undefined) => void
+}
+
+const initialColumns = (DateRenderer: FC<DateRendererProps>): ColumnWithWidth[] => [
 	{
 		key: "typeOperation",
 		title: <FormattedMessageWithValues id="operation" />,
@@ -59,6 +64,12 @@ const initialColumns: ColumnWithWidth[] = [
 	{
 		key: "dateExecution",
 		title: <FormattedMessageWithValues id="dateExecution" />,
+		render: (date: Date | undefined, operation: IOperation) => {
+			console.log(date, "date in render", operation)
+			return (
+				<DateRenderer defaultDate={date} onSelect={(date) => { operation.dateExecution = date }} />
+			)
+		},
 		dataIndex: "dateExecution",
 		width: 120,
 		ellipsis: true,
@@ -93,13 +104,19 @@ const initialColumns: ColumnWithWidth[] = [
 	},
 ]
 
-interface OperationTableProps {
+interface Props {
 	operations: IOperation[]
 	selectedProductIds?: number[]
 	onProductDeselect?: (productId: number) => void
+	DateRenderer?: FC<DateRendererProps>
 }
 
-const OperationTable = ({ operations, selectedProductIds, onProductDeselect }: OperationTableProps) => {
+const OperationTable = ({
+	operations,
+	selectedProductIds,
+	onProductDeselect,
+	DateRenderer,
+}: Props) => {
 	const { setIsVisible, isVisible, handleRowUnSelect, handleRowSelect } =
 		useOperationTable(operations)
 
@@ -112,7 +129,16 @@ const OperationTable = ({ operations, selectedProductIds, onProductDeselect }: O
 	const addOperations = useSelectedOperationsStore((state) => state.addOperations)
 	const removeOperations = useSelectedOperationsStore((state) => state.removeOperations)
 
-	const [columns, setColumns] = useState<ColumnWithWidth[]>(initialColumns)
+	const [columns, setColumns] = useState<ColumnWithWidth[]>(() =>
+		initialColumns(
+			DateRenderer ??
+			(({ defaultDate, onSelect }: DateRendererProps) => (
+				<span onClick={() => onSelect(defaultDate ?? new Date())}>
+					{defaultDate ? defaultDate.toLocaleDateString() : ""}
+				</span>
+			)) as FC<DateRendererProps>,
+		),
+	)
 
 	const handleResize = useCallback(
 		(index: number) =>

@@ -1,21 +1,31 @@
-import { convertOperationsDate } from "../lib"
+import { convertOperationsDate, IOperation } from "../lib"
 import { APIJSONRequest } from "@/shared/api"
-import { IOperationResponse, IOperationResponseWithDatesSting } from "./operationAPITypes"
+import {
+	IOperationResponse,
+	IOperationResponseWithDatesSting,
+} from "./operationAPITypes"
 
 export type { IOperationResponse, IOperationResponseWithDatesSting }
 
 export const operationAPI = {
 	getOperationByExecutorId: async (executorID: number) => {
-		const operations = await APIJSONRequest<IOperationResponseWithDatesSting[]>(
-			`OperationsOfItinerary/by-executor/${executorID}`,
+		const operations = await APIJSONRequest<
+			IOperationResponseWithDatesSting[]
+		>(`OperationsOfItinerary/by-executor/${executorID}`)
+
+		console.log(
+			operations,
+			"operations by executor id",
+			convertOperationsDate(operations[0]),
 		)
+
 		return operations.map(convertOperationsDate)
 	},
 
 	getOperationsByItineraryId: async (itineraryId: number) => {
-		const operations = await APIJSONRequest<IOperationResponseWithDatesSting[]>(
-			`OperationsOfItinerary/by-itinerary/${itineraryId}`,
-		)
+		const operations = await APIJSONRequest<
+			IOperationResponseWithDatesSting[]
+		>(`OperationsOfItinerary/by-itinerary/${itineraryId}`)
 		return operations.map(convertOperationsDate)
 	},
 
@@ -26,10 +36,13 @@ export const operationAPI = {
 		})
 	},
 
-	putOperation: async (operation: IOperationResponseWithDatesSting) => {
-		return APIJSONRequest(`OperationsOfItinerary/${operation.id}`, {
-			method: "PUT",
-			body: JSON.stringify(operation),
-		})
+	putOperation: async (operation: IOperation) => {
+		return APIJSONRequest<IOperationResponseWithDatesSting>(
+			`OperationsOfItinerary/${operation.id}`,
+			{
+				method: "PUT",
+				body: JSON.stringify(operation),
+			},
+		)
 	},
 }
